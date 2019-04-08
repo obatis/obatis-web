@@ -22,7 +22,8 @@ public class HttpMessageBigIntConvertSerializer implements ObjectSerializer {
 		} 
 		
 		String value = object.toString();
-		if(value.length() >= 30) {
+		// 如果长度达到28位，说明是生成的number
+		if(value.length() >= 28) {
 			out.write("\"" + value + "\"");
 			return;
 		}

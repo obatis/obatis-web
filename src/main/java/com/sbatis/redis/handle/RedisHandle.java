@@ -15,23 +15,40 @@ import org.springframework.stereotype.Component;
 /**
  * 针对存储String类型的数据，兼容list的存储
  * @author HuangLongPu
- *
  */
 @Component
 public class RedisHandle {
 
 	@Resource
 	private RedisTemplate<String, Object> redisTemplate;
-	
+
+	/**
+	 * 设置常规对象
+	 * @author HuangLongPu
+	 * @param key
+	 * @param value
+	 */
 	public void set(String key, Object value) {
 		this.redisTemplate.opsForValue().set(key, value);
 	}
 
+	/**
+	 * 设置常规对象，可以设置过期时间，单位为秒
+	 * @author HuangLongPu
+	 * @param key
+	 * @param value
+	 * @param timeout
+	 */
 	public void set(String key, Object value, int timeout) {
 		this.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
 		this.redisTemplate.opsForValue().set(key, value);
 	}
 
+	/**
+	 * 从redis获取常规对象的值
+	 * @param key
+	 * @return
+	 */
 	public Object get(String key) {
 		return this.redisTemplate.opsForValue().get(key);
 	}
@@ -41,29 +58,51 @@ public class RedisHandle {
 	}
 	
 	/**
-	 * 将list放入redis，接受T泛型
+	 * 将list存储于redis中，需传入泛型
+	 * @author HuangLongPu
 	 * @param key
 	 * @param list
 	 */
-    public<T> void setList(String key, List<T> list){
+    public void setList(String key, List<?> list){
 
     	if(ValidateTool.isEmpty(key)) {
-    		throw new BusinessException("error : key is empty!!!");
+    		throw new BusinessException("error : key is empty!");
     	}
     	if(list == null) {
-    		throw new BusinessException("error : list is empty!!!");
+    		throw new BusinessException("error : list is empty!");
     	}
     	String data = JsonCommonConvert.objConvertJson(list);
     	this.set(key, data);
     }
-    
+
+	/**
+	 * 将list存储于redis中，需传入泛型，支持过期时间
+	 * @author HuangLongPu
+	 * @param key
+	 * @param list
+	 * @param timeout
+	 */
+    public void setList(String key, List<?> list, int timeout){
+
+    	if(ValidateTool.isEmpty(key)) {
+    		throw new BusinessException("error : key is empty!");
+    	}
+    	if(list == null) {
+    		throw new BusinessException("error : list is empty!");
+    	}
+		this.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
+    	String data = JsonCommonConvert.objConvertJson(list);
+    	this.set(key, data);
+    }
+
     /**
-     * 通过key获取list数据，由于需要转list的数据，需要传入class
+     * 通过key获取list数据，由于需要转list的数据，需要传入class进行转换
+	 * @author HuangLongPu
      * @param key
      * @param cls
      * @return
      */
-    public<T> List<T> getList(String key, Class<T> cls){
+    public<M> List<M> getList(String key, Class<M> cls){
     	if(ValidateTool.isEmpty(key)) {
     		throw new BusinessException("error : key is empty!!!");
     	}

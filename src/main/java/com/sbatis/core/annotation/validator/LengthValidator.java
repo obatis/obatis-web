@@ -21,26 +21,26 @@ public class LengthValidator implements ConstraintValidator<Length, Object> {
 	
     @SuppressWarnings("rawtypes")
 	@Override
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
+    public boolean isValid(Object value, ConstraintValidatorContext constraintValidatorContext) {
     	
     	if(value instanceof List) {
     		int size = ((List) value).size();
-    		if(size < min || size > max) {
+    		if(size < min || (max > 0 && size > max)) {
     			return false;
     		}
     	} else if(value instanceof Object[]) {
     		int len = ((Object[]) value).length;
-    		if(len < min || len > max) {
+    		if(len < min || (max > 0 && len > max)) {
     			return false;
     		}
     	} else if (value instanceof Map) {
     		int size = ((Map) value).size();
-    		if(size < min || size > max) {
+    		if(size < min || (max > 0 && size > max)) {
     			return false;
     		}
     	} else {
     		int len = CommonConvert.toString(value).length();
-    		if(len < min || len > max) {
+    		if(len < min || (max > 0 && len > max)) {
     			return false;
     		}
     	}

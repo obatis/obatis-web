@@ -11,9 +11,8 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * 针对数字范围的校验，比如判断是否属于1和2的范围内，value值填 "1,2"即可验证
+ * 校验是否为数字，针对范围，判断是否属于1和2的范围内，value填 "1,2"即可
  * @author HuangLongPu
- *
  */
 @Target({FIELD})
 @Retention(RUNTIME)

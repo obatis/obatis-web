@@ -11,9 +11,8 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * 校验入参是否为电子邮箱地址
+ * 校验是否为电子邮箱地址
  * @author HuangLongPu
- *
  */
 @Target({ FIELD })
 @Retention(RUNTIME)

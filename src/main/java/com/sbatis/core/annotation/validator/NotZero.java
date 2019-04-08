@@ -16,9 +16,10 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * description: 验证类，非0判断
+ * 校验不能为0，包括空值
+ * @author HuangLongPu
  */
-@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
+@Target({FIELD})
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = {NotZeroValidator.class})

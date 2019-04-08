@@ -12,7 +12,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
  * @author HuangLongPu
  */
 @Configuration
-public class HttpEncodingAutoConfiguration {
+public class HttpEncodingConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean(CharacterEncodingFilter.class)

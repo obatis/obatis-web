@@ -60,7 +60,6 @@ public class HttpMessageConverterConfig {
         serializeConfig.put(BigInteger.class, new HttpMessageBigIntConvertSerializer());
         serializeConfig.put(BigDecimal.class, new HttpMessageBigIntConvertSerializer());
 		fastJsonConfig.setSerializeConfig(serializeConfig);
-        //3、在convert中添加配置信息
         fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
         
         // fastjson设置MediaType
