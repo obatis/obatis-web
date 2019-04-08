@@ -93,23 +93,13 @@
         </dependency>
         <dependency>
             <groupId>com.sbatis</groupId>
-            <artifactId>sbatis-util</artifactId>
+            <artifactId>sbatis-tools</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cc.lecent</groupId>
-            <artifactId>lecent-upload-ftp</artifactId>
-            <version>1.1.9</version>
-        </dependency>
-        <dependency>
-            <groupId>cc.lecent</groupId>
-            <artifactId>lecent-excel</artifactId>
-            <version>1.2.8.3</version>
-        </dependency>
-        <dependency>
-            <groupId>cc.lecent</groupId>
-            <artifactId>lecent-net</artifactId>
-            <version>1.2.2</version>
+            <groupId>com.sbatis</groupId>
+            <artifactId>sbatis-upload</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>
