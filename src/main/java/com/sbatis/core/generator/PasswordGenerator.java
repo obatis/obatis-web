@@ -6,7 +6,7 @@ import com.sbatis.encrypt.md5.Md5EncryptTool;
 /**
  * md5密码生成库，建议sha值是个变化值(比如上次登录时间)，或者是不对用户展示的值，提高暴力破解的难度。
  * 此工具主要提供密码的生成和校验，为提高用户密码强度和系统安全体系，建议每登录一次重新生成一次密码，这样哪怕之前的密码泄露也相对安全。
- * 若是下载源码后自行编译生成jar包后使用，建议修改预设的 PREFIX(前缀) 和 SUFFIX(后缀)值，防止密码猜测
+ * 若是下载源码后自行编译生成jar包后使用，建议修改预设的 PREFIX(前缀) 和 SUFFIX(后缀)值，防止密码猜测。
  * @author HuangLongPu
  */
 public class PasswordGenerator {
