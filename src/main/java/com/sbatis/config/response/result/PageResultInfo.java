@@ -7,15 +7,15 @@ import java.util.List;
 public class PageResultInfo<T> {
 
 	@ApiModelProperty(value = "分页信息")
-    private List<T> info;
+    private List<T> list;
     @ApiModelProperty(value = "总条数")
     private long total = 0;
 
-    public List<T> getInfo() {
-        return info;
+    public List<T> getList() {
+        return list;
     }
-    public void setInfo(List<T> info) {
-        this.info = info;
+    public void setList(List<T> list) {
+        this.list = list;
     }
     public long getTotal() {
         return total;
