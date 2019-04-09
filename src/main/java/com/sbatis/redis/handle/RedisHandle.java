@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import com.sbatis.convert.CommonConvert;
 import com.sbatis.convert.JsonCommonConvert;
-import com.sbatis.core.exception.BusinessException;
+import com.sbatis.core.exception.CommonException;
 import com.sbatis.validate.ValidateTool;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -66,10 +66,10 @@ public class RedisHandle {
     public void setList(String key, List<?> list){
 
     	if(ValidateTool.isEmpty(key)) {
-    		throw new BusinessException("error : key is empty!");
+    		throw new CommonException("error : key is empty!");
     	}
     	if(list == null) {
-    		throw new BusinessException("error : list is empty!");
+    		throw new CommonException("error : list is empty!");
     	}
     	String data = JsonCommonConvert.objConvertJson(list);
     	this.set(key, data);
@@ -85,10 +85,10 @@ public class RedisHandle {
     public void setList(String key, List<?> list, int timeout){
 
     	if(ValidateTool.isEmpty(key)) {
-    		throw new BusinessException("error : key is empty!");
+    		throw new CommonException("error : key is empty!");
     	}
     	if(list == null) {
-    		throw new BusinessException("error : list is empty!");
+    		throw new CommonException("error : list is empty!");
     	}
 		this.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
     	String data = JsonCommonConvert.objConvertJson(list);
@@ -104,7 +104,7 @@ public class RedisHandle {
      */
     public<M> List<M> getList(String key, Class<M> cls){
     	if(ValidateTool.isEmpty(key)) {
-    		throw new BusinessException("error : key is empty!!!");
+    		throw new CommonException("error : key is empty!!!");
     	}
     	Object data = this.get(key);
     	String jsonStr = CommonConvert.toString(data);

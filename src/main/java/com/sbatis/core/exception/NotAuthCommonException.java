@@ -1,18 +1,17 @@
 package com.sbatis.core.exception;
 
 /**
- * description: 未认证异常
+ * 自定义未认证异常类
+ * @author HuangLongPu
  */
-public class NotAuthException extends RuntimeException  {
-	
-    private static final long serialVersionUID = -2386016023795321548L;
+public class NotAuthCommonException extends RuntimeException  {
 
     /**
      * 异常信息
      */
     private String message;
 
-    public NotAuthException(String message) {
+    public NotAuthCommonException(String message) {
         super(message);
     }
 

@@ -2,9 +2,9 @@ package com.sbatis.config.response.result;
 
 import com.sbatis.constant.http.ResponseDefaultErrorCode;
 import com.sbatis.constant.http.ResponseDefaultErrorStatus;
-import com.sbatis.core.exception.BusinessException;
-import com.sbatis.core.exception.NotAuthException;
-import com.sbatis.core.exception.NotLoginException;
+import com.sbatis.core.exception.CommonException;
+import com.sbatis.core.exception.NotAuthCommonException;
+import com.sbatis.core.exception.NotLoginCommonException;
 import com.sbatis.core.logger.LogPrintFactory;
 import com.sbatis.core.logger.LogPrinter;
 import com.sbatis.validate.ValidateTool;
@@ -42,11 +42,11 @@ public class ExceptionRestHandleAdvice {
 		ResultInfo resultInfo = new ResultInfo();
 		String errorCode = null;
 
-		if (exception instanceof BusinessException) {
+		if (exception instanceof CommonException) {
 			LOG.print(exception.getMessage());
 			resultInfo.setStatus(ResponseDefaultErrorStatus.BUS_ERROR_STATUS);
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : "业务异常");
-			errorCode = ((BusinessException) exception).getErrCode();
+			errorCode = ((CommonException) exception).getErrCode();
 		} else if (exception instanceof MethodArgumentNotValidException) {
 			System.out.println(exception.getMessage());
 			MethodArgumentNotValidException e1 = (MethodArgumentNotValidException) exception;
@@ -67,12 +67,12 @@ public class ExceptionRestHandleAdvice {
 			resultInfo.setMessage("请求参数值类型不匹配");
 			errorCode = ResponseDefaultErrorCode.PARAM_TYPE_ERROR_CODE;
 			LOG.print("请求参数值类型不匹配：" + exception.getMessage());
-		} else if (exception instanceof NotAuthException) {
+		} else if (exception instanceof NotAuthCommonException) {
 			resultInfo.setStatus(ResponseDefaultErrorStatus.NOT_AUTH_ERROR_STATUS);
 			resultInfo.setMessage("请求未授权，没有操作权限");
 			errorCode = ResponseDefaultErrorCode.NOT_AUTH_ERROR_CODE;
 			LOG.print("请求未授权，没有操作权限");
-		} else if (exception instanceof NotLoginException) {
+		} else if (exception instanceof NotLoginCommonException) {
 			resultInfo.setStatus(ResponseDefaultErrorStatus.NOT_LOGIN_ERROR_STATUS);
 			resultInfo.setMessage("用户未登录");
 			errorCode = ResponseDefaultErrorCode.NOT_LOGIN_ERROR_CODE;

@@ -2,19 +2,20 @@ package com.sbatis.core.exception;
 
 
 /**
- * description: 未登录异常
+ * 自定义公共未登录异常类
+ * @author HuangLongPu
  */
-public class NotLoginException extends RuntimeException {
-	private static final long serialVersionUID = 4344663236819740487L;
+public class NotLoginCommonException extends RuntimeException {
+
 	/**
 	 * 异常信息
 	 */
 	private String message;
 
-	public NotLoginException() {
-		super("未登录");
+	public NotLoginCommonException() {
+		super("账户未登录");
 	}
-	public NotLoginException(String message) {
+	public NotLoginCommonException(String message) {
 		super(message);
 	}
 
