@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 设置数据返回格式为fastjson格式
+ * 设置数据返回格式为fastjson格式，设置规则、转换代理处理方法等
  * @author HuangLongPu
  */
 @Configuration

@@ -8,7 +8,7 @@ import com.sbatis.validate.ValidateTool;
 import java.lang.reflect.Type;
 
 /**
- * 主要对BigInt类型进行转换处理
+ * 主要对BigInt类型进行转换处理，防止科学计数，比如生成的28为number串码，否则前端接收会出现科学计数的现象
  * @author HuangLongPu
  */
 public class HttpMessageBigIntConvertSerializer implements ObjectSerializer {
