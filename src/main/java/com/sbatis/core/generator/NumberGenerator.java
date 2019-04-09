@@ -6,7 +6,11 @@ import java.math.BigInteger;
 import java.util.*;
 
 /**
- * 获取28长度的纯数字编号，可用作ID、订单号、流水号等
+ * 获取28长度的纯数字编号，可用作ID、订单号、流水号等。
+ * 默认生成28位的数字串，若是下载源码编译jar 包使用的，可自行修改位数。
+ * 经过测试，目前在快速生成10万次没发现有重复，同时保留了测试方法(注释部分)，欢迎测试并提出改进意见。
+ * 如果你有更好的建议，也可以在线留言(留言途径有github项目、sbatis项目主页)，我们会及时改进和调整，感谢你的支持 更多建议及意见，可以通过邮箱留言：huanglongpu@126.com。
+ * 注：测试案例仅为业务实现，未考虑性能问题，测试时可考虑加入线程池或者队列效果会更好。
  * @author HuangLongPu
  */
 public class NumberGenerator {
@@ -14,37 +18,6 @@ public class NumberGenerator {
 	private NumberGenerator() {}
 
 	private static final int maxLength = 11;
-
-//	private static final Map<String, Integer> code = new HashMap<>();
-//
-//	static {
-//		code.put("a", 1);
-//		code.put("b", 2);
-//		code.put("c", 3);
-//		code.put("d", 4);
-//		code.put("e", 5);
-//		code.put("f", 6);
-//		code.put("g", 7);
-//		code.put("h", 8);
-//		code.put("i", 9);
-//		code.put("j", 10);
-//		code.put("k", 11);
-//		code.put("l", 12);
-//		code.put("m", 13);
-//		code.put("n", 14);
-//		code.put("o", 15);
-//		code.put("p", 16);
-//		code.put("q", 17);
-//		code.put("r", 18);
-//		code.put("s", 19);
-//		code.put("t", 20);
-//		code.put("u", 21);
-//		code.put("v", 22);
-//		code.put("w", 23);
-//		code.put("x", 24);
-//		code.put("y", 25);
-//		code.put("z", 26);
-//	}
 
 	/**
 	 * 获取类型为BigInteger，位数28位
@@ -54,21 +27,6 @@ public class NumberGenerator {
 	public static final BigInteger getNumber() {
 		return new BigInteger(DateCommonConvert.formatCurDateTimeMillis() + handleNumber());
 	}
-
-//	private static String handleNumber() {
-//		String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
-//		int uuidSize = uuid.length();
-//		for (int i = 0; i < uuidSize; i++) {
-//			String key = uuid.charAt(i) + "";
-//			if(code.containsKey(key)) {
-//				uuid = uuid.replace(key, code.get(key) + "");
-//			}
-//		}
-//
-//		System.out.println(uuid);
-////		return uuid.substring(0, maxLength);
-//		return uuid;
-//	}
 
 	/**
 	 * 获取number后缀，根据uuid并且补全位数
