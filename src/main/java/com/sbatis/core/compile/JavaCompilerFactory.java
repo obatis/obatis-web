@@ -12,7 +12,7 @@ import javax.tools.*;
  * Java 编译工厂类，可以直接用来编译字符串形式的Java源代码
  * @author HuangLongPu
  */
-public class JavaCompileFactory {
+public class JavaCompilerFactory {
 
 	/**
 	 * 编译 Java 文件
