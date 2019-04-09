@@ -9,7 +9,7 @@ import java.util.Arrays;
 import javax.tools.*;
 
 /**
- * Java 编译工厂类
+ * Java 编译工厂类，可以直接用来编译字符串形式的Java源代码
  * @author HuangLongPu
  */
 public class JavaCompileFactory {
@@ -23,7 +23,7 @@ public class JavaCompileFactory {
 	 * @throws URISyntaxException
 	 * @throws ClassNotFoundException
 	 */
-	public static Class<?> compile(String packageName, String fileName, String javaSource) throws URISyntaxException, ClassNotFoundException {
+	public static Class<?> compiler(String packageName, String fileName, String javaSource) throws URISyntaxException, ClassNotFoundException {
 
 		JavaCompiler javaCompiler = ToolProvider.getSystemJavaCompiler();
 		StandardJavaFileManager standardJavaFileManager = javaCompiler.getStandardFileManager(null, null, null);
