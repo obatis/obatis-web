@@ -16,8 +16,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({ FIELD })
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = { IsOrderNoValidator.class })
-public @interface IsOrderNo {
+@Constraint(validatedBy = { IsNoValidator.class })
+public @interface IsNo {
 
 	String message() default "订单号只能包含数字、字母、下划线和中划线";
 

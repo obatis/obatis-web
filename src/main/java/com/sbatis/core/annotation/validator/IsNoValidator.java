@@ -5,7 +5,7 @@ import com.sbatis.validate.ValidateTool;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class IsOrderNoValidator implements ConstraintValidator<IsOrderNo, Object> {
+public class IsNoValidator implements ConstraintValidator<IsNo, Object> {
 
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
