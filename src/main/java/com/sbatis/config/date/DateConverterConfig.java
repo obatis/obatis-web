@@ -3,6 +3,7 @@ package com.sbatis.config.date;
 import com.sbatis.convert.date.DateCommonConvert;
 import com.sbatis.convert.date.DefaultDateConstant;
 import com.sbatis.validate.ValidateTool;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +12,7 @@ import java.util.Date;
 /**
  * 日期转换处理类，体现为前端传入字符串日期(时间)类型时，也可以正常接收
  */
-@Component
+@Configuration
 public class DateConverterConfig implements Converter<String, Date> {
 	
     @Override
