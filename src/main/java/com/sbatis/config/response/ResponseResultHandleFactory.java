@@ -12,9 +12,9 @@ import java.util.List;
  * 处理框架数据返回，进行结果封装
  * @author HuangLongPu
  */
-public class HandleResponseResultInfoFactory {
+public class ResponseResultHandleFactory {
 	
-	private HandleResponseResultInfoFactory() {}
+	private ResponseResultHandleFactory() {}
 
     public static void handleResponseResultInfo(RequestMappingHandlerAdapter requestMappingHandlerAdapter) {
         List<HandlerMethodReturnValueHandler> returnValueHandlers = requestMappingHandlerAdapter.getReturnValueHandlers();
