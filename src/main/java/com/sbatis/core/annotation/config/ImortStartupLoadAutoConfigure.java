@@ -8,23 +8,26 @@ import org.springframework.core.type.AnnotationMetadata;
 
 import java.util.Set;
 
-public class ImortStartupLoadAutoConfig implements ImportBeanDefinitionRegistrar {
+public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegistrar {
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
 
+        String startupClassName = annotationMetadata.getClassName();
+        String startuppackageName = startupClassName.substring(0, startupClassName.lastIndexOf("."));
         /**
          * 是否使用默认的filter，使用默认的filter意味着只扫描那些类上拥有Component、Service、Repository或Controller注解的类。
          */
-        String basePackage = "com.sbatis";
+//        String basePackage = "com.sbatis";
 
         ClassPathScanningCandidateComponentProvider beanScanner = new ClassPathScanningCandidateComponentProvider(true);
-        Set<BeanDefinition> beanDefinitions = beanScanner.findCandidateComponents(basePackage);
+        Set<BeanDefinition> beanDefinitions = beanScanner.findCandidateComponents(startuppackageName);
         for (BeanDefinition beanDefinition : beanDefinitions) {
             /**
              * beanName通常由对应的BeanNameGenerator来生成，比如Spring自带的AnnotationBeanNameGenerator、DefaultBeanNameGenerator等，也可以自己实现。
              */
             String beanName = beanDefinition.getBeanClassName();
+            System.out.println(beanName);
             beanDefinitionRegistry.registerBeanDefinition(beanName, beanDefinition);
         }
 
