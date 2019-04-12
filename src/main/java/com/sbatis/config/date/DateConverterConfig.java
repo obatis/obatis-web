@@ -5,7 +5,6 @@ import com.sbatis.convert.date.DefaultDateConstant;
 import com.sbatis.validate.ValidateTool;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 

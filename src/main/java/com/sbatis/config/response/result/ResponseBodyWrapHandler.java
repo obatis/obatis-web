@@ -25,10 +25,10 @@ public class ResponseBodyWrapHandler implements HandlerMethodReturnValueHandler 
 
     @Override
     public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
-    	if(returnValue instanceof ResultInfo) {
+    	if(returnValue instanceof ResultHandle) {
     		delegate.handleReturnValue(returnValue, returnType, mavContainer, webRequest);
     	} else {
-            ResultInfo resultInfo = new ResultInfo();
+            ResultHandle resultInfo = new ResultHandle();
     		resultInfo.setResult(returnValue);
     		resultInfo.setStatus(HttpStatus.OK.value());
     		delegate.handleReturnValue(resultInfo, returnType, mavContainer, webRequest);

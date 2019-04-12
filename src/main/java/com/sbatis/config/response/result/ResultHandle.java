@@ -7,9 +7,9 @@ import org.apache.http.HttpStatus;
  * 数据返回装载类，引入swagger描述，接口信息一目了然
  * @author HuangLongPu
  */
-public final class ResultInfo {
+public final class ResultHandle {
 
-	protected ResultInfo() {}
+	protected ResultHandle() {}
 
 	/**
 	 * 请求状态码

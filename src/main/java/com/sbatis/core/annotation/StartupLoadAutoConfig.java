@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(ElementType.TYPE)
 @Retention(RUNTIME)
 @Documented
-@SpringBootApplication
 @Import(value = ImortStartupLoadAutoConfig.class)
+@SpringBootApplication
 public @interface StartupLoadAutoConfig {
 }

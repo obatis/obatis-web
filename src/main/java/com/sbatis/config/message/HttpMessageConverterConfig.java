@@ -8,6 +8,7 @@ import com.sbatis.constant.NormalCommonConstant;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 
 import java.math.BigDecimal;
@@ -23,16 +24,16 @@ import java.util.List;
 @Configuration
 public class HttpMessageConverterConfig {
 
-	@Bean
-	public HttpMessageConverters httpMessageConverters() {
+    @Bean
+    public HttpMessageConverters configureMessageConverters() {
 
-            System.out.println(" ######## convert message ###########");
+        System.out.println(" ######## convert message ###########");
 
         FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
- 
+
         SerializerFeature[] serializerFeatures = new SerializerFeature[]{
-        		SerializerFeature.WriteBigDecimalAsPlain,
+                SerializerFeature.WriteBigDecimalAsPlain,
                 //    输出key是包含双引号
 //                SerializerFeature.QuoteFieldNames,ßßß
                 //    是否输出为null的字段,若为null 则显示该字段
@@ -51,23 +52,23 @@ public class HttpMessageConverterConfig {
                 //    循环引用
                 SerializerFeature.DisableCircularReferenceDetect,
         };
- 
+
         fastJsonConfig.setSerializerFeatures(serializerFeatures);
-            /**
-             * TODO  日期需要优化
-             */
+        /**
+         * TODO  日期需要优化
+         */
         fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
         fastJsonConfig.setCharset(Charset.forName(NormalCommonConstant.CHARSET_UTF8));
         // 对BigInt 和BigDecimal类型做序列化处理，防止出现科学计数
         SerializeConfig serializeConfig =  new SerializeConfig();
         serializeConfig.put(BigInteger.class, new HttpMessageBigIntConvertSerializer());
         serializeConfig.put(BigDecimal.class, new HttpMessageBigIntConvertSerializer());
-		fastJsonConfig.setSerializeConfig(serializeConfig);
+        fastJsonConfig.setSerializeConfig(serializeConfig);
         fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
-        
+
         // fastjson设置MediaType
         List<MediaType> supportedMediaTypes = new ArrayList<>();
-//        supportedMediaTypes.add(MediaType.APPLICATION_JSON);
+        supportedMediaTypes.add(MediaType.APPLICATION_JSON);
         supportedMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
 //        supportedMediaTypes.add(MediaType.APPLICATION_ATOM_XML);
 //        supportedMediaTypes.add(MediaType.APPLICATION_FORM_URLENCODED);
@@ -85,7 +86,7 @@ public class HttpMessageConverterConfig {
 //        supportedMediaTypes.add(MediaType.TEXT_PLAIN);
 //        supportedMediaTypes.add(MediaType.TEXT_XML);
         fastJsonHttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
- 
+
         return new HttpMessageConverters(fastJsonHttpMessageConverter);
     }
 }

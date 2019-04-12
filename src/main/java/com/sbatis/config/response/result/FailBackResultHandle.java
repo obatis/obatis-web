@@ -7,11 +7,11 @@ import com.sbatis.constant.http.ResponseDefaultErrorStatus;
  * 微服务请求熔断回调结果集处理
  * @author HuangLongPu
  */
-public class FailBackResultInfo {
+public class FailBackResultHandle {
 
-	protected FailBackResultInfo(){}
+	protected FailBackResultHandle(){}
 	
-	public static final ResultInfo RESULT = new ResultInfo();
+	public static final ResultHandle RESULT = new ResultHandle();
 	
 	static {
 		RESULT.setStatus(ResponseDefaultErrorStatus.FAIL_BACK_ERROR_STATUS);
