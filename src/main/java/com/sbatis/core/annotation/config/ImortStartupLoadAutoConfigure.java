@@ -14,14 +14,12 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
 
         String startupClassName = annotationMetadata.getClassName();
-        String startuppackageName = startupClassName.substring(0, startupClassName.lastIndexOf("."));
+        String startupPackageName = startupClassName.substring(0, startupClassName.lastIndexOf("."));
         /**
          * 是否使用默认的filter，使用默认的filter意味着只扫描那些类上拥有Component、Service、Repository或Controller注解的类。
          */
-//        String basePackage = "com.sbatis";
-
         ClassPathScanningCandidateComponentProvider beanScanner = new ClassPathScanningCandidateComponentProvider(true);
-        Set<BeanDefinition> beanDefinitions = beanScanner.findCandidateComponents(startuppackageName);
+        Set<BeanDefinition> beanDefinitions = beanScanner.findCandidateComponents(startupPackageName);
         for (BeanDefinition beanDefinition : beanDefinitions) {
             /**
              * beanName通常由对应的BeanNameGenerator来生成，比如Spring自带的AnnotationBeanNameGenerator、DefaultBeanNameGenerator等，也可以自己实现。
