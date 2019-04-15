@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.sbatis</groupId>
-    <artifactId>sbatis-web</artifactId>
+    <groupId>com.obatis</groupId>
+    <artifactId>obatis-web</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>sbatis-web</name>
+    <name>obatis-web</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -92,13 +92,13 @@
             <version>1.8.0.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>com.sbatis</groupId>
-            <artifactId>sbatis-tools</artifactId>
+            <groupId>com.obatis</groupId>
+            <artifactId>obatis-tools</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>com.sbatis</groupId>
-            <artifactId>sbatis-upload</artifactId>
+            <groupId>com.obatis</groupId>
+            <artifactId>obatis-upload</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

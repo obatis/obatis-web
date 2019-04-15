@@ -6,16 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="sbatis-web" />
+        <module name="obatis-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="sbatis-web" target="1.8" />
+      <module name="obatis-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="sbatis-web" options="-parameters" />
+      <module name="obatis-web" options="-parameters" />
     </option>
   </component>
 </project>
