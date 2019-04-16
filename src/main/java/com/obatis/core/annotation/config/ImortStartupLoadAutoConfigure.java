@@ -25,7 +25,6 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
              * beanName通常由对应的BeanNameGenerator来生成，比如Spring自带的AnnotationBeanNameGenerator、DefaultBeanNameGenerator等，也可以自己实现。
              */
             String beanName = beanDefinition.getBeanClassName();
-            System.out.println(beanName);
             beanDefinitionRegistry.registerBeanDefinition(beanName, beanDefinition);
         }
 
