@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
 
-public class PageResultHandle<T> {
+public class PageInfo<T> {
 
 	@ApiModelProperty(value = "分页信息")
     private List<T> list;
