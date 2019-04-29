@@ -40,7 +40,7 @@ public final class ResultHandle implements Serializable {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	protected void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -48,7 +48,7 @@ public final class ResultHandle implements Serializable {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	protected void setMessage(String message) {
 		this.message = message;
 	}
 
@@ -56,7 +56,7 @@ public final class ResultHandle implements Serializable {
 		return result;
 	}
 
-	public void setResult(Object result) {
+	protected void setResult(Object result) {
 		this.result = result;
 	}
 
@@ -64,7 +64,8 @@ public final class ResultHandle implements Serializable {
 		return errorCode;
 	}
 
-	public void setErrorCode(String errorCode) {
+	protected void setErrorCode(String errorCode) {
 		this.errorCode = errorCode;
 	}
+
 }
