@@ -4,7 +4,7 @@
 
     <groupId>com.obatis</groupId>
     <artifactId>obatis-web</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
     <name>obatis-upload</name>
     <description>obatis-web, apply web project</description>
