@@ -45,7 +45,6 @@ public class NumberGenerator {
 		int offset = maxLength - lenth;
 		for (int i = 0; i < offset; i++) {
 			s.insert(0, new Random().nextInt(10));
-//			s.insert(0, 0);
 		}
 		
 		return s.toString();
@@ -64,52 +63,4 @@ public class NumberGenerator {
 		return hashCode;
 	}
 
-//	public static Map<BigInteger, BigInteger> map = new HashMap<>();
-//	public static void main(String[] args) {
-//
-//		for (int i =0; i < 100; i++) {
-//			new TestNumber().start();
-////			System.out.println(getHashCode());;
-//		}
-//
-//		System.out.println(" exe ");
-//
-//		try {
-//			Thread.sleep(15000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//
-//		System.out.println(map.size());
-//	}
-//
-//}
-//
-//class TestNumber extends Thread {
-//	@Override
-//	public void run() {
-//		for (int i =0; i < 1000; i++) {
-//			BigInteger number = NumberGenerator.getNumber();
-////			if(NumberGenerator.map.containsKey(number)) {
-////				System.out.println(number);
-////			}
-//			new TestAdd(number).start();
-//		}
-//	}
-//}
-//
-//class TestAdd extends Thread {
-//
-//	private BigInteger number;
-//
-//	public TestAdd(BigInteger number) {
-//		this.number = number;
-//	}
-//
-//	@Override
-//	public void run() {
-//		synchronized (NumberGenerator.map) {
-//			NumberGenerator.map.put(number, number);
-//		}
-//	}
 }
