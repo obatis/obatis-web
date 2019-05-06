@@ -6,12 +6,12 @@ import com.obatis.validate.ValidateTool;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class isRangeValidator implements ConstraintValidator<isRange, Object> {
+public class IsRangeValidator implements ConstraintValidator<IsRange, Object> {
 
 	String numberValue = null;
 	
 	@Override
-	public void initialize(isRange numberRange) {
+	public void initialize(IsRange numberRange) {
 		ConstraintValidator.super.initialize(numberRange);
 		numberValue = numberRange.value();
 	}

@@ -17,8 +17,8 @@ import javax.validation.Payload;
 @Target({FIELD})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {isRangeValidator.class})
-public @interface isRange {
+@Constraint(validatedBy = {IsRangeValidator.class})
+public @interface IsRange {
 
 	String message() default "参数有误";
 	
