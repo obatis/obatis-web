@@ -31,7 +31,7 @@ public class DateConverterConfig implements Converter<String, Date> {
         } else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}:\\d{1,2}$")){
             return DateCommonConvert.parseDate(source, DefaultDateConstant.DATE_TIME_PATTERN);
         } else {
-            throw new IllegalArgumentException("Invalid boolean value '" + source + "'");
+            throw new IllegalArgumentException("error: invalid value '" + source + "'");
         }
     }
 

@@ -7,9 +7,9 @@ import com.obatis.constant.http.ResponseDefaultErrorStatus;
  * 微服务请求熔断回调结果集处理
  * @author HuangLongPu
  */
-public class FailBackResultHandle {
+public class FailBackResponse {
 
-	protected FailBackResultHandle(){}
+	protected FailBackResponse(){}
 	
 	public static final ResultResponse RESULT = new ResultResponse();
 	
