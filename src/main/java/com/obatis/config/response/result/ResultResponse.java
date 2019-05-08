@@ -9,11 +9,11 @@ import java.io.Serializable;
  * 数据返回装载类，引入swagger描述，接口信息一目了然
  * @author HuangLongPu
  */
-public final class ResultHandle implements Serializable {
+public final class ResultResponse implements Serializable {
 
 	private static final long serialVersionUID = -6855376486664900854L;
 
-	protected ResultHandle() {}
+	protected ResultResponse() {}
 
 	/**
 	 * 请求状态码

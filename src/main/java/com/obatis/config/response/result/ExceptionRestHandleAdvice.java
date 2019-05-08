@@ -35,11 +35,11 @@ public class ExceptionRestHandleAdvice {
 	private final static LogPrinter LOG = LogPrintFactory.getLogPrint(ExceptionRestHandleAdvice.class);
 
 	@ExceptionHandler(value = Exception.class)
-	public ResultHandle handler(HttpServletResponse response, Exception exception) {
+	public ResultResponse handler(HttpServletResponse response, Exception exception) {
 		if (response.getStatus() == HttpStatus.BAD_REQUEST.value()) {
 			response.setStatus(HttpStatus.OK.value());
 		}
-		ResultHandle resultInfo = new ResultHandle();
+		ResultResponse resultInfo = new ResultResponse();
 		Integer sysCode = null;
 		String errorCode = null;
 

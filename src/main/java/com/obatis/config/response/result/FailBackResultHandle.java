@@ -11,7 +11,7 @@ public class FailBackResultHandle {
 
 	protected FailBackResultHandle(){}
 	
-	public static final ResultHandle RESULT = new ResultHandle();
+	public static final ResultResponse RESULT = new ResultResponse();
 	
 	static {
 		RESULT.setStatus(ResponseDefaultErrorStatus.FAIL_BACK_ERROR_STATUS);
