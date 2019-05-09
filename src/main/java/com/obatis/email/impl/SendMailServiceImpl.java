@@ -4,7 +4,6 @@ import com.obatis.email.SendMailService;
 import com.obatis.email.exception.SendMailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -28,14 +27,10 @@ public class SendMailServiceImpl implements SendMailService {
 
     @Override
     public void send(String toEmail, String title, String content) throws SendMailException {
-
-        if(mailSender == null) {
-            mailSender = loadJavaMailSender(env);
-        }
-
         logger.warn("发送邮件到 " + toEmail);
         logger.warn("标题为： " + title);
         logger.warn("内容为： " + content);
+        getJavaMailSender(env);
         //使用MimeMessage，MIME协议
         MimeMessage message = mailSender.createMimeMessage();
 
@@ -57,6 +52,13 @@ public class SendMailServiceImpl implements SendMailService {
             e.printStackTrace();
             throw new SendMailException("error:" + e.getMessage());
         }
+    }
+
+    private static JavaMailSender getJavaMailSender(Environment env) {
+        if(mailSender == null) {
+            return loadJavaMailSender(env);
+        }
+        return mailSender;
     }
 
     private static synchronized JavaMailSender loadJavaMailSender(Environment env) {
