@@ -5,10 +5,13 @@ import com.obatis.email.exception.SendMailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -17,15 +20,19 @@ public class SendMailServiceImpl implements SendMailService {
 
     private final Logger logger = LoggerFactory.getLogger(SendMailServiceImpl.class);
 
-//    @Value("${spring.mail.username}")
-    //使用@Value注入application.properties中指定的用户名
-    private String fromEmail;
-    @Autowired
-    private JavaMailSender mailSender;
+    @Resource
+    private Environment env;
 
+    private static JavaMailSender mailSender;
+    private static String fromEmail = null;
 
     @Override
     public void send(String toEmail, String title, String content) throws SendMailException {
+
+        if(mailSender == null) {
+            mailSender = loadJavaMailSender(env);
+        }
+
         logger.warn("发送邮件到 " + toEmail);
         logger.warn("标题为： " + title);
         logger.warn("内容为： " + content);
@@ -50,5 +57,17 @@ public class SendMailServiceImpl implements SendMailService {
             e.printStackTrace();
             throw new SendMailException("error:" + e.getMessage());
         }
+    }
+
+    private static synchronized JavaMailSender loadJavaMailSender(Environment env) {
+        if(mailSender == null) {
+            mailSender = new JavaMailSenderImpl();
+            ((JavaMailSenderImpl) mailSender).setHost(env.getProperty("spring.mail.host"));
+            ((JavaMailSenderImpl) mailSender).setUsername(env.getProperty("spring.mail.username"));
+            ((JavaMailSenderImpl) mailSender).setPassword(env.getProperty("spring.mail.password"));
+            ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("spring.mail.default-encoding", "UTF-8"));
+            fromEmail = env.getProperty("mail.fromMail.addr");
+        }
+        return mailSender;
     }
 }
