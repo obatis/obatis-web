@@ -2,40 +2,37 @@ package com.obatis.email.impl;
 
 import com.obatis.email.SendMailService;
 import com.obatis.email.exception.SendMailException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.Map;
 
 @Component
 public class SendMailServiceImpl implements SendMailService {
 
-    private final Logger logger = LoggerFactory.getLogger(SendMailServiceImpl.class);
-
     @Resource
     private Environment env;
+    @Resource
+    private TemplateEngine templateEngine;
 
     private static JavaMailSender mailSender;
     private static String fromEmail = null;
 
     @Override
     public void send(String toEmail, String title, String content) throws SendMailException {
-        logger.warn("发送邮件到 " + toEmail);
-        logger.warn("标题为： " + title);
-        logger.warn("内容为： " + content);
         getJavaMailSender(env);
         //使用MimeMessage，MIME协议
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper;
-        //MimeMessageHelper帮助我们设置更丰富的内容
         try {
             helper = new MimeMessageHelper(message, true);
             helper.setFrom(fromEmail);
@@ -46,12 +43,25 @@ public class SendMailServiceImpl implements SendMailService {
              */
             helper.setText(content, true);
             mailSender.send(message);
-            logger.info("发送HTML邮件成功");
         } catch (MessagingException e) {
-            logger.error("发送HTML邮件失败：", e);
             e.printStackTrace();
             throw new SendMailException("error:" + e.getMessage());
         }
+    }
+
+    /**
+     * 使用模版的形式发送邮件
+     * @param toEmail
+     * @param title
+     * @param templatePath
+     * @param params
+     * @throws SendMailException
+     */
+    @Override
+    public void sendTemplate(String toEmail, String title, String templatePath, Map<String, Object> params) throws SendMailException {
+        Context context = new Context();
+        context.setVariables(params);
+        this.send(toEmail, title, templateEngine.process(templatePath, context));
     }
 
     private static JavaMailSender getJavaMailSender(Environment env) {
@@ -61,6 +71,11 @@ public class SendMailServiceImpl implements SendMailService {
         return mailSender;
     }
 
+    /**
+     * JavaMailSender 采用自定义方式而非注入的方式，目的为保证兼容性，在不使用邮件功能（未配置）时框架也能正常使用
+     * @param env
+     * @return
+     */
     private static synchronized JavaMailSender loadJavaMailSender(Environment env) {
         if(mailSender == null) {
             mailSender = new JavaMailSenderImpl();
