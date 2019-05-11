@@ -30,7 +30,6 @@ public class ResponseBodyWrapHandler implements HandlerMethodReturnValueHandler 
     	} else {
             ResultResponse resultInfo = new ResultResponse();
     		resultInfo.setResult(returnValue);
-    		resultInfo.setStatus(HttpStatus.OK.value());
     		delegate.handleReturnValue(resultInfo, returnType, mavContainer, webRequest);
     	}
     }

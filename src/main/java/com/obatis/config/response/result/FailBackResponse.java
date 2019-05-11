@@ -14,7 +14,7 @@ public class FailBackResponse {
 	public static final ResultResponse RESULT = new ResultResponse();
 	
 	static {
-		RESULT.setStatus(ResponseDefaultErrorStatus.FAIL_BACK_ERROR_STATUS);
+		RESULT.setCode(ResponseDefaultErrorStatus.FAIL_BACK_ERROR_STATUS);
 		RESULT.setMessage("请求错误，检查网络情况");
 		RESULT.setErrorCode(ResponseDefaultErrorCode.NETWORK_ERROR_CODE);
 	}

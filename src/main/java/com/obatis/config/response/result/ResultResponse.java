@@ -19,7 +19,7 @@ public final class ResultResponse implements Serializable {
 	 * 请求状态码
 	 */
 	@ApiModelProperty(value = "请求状态码(200正常请求)", required = true, dataType = "int")
-	private int status = HttpStatus.SC_OK;
+	private int code = HttpStatus.SC_OK;
 	/**
 	 * 提示信息(错误提示)
 	 */
@@ -36,12 +36,12 @@ public final class ResultResponse implements Serializable {
 	@ApiModelProperty(value = "错误描述码", required = true, dataType = "string")
 	private String errorCode;
 
-	public int getStatus() {
-		return status;
+	public int getCode() {
+		return code;
 	}
 
-	protected void setStatus(int status) {
-		this.status = status;
+	public void setCode(int code) {
+		this.code = code;
 	}
 
 	public String getMessage() {

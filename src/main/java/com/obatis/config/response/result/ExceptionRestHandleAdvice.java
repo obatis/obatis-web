@@ -45,7 +45,7 @@ public class ExceptionRestHandleAdvice {
 
 		if (exception instanceof HandleException) {
 			LOG.print(exception.getMessage());
-			resultInfo.setStatus(ResponseDefaultErrorStatus.BUS_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.BUS_ERROR_STATUS);
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : "业务异常");
 			errorCode = ((HandleException) exception).getErrCode();
 		} else if (exception instanceof MethodArgumentNotValidException) {
@@ -59,51 +59,51 @@ public class ExceptionRestHandleAdvice {
 				errorMsgs.add(fieldError.getDefaultMessage());
 			}
 			String join = String.join(",", errorMsgs);
-			resultInfo.setStatus(ResponseDefaultErrorStatus.PARAM_INVALID_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_INVALID_ERROR_STATUS);
 			resultInfo.setMessage(ValidateTool.isHaveChinese(join) ? join : "请求参数值无效");
 			errorCode = ResponseDefaultErrorCode.PARAM_INVALID_ERROR_CODE;
 			LOG.print("请求参数值无效：" + join);
 		} else if (exception instanceof HttpMessageNotReadableException) {
-			resultInfo.setStatus(ResponseDefaultErrorStatus.PARAM_TYPE_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_TYPE_ERROR_STATUS);
 			resultInfo.setMessage("请求参数值类型不匹配");
 			errorCode = ResponseDefaultErrorCode.PARAM_TYPE_ERROR_CODE;
 			LOG.print("请求参数值类型不匹配：" + exception.getMessage());
 		} else if (exception instanceof NotAuthHandleException) {
-			resultInfo.setStatus(ResponseDefaultErrorStatus.NOT_AUTH_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_AUTH_ERROR_STATUS);
 			resultInfo.setMessage("请求未授权，没有操作权限");
 			errorCode = ResponseDefaultErrorCode.NOT_AUTH_ERROR_CODE;
 			LOG.print("请求未授权，没有操作权限");
 		} else if (exception instanceof NotLoginHandleException) {
-			resultInfo.setStatus(ResponseDefaultErrorStatus.NOT_LOGIN_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_LOGIN_ERROR_STATUS);
 			resultInfo.setMessage("用户未登录");
 			errorCode = ResponseDefaultErrorCode.NOT_LOGIN_ERROR_CODE;
 			LOG.print("用户未登录," + exception.getMessage());
 		} else if (exception instanceof NoHandlerFoundException) {
-			resultInfo.setStatus(org.apache.http.HttpStatus.SC_NOT_FOUND);
+			resultInfo.setCode(org.apache.http.HttpStatus.SC_NOT_FOUND);
 			resultInfo.setMessage("HTTP请求URL地址不正确");
 			errorCode = ResponseDefaultErrorCode.URL_NOT_FOUND_ERROR_CODE;
 			LOG.print("HTTP请求URL地址不正确" + exception.getMessage());
 		} else if (exception instanceof NullPointerException) {
 			String trace = printStackTrace(exception);
-			resultInfo.setStatus(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("执行错误");
 			errorCode = ResponseDefaultErrorCode.NULL_POINTER_ERROR_CODE;
 			LOG.print("空指针异常：" + trace);
 		} else if (exception instanceof IndexOutOfBoundsException) {
 			String trace = printStackTrace(exception);
-			resultInfo.setStatus(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("业务运行错误");
 			errorCode = ResponseDefaultErrorCode.INDEX_OUT_ERROR_CODE;
 			LOG.print("操作越界异常：" + trace);
 		} else if (exception instanceof SQLException) {
 			String trace = printStackTrace(exception);
-			resultInfo.setStatus(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("执行错误");
 			errorCode = ResponseDefaultErrorCode.SQL_EXECUTE_ERROR_CODE;
 			LOG.print("SQL执行运行异常：" + trace);
 		} else {
 			String trace = printStackTrace(exception);
-			resultInfo.setStatus(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("执行错误");
 			errorCode = ResponseDefaultErrorCode.SYSTEM_ERROR_CODE;
 			LOG.print("程序执行错误：" + trace);
