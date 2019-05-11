@@ -1,6 +1,7 @@
 package com.obatis.core.annotation;
 
 import com.obatis.core.annotation.config.ImortStartupLoadAutoConfigure;
+import com.obatis.startup.SystemConstant;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
@@ -21,8 +22,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @SpringBootApplication
 @Import(value = ImortStartupLoadAutoConfigure.class)
-@ComponentScan(value = "com.obatis",
-        useDefaultFilters = true
+@ComponentScan(value = SystemConstant.CORE_BASE_DIR, useDefaultFilters = true
 )
 public @interface StartupLoadAutoConfigure {
 

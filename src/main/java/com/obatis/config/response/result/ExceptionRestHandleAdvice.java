@@ -86,25 +86,25 @@ public class ExceptionRestHandleAdvice {
 		} else if (exception instanceof NullPointerException) {
 			String trace = printStackTrace(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
-			resultInfo.setMessage("执行错误");
+			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.NULL_POINTER_ERROR_CODE;
 			LOG.print("空指针异常：" + trace);
 		} else if (exception instanceof IndexOutOfBoundsException) {
 			String trace = printStackTrace(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
-			resultInfo.setMessage("业务运行错误");
+			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.INDEX_OUT_ERROR_CODE;
 			LOG.print("操作越界异常：" + trace);
 		} else if (exception instanceof SQLException) {
 			String trace = printStackTrace(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
-			resultInfo.setMessage("执行错误");
+			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.SQL_EXECUTE_ERROR_CODE;
 			LOG.print("SQL执行运行异常：" + trace);
 		} else {
 			String trace = printStackTrace(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
-			resultInfo.setMessage("执行错误");
+			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.SYSTEM_ERROR_CODE;
 			LOG.print("程序执行错误：" + trace);
 		}

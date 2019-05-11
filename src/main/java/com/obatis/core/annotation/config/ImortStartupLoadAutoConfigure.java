@@ -1,5 +1,6 @@
 package com.obatis.core.annotation.config;
 
+import com.obatis.startup.SystemConstant;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
@@ -15,6 +16,11 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
 
         String startupClassName = annotationMetadata.getClassName();
         String startupPackageName = startupClassName.substring(0, startupClassName.lastIndexOf("."));
+        SystemConstant.PROJECT_BASE_DIR = startupPackageName;
+        if("com".equals(startupPackageName) || SystemConstant.CORE_BASE_DIR.equals(startupPackageName)) {
+            return;
+        }
+
         /**
          * 是否使用默认的filter，使用默认的filter意味着只扫描那些类上拥有Component、Service、Repository或Controller注解的类。
          */
