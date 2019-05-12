@@ -1,10 +1,13 @@
 package com.obatis.config.request;
 
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.UserAgent;
+
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class RequestIpInfo {
+public class HandleRequestInfo {
 
 	/**
 	 * 
@@ -50,5 +53,47 @@ public class RequestIpInfo {
 			}
 		}
 		return ipAddress;
+	}
+
+	public static RequestInfo getRequestInfo(HttpServletRequest request) {
+		String agentString = request.getHeader("User-Agent");
+		UserAgent userAgent = UserAgent.parseUserAgentString(agentString);
+		OperatingSystem operatingSystem = userAgent.getOperatingSystem(); // 操作系统信息
+		String browser = userAgent.getBrowser() + " " + userAgent.getBrowserVersion();
+		eu.bitwalker.useragentutils.DeviceType deviceType = operatingSystem.getDeviceType(); // 设备类型
+		String device = null;
+		switch (deviceType) {
+			case COMPUTER:
+				device = "PC";
+				break;
+			case TABLET:
+				if (agentString.contains("Android")) {
+					device = "Android Pad";
+				} else if (agentString.contains("iOS")) {
+					device = "iPad";
+				} else {
+					device = "Unknown";
+				}
+				break;
+			case MOBILE:
+				if (agentString.contains("Android")) {
+					device = "Android";
+				} else if (agentString.contains("iOS")) {
+					device = "IOS";
+				} else {
+					device = "Unknown";
+				}
+				break;
+			default:
+				device = "Unknown";
+				break;
+		}
+
+		RequestInfo info = new RequestInfo();
+		info.setRequestBrowser(browser);
+		info.setDeviceType(device);
+		info.setRequestSystem(operatingSystem.getName());
+		info.setRequestIp(getRequestIp(request));
+		return info;
 	}
 }

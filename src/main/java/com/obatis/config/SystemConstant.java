@@ -1,4 +1,4 @@
-package com.obatis.startup;
+package com.obatis.config;
 
 public class SystemConstant {
 

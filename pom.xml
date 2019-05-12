@@ -208,6 +208,11 @@
             <version>2.5</version>
         </dependency>
         <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.21</version>
+        </dependency>
+        <dependency>
             <groupId>com.obatis</groupId>
             <artifactId>obatis-tools</artifactId>
             <version>1.0.3</version>
