@@ -2,6 +2,7 @@ package com.obatis.redis.handle;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
@@ -20,7 +21,7 @@ public class RedisMapHandle<MK, MV> {
 
 	@Resource
 	public RedisTemplate<String, Map<MK, MV>> redisTemplate;
-	
+
 	/**
 	 * 根据 key 和 value 添加到 redis 数据库
 	 * @author HuangLongPu
