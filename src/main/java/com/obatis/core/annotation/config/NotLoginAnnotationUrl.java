@@ -13,13 +13,13 @@ public final class NotLoginAnnotationUrl {
 
     private static final Map<String, Boolean> NOT_LOGIN_URL = new HashMap<>();
 
-    private NotLoginAnnotationUrl() {}
+    protected NotLoginAnnotationUrl() {}
 
     /**
      * 放置添加注解 @NotLogin 的Controller Url路径
      * @param url
      */
-    protected final static void putNotLoginAnnotationUrl(String url) {
+    protected final void putNotLoginAnnotationUrl(String url) {
         if(ValidateTool.isEmpty(url)) {
             return;
         }

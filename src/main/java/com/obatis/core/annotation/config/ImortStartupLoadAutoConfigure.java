@@ -33,6 +33,10 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
             beanDefinitionRegistry.registerBeanDefinition(beanName, beanDefinition);
         }
 
+        /**
+         * 加载 Controller url
+         */
+        new LoadAnnotationUrl().load(startupPackageName);
     }
 
 }
