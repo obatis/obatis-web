@@ -16,7 +16,6 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
 
         String startupClassName = annotationMetadata.getClassName();
         String startupPackageName = startupClassName.substring(0, startupClassName.lastIndexOf("."));
-        SystemConstant.PROJECT_BASE_DIR = startupPackageName;
         if("com".equals(startupPackageName) || SystemConstant.CORE_BASE_DIR.equals(startupPackageName)) {
             return;
         }

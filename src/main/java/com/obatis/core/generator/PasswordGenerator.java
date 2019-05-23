@@ -12,9 +12,12 @@ import com.obatis.encrypt.md5.Md5EncryptTool;
 public class PasswordGenerator {
 	
 	private PasswordGenerator() {}
-	
-	private static String PREFIX = "00R9_";
-	private static String SUFFIX = "108+&C";
+
+	/**
+	 * 默认设置生成密码的前缀值和后缀值，如需修改，设置为符合团队规定的值
+	 */
+	public static String PREFIX = "00R9_";
+	public static String SUFFIX = "108+&C";
 
 	/**
 	 * 传入sha值、用户名和密码明文，得到密码加密串

@@ -7,7 +7,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * 设置后端允许跨域访问
+ * 设置服务器允许跨域访问
  * @author HuangLongPu
  */
 @Configuration
