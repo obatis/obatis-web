@@ -17,4 +17,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Documented
 public @interface NotLogin {
+
+    /**
+     * URL名称，优先级最高，如果未填写，再基于Swagger获取URL名称
+     * @return
+     */
+    String urlName() default "";
 }

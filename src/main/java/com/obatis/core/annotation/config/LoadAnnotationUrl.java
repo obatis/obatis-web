@@ -24,6 +24,8 @@ public final class LoadAnnotationUrl {
     }
 
     private final void handle(Set<Class<?>> controllerList) {
+
+
         for (Class<?> cla : controllerList) {
             String path = "";
             // 表示注解为 Controller
