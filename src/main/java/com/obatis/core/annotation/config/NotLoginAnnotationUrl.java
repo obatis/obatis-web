@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public final class NotLoginAnnotationUrl {
 
-    private static final Map<String, Boolean> NOT_LOGIN_URL = new HashMap<>();
+    private static final Map<String, String> NOT_LOGIN_URL = new HashMap<>();
 
     protected NotLoginAnnotationUrl() {}
 
@@ -19,11 +19,11 @@ public final class NotLoginAnnotationUrl {
      * 放置添加注解 @NotLogin 的Controller Url路径
      * @param url
      */
-    protected final void putNotLoginAnnotationUrl(String url) {
+    protected static final void putNotLoginAnnotationUrl(String url, String urlName) {
         if(ValidateTool.isEmpty(url)) {
             return;
         }
-        NOT_LOGIN_URL.put(url, true);
+        NOT_LOGIN_URL.put(url, urlName);
     }
 
     /**
@@ -35,10 +35,6 @@ public final class NotLoginAnnotationUrl {
         if(ValidateTool.isEmpty(url)) {
             return false;
         }
-        Boolean flag = NOT_LOGIN_URL.get(url);
-        if(flag == null) {
-            return false;
-        }
-        return flag;
+        return NOT_LOGIN_URL.containsKey(url);
     }
 }
