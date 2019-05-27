@@ -40,7 +40,6 @@ public class ExceptionRestHandleAdvice {
 			response.setStatus(HttpStatus.OK.value());
 		}
 		ResultResponse resultInfo = new ResultResponse();
-		Integer sysCode = null;
 		String errorCode = null;
 
 		if (exception instanceof HandleException) {
