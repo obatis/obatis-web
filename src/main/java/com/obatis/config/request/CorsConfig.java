@@ -15,7 +15,6 @@ public class CorsConfig {
 
 	/**
 	 * 跨域设置
-	 * @author HuangLongPu
 	 * @return
 	 */
 	@Bean
