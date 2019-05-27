@@ -84,25 +84,25 @@ public class ExceptionRestHandleAdvice {
 			errorCode = ResponseDefaultErrorCode.URL_NOT_FOUND_ERROR_CODE;
 			LOG.print("HTTP请求URL地址不正确" + exception.getMessage());
 		} else if (exception instanceof NullPointerException) {
-			String trace = printStackTrace(exception);
+			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.NULL_POINTER_ERROR_CODE;
 			LOG.print("空指针异常：" + trace);
 		} else if (exception instanceof IndexOutOfBoundsException) {
-			String trace = printStackTrace(exception);
+			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.INDEX_OUT_ERROR_CODE;
 			LOG.print("操作越界异常：" + trace);
 		} else if (exception instanceof SQLException) {
-			String trace = printStackTrace(exception);
+			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.SQL_EXECUTE_ERROR_CODE;
 			LOG.print("SQL执行运行异常：" + trace);
 		} else {
-			String trace = printStackTrace(exception);
+			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.SYSTEM_ERROR_CODE;
@@ -116,7 +116,12 @@ public class ExceptionRestHandleAdvice {
 		return resultInfo;
 	}
 
-	private static String printStackTrace(Throwable e) {
+	/**
+	 * 构建日志
+	 * @param e
+	 * @return
+	 */
+	private static String printExceptionLog(Throwable e) {
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter, true);
 		e.printStackTrace(printWriter);
