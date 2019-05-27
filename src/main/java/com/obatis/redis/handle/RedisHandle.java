@@ -28,7 +28,6 @@ public class RedisHandle {
 
 	/**
 	 * 设置常规对象
-	 * @author HuangLongPu
 	 * @param key
 	 * @param value
 	 */
@@ -38,7 +37,6 @@ public class RedisHandle {
 
 	/**
 	 * 设置常规对象，可以设置过期时间，单位为秒
-	 * @author HuangLongPu
 	 * @param key
 	 * @param value
 	 * @param timeout
@@ -63,7 +61,6 @@ public class RedisHandle {
 	
 	/**
 	 * 将list存储于redis中，需传入泛型
-	 * @author HuangLongPu
 	 * @param key
 	 * @param list
 	 */
@@ -75,7 +72,6 @@ public class RedisHandle {
 
 	/**
 	 * 将list存储于redis中，需传入泛型，支持过期时间
-	 * @author HuangLongPu
 	 * @param key
 	 * @param list
 	 * @param timeout
@@ -98,7 +94,6 @@ public class RedisHandle {
 
     /**
      * 通过key获取list数据，由于需要转list的数据，需要传入class进行转换
-	 * @author HuangLongPu
      * @param key
      * @param cls
      * @return

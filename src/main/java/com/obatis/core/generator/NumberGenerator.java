@@ -21,7 +21,6 @@ public class NumberGenerator {
 
 	/**
 	 * 获取类型为BigInteger，位数28位
-	 * @author HuangLongPu
 	 * @return
 	 */
 	public static final BigInteger getNumber() {
@@ -30,7 +29,6 @@ public class NumberGenerator {
 
 	/**
 	 * 获取number后缀，根据uuid并且补全位数
-	 * @author HuangLongPu
 	 * @return
 	 */
 	private static String handleNumber() {
@@ -52,7 +50,6 @@ public class NumberGenerator {
 
 	/**
 	 * 获取uuid值的hashcode
-	 * @author HuangLongPu
 	 * @return
 	 */
 	private static int getHashCode() {

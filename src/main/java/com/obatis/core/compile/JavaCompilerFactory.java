@@ -41,7 +41,6 @@ public class JavaCompilerFactory {
 
 	/**
 	 * 自定义fileManager
-	 * @author HuangLongPu
 	 */
 	static class ClassJavaFileManager extends ForwardingJavaFileManager {
 
@@ -63,7 +62,6 @@ public class JavaCompilerFactory {
 
 	/**
 	 * 生成 class 文件，放置于缓存中
-	 * @author HuangLongPu
 	 */
 	static class CreateJavaClassFile extends SimpleJavaFileObject {
 
@@ -86,7 +84,6 @@ public class JavaCompilerFactory {
 
 	/**
 	 * 存储源文件
-	 * @author HuangLongPu
 	 */
 	static class HandleJavaFileObject extends SimpleJavaFileObject {
 
@@ -105,7 +102,6 @@ public class JavaCompilerFactory {
 
 	/**
 	 * 定义内存加载器
-	 * @author HuangLongPu
 	 */
 	static class MemoryJavaClassLoader extends ClassLoader {
 		private CreateJavaClassFile createJavaClassFile;

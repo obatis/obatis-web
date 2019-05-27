@@ -21,7 +21,6 @@ public class PasswordGenerator {
 
 	/**
 	 * 传入sha值、用户名和密码明文，得到密码加密串
-	 * @author HuangLongPu
 	 * @param shaName   sha值，自定义，建议sha值是个变化值(比如上次登录时间)，这样每登录(建议每登录一次修改一次密码)一次密码变化一次
 	 * @param userName  用户名，也可以传入跟用户绑定的全局唯一属性值
 	 * @param password  用户的明文密码
@@ -37,7 +36,6 @@ public class PasswordGenerator {
 
 	/**
 	 * 对 md5 串码进行再一次处理，加入 base64 机制和替换规则，提高暴力破解密码的难度
-	 * @author HuangLongPu
 	 * @param md5Encrypt
 	 * @return
 	 */

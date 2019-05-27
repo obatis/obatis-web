@@ -12,7 +12,6 @@ public class HandleRequestInfo {
 	/**
 	 * 
 	 * @Description: 获取请求的IP地址
-	 * @author HuangLongPu
 	 * @date 2019-05-09
 	 * @param request
 	 * @return String

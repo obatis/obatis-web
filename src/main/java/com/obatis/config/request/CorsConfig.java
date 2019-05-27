@@ -27,7 +27,6 @@ public class CorsConfig {
 
 	/**
 	 * 设置跨域的http请求头
-	 * @author HuangLongPu
 	 * @return
 	 */
 	private CorsConfiguration buildCorsConfig() {
