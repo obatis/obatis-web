@@ -20,7 +20,7 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
         if(ValidateTool.isEmpty(startupPackageName)) {
             return;
         }
-        if(!"com".equals(startupPackageName) && SystemConstant.CORE_BASE_DIR.equals(startupPackageName)) {
+        if(!"com".equals(startupPackageName) && !SystemConstant.CORE_BASE_DIR.equals(startupPackageName)) {
             /**
              * 是否使用默认的filter，使用默认的filter意味着只扫描那些类上拥有Component、Service、Repository或Controller注解的类。
              */

@@ -26,8 +26,6 @@ public final class LoadAnnotationUrl {
          * 获取到所有的 RestController 注解
          */
         Set<Class<?>> restControllerList = reflections.getTypesAnnotatedWith(RestController.class);
-        System.out.println(controllerList.size());
-        System.out.println(restControllerList.size());
         /**
          * 处理 URL路径
          */
