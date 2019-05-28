@@ -1,13 +1,17 @@
 package com.obatis.config.request;
 
+import com.obatis.constant.http.HttpConstant;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class HandleRequestInfo {
+public class RequestHandleInfo {
 
 	/**
 	 * 
@@ -94,5 +98,15 @@ public class HandleRequestInfo {
 		info.setRequestSystem(operatingSystem.getName());
 		info.setRequestIp(getRequestIp(request));
 		return info;
+	}
+
+	/**
+	 * 获取用户请求的token
+	 * @return
+	 */
+	public static String getAuthUserToken() {
+		RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+		HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
+		return request.getHeader(HttpConstant.HEADER_ACCOUNT_TOKEN);
 	}
 }
