@@ -168,6 +168,9 @@
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard:2.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-netflix-hystrix-dashboard:2.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.5" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.9" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:d3js:3.4.11" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter-openfeign:2.0.0.RELEASE" level="project" />
@@ -216,9 +219,6 @@
     <orderEntry type="library" name="Maven: com.obatis:obatis-upload:1.0" level="project" />
     <orderEntry type="library" name="Maven: commons-net:commons-net:3.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.5.0" level="project" />
-    <orderEntry type="library" name="Maven: com.obatis:obatis-net:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.5" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.9" level="project" />
-    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
+    <orderEntry type="library" name="Maven: com.obatis:obatis-net:1.0.1" level="project" />
   </component>
 </module>
