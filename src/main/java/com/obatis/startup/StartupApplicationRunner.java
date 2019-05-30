@@ -21,8 +21,7 @@ public class StartupApplicationRunner extends SpringApplication implements Appli
 	 * 该方法在项目启动时运行
 	 */
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
-
+	public void run(ApplicationArguments args) {
 		// 加载返回封装
 		ResponseResultHandleFactory.handleResponseResultInfo(requestMappingHandlerAdapter);
 	}

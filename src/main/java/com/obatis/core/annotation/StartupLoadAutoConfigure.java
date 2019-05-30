@@ -21,8 +21,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Documented
 @SpringBootApplication
+@ComponentScan(value = SystemConstant.CORE_BASE_DIR)
 @Import(value = ImortStartupLoadAutoConfigure.class)
-@ComponentScan(value = SystemConstant.CORE_BASE_DIR, useDefaultFilters = true)
 public @interface StartupLoadAutoConfigure {
 
 }
