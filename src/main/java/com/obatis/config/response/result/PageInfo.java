@@ -2,12 +2,13 @@ package com.obatis.config.response.result;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PageInfo<T> {
 
 	@ApiModelProperty(value = "分页信息")
-    private List<T> list;
+    private List<T> list = new ArrayList<>();
     @ApiModelProperty(value = "总条数")
     private long total = 0;
 
