@@ -1,7 +1,7 @@
 package com.obatis.core.annotation;
 
-import com.obatis.core.annotation.config.ImortStartupLoadAutoConfigure;
 import com.obatis.config.SystemConstant;
+import com.obatis.core.annotation.config.ImortStartupLoadAutoConfigure;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;

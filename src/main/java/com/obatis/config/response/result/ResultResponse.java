@@ -48,7 +48,7 @@ public final class ResultResponse implements Serializable {
 		return message;
 	}
 
-	protected void setMessage(String message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
 
@@ -56,7 +56,7 @@ public final class ResultResponse implements Serializable {
 		return result;
 	}
 
-	protected void setResult(Object result) {
+	public void setResult(Object result) {
 		this.result = result;
 	}
 
@@ -64,7 +64,7 @@ public final class ResultResponse implements Serializable {
 		return errorCode;
 	}
 
-	protected void setErrorCode(String errorCode) {
+	public void setErrorCode(String errorCode) {
 		this.errorCode = errorCode;
 	}
 
