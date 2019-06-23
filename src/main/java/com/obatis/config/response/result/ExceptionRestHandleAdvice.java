@@ -48,7 +48,6 @@ public class ExceptionRestHandleAdvice {
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : "业务异常");
 			errorCode = ((HandleException) exception).getErrCode();
 		} else if (exception instanceof MethodArgumentNotValidException) {
-			System.out.println(exception.getMessage());
 			MethodArgumentNotValidException e1 = (MethodArgumentNotValidException) exception;
 			BindingResult bindingResult = e1.getBindingResult();
 			List<ObjectError> allErrors = bindingResult.getAllErrors();
