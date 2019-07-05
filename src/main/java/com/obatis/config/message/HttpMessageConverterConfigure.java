@@ -61,6 +61,7 @@ public class HttpMessageConverterConfigure {
         SerializeConfig serializeConfig =  new SerializeConfig();
         serializeConfig.put(BigInteger.class, new HttpMessageBigIntConvertSerializer());
         serializeConfig.put(BigDecimal.class, new HttpMessageBigIntConvertSerializer());
+        serializeConfig.put(Long.class, new HttpMessageBigIntConvertSerializer());
         fastJsonConfig.setSerializeConfig(serializeConfig);
         fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
 
