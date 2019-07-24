@@ -42,7 +42,7 @@ public class RedisHandle {
 	 * @param timeout
 	 */
 	public void set(String key, Object value, int timeout) {
-		this.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
+		this.expire(key, timeout);
 		this.redisTemplate.opsForValue().set(key, value);
 	}
 
@@ -65,7 +65,7 @@ public class RedisHandle {
 	 * @param list
 	 */
     public void setList(String key, List<?> list){
-    	this.validateDate(key, list);
+    	this.validateData(key, list);
     	String data = JsonCommonConvert.objConvertJson(list);
     	this.set(key, data);
     }
@@ -77,13 +77,13 @@ public class RedisHandle {
 	 * @param timeout
 	 */
     public void setList(String key, List<?> list, int timeout){
-    	this.validateDate(key, list);
+    	this.validateData(key, list);
 		this.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
     	String data = JsonCommonConvert.objConvertJson(list);
     	this.set(key, data);
     }
 
-    private void validateDate(String key, List<?> list) throws HandleException {
+    private void validateData(String key, List<?> list) throws HandleException {
 		if(ValidateTool.isEmpty(key)) {
 			throw new HandleException("error : key is empty!");
 		}

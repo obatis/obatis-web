@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
+import com.obatis.core.exception.HandleException;
+import com.obatis.validate.ValidateTool;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,13 @@ public class RedisMapHandle<MK, MV> {
 	@Resource
 	public RedisTemplate<String, Map<MK, MV>> redisTemplate;
 
+	public void expire(String key, int timeout) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty !!!");
+		}
+		this.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
+	}
+
 	/**
 	 * 根据 key 和 value 添加到 redis 数据库
 	 * @param key 保存到 redis 数据库的 key
@@ -29,6 +38,27 @@ public class RedisMapHandle<MK, MV> {
 	 * @param mv map 的 value
 	 */
 	public void set(String key, MK mk, MV mv) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty !!!");
+		}
+		if(ValidateTool.isEmpty(mk)) {
+			throw new HandleException("error : map key is empty !!!");
+		}
+		this.redisTemplate.opsForHash().put(key, mk, mv);
+	}
+
+	/**
+	 * 根据 key 和 value 添加到 redis 数据库，并设置过期时间
+	 * @param key
+	 * @param mk
+	 * @param mv
+	 * @param timeout
+	 */
+	public void set(String key, MK mk, MV mv, int timeout) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty !!!");
+		}
+		this.expire(key, timeout);
 		this.redisTemplate.opsForHash().put(key, mk, mv);
 	}
 	
@@ -38,6 +68,22 @@ public class RedisMapHandle<MK, MV> {
 	 * @param value
 	 */
 	public void set(String key, Map<MK, MV> value) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty !!!");
+		}
+		this.redisTemplate.opsForHash().putAll(key, value);
+	}
+
+	/**
+	 * 根据 key 和 map 添加到 redis 数据库，并设置过期时间
+	 * @param key
+	 * @param value
+	 */
+	public void set(String key, Map<MK, MV> value, int timeout) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty !!!");
+		}
+		this.expire(key, timeout);
 		this.redisTemplate.opsForHash().putAll(key, value);
 	}
 	
@@ -47,6 +93,9 @@ public class RedisMapHandle<MK, MV> {
 	 * @return
 	 */
 	public Map<MK, MV> get(String key) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty !!!");
+		}
 		HashOperations<String, MK, MV> opsForMap = this.redisTemplate.opsForHash();
 		return opsForMap.entries(key);
 	}
@@ -58,6 +107,12 @@ public class RedisMapHandle<MK, MV> {
 	 * @return
 	 */
 	public MV get(String key, MK mk) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty !!!");
+		}
+		if(ValidateTool.isEmpty(mk)) {
+			throw new HandleException("error : map key is empty !!!");
+		}
 		HashOperations<String, MK, MV> opsForMap = this.redisTemplate.opsForHash();
 		return opsForMap.get(key, mk);
 	}
@@ -68,6 +123,9 @@ public class RedisMapHandle<MK, MV> {
 	 * @return
 	 */
 	public List<MV> list(String key) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty!!!");
+		}
 		HashOperations<String, MK, MV> opsForMap = this.redisTemplate.opsForHash();
 		return opsForMap.values(key);
 	}
@@ -79,8 +137,15 @@ public class RedisMapHandle<MK, MV> {
 	 * @return
 	 */
 	public List<MV> list(String key, List<MK> hashKeys) {
-		HashOperations<String, MK, MV> opsForMap = this.redisTemplate.opsForHash();
-		return opsForMap.multiGet(key, hashKeys);
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty!!!");
+		}
+		if(ValidateTool.isEmpty(hashKeys)) {
+			return list(key);
+		} else {
+			HashOperations<String, MK, MV> opsForMap = this.redisTemplate.opsForHash();
+			return opsForMap.multiGet(key, hashKeys);
+		}
 	}
 	
 	/**
@@ -89,6 +154,9 @@ public class RedisMapHandle<MK, MV> {
 	 * @return
 	 */
 	public Long size(String key) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty!!!");
+		}
 		return this.redisTemplate.opsForHash().size(key);
 	}
 	
@@ -97,9 +165,16 @@ public class RedisMapHandle<MK, MV> {
 	 * @param key
 	 * @param hashKeys
 	 */
-	@SuppressWarnings("unchecked")
 	public void remove(String key, MK... hashKeys) {
-		this.redisTemplate.opsForHash().delete(key, hashKeys);
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty!!!");
+		}
+		if(ValidateTool.isEmpty(hashKeys) || hashKeys.length == 0) {
+			this.delete(key);
+		} else {
+			this.redisTemplate.opsForHash().delete(key, hashKeys);
+		}
+
 	}
 	
 	/**
@@ -107,6 +182,9 @@ public class RedisMapHandle<MK, MV> {
 	 * @param key
 	 */
 	public void delete(String key) {
+		if(ValidateTool.isEmpty(key)) {
+			throw new HandleException("error : key is empty!!!");
+		}
 		this.redisTemplate.delete(key);
 	}
 }
