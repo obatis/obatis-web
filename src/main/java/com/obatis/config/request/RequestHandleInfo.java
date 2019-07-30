@@ -14,7 +14,6 @@ import java.net.UnknownHostException;
 public class RequestHandleInfo {
 
 	/**
-	 * 
 	 * @Description: 获取请求的IP地址
 	 * @date 2019-05-09
 	 * @param request

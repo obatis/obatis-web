@@ -15,6 +15,10 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.Map;
 
+/**
+ * 发送邮件构造方法构造类
+ * 加入到Spring bean 对象，直接使用引入注解标签即可
+ */
 @Component
 public class SendMailServiceImpl implements SendMailService {
 
@@ -50,7 +54,7 @@ public class SendMailServiceImpl implements SendMailService {
     }
 
     /**
-     * 使用模版的形式发送邮件
+     * 使用 thymeleaf 模版的形式发送邮件
      * @param toEmail
      * @param title
      * @param templatePath
@@ -64,6 +68,11 @@ public class SendMailServiceImpl implements SendMailService {
         this.send(toEmail, title, templateEngine.process(templatePath, context));
     }
 
+    /**
+     * 构造 JavaMailSender 对象
+     * @param env
+     * @return
+     */
     private static JavaMailSender getJavaMailSender(Environment env) {
         if(mailSender == null) {
             return loadJavaMailSender(env);
