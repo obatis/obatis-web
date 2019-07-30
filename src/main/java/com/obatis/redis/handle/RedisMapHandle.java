@@ -99,6 +99,8 @@ public class RedisMapHandle<MK, MV> {
 		HashOperations<String, MK, MV> opsForMap = this.redisTemplate.opsForHash();
 		return opsForMap.entries(key);
 	}
+
+
 	
 	/**
 	 * 根据 key 和 map key 获取 value 值

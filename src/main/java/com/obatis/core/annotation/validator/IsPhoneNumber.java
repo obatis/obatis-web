@@ -20,7 +20,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = {IsPhoneNumberValidator.class})
 public @interface IsPhoneNumber {
 
-String message() default "手机号码格式不正确";
+    String message() default "手机号码格式不正确";
     
     Class<?>[] groups() default {};
 
