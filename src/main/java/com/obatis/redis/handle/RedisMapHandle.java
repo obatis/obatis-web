@@ -26,7 +26,7 @@ public class RedisMapHandle<MK, MV> {
 
 	public void expire(String key, int timeout) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty !!!");
+			throw new HandleException("error : key is empty");
 		}
 		this.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
 	}
@@ -39,10 +39,10 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public void set(String key, MK mk, MV mv) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty !!!");
+			throw new HandleException("error : key is empty");
 		}
 		if(ValidateTool.isEmpty(mk)) {
-			throw new HandleException("error : map key is empty !!!");
+			throw new HandleException("error : map key is empty");
 		}
 		this.redisTemplate.opsForHash().put(key, mk, mv);
 	}
@@ -56,7 +56,7 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public void set(String key, MK mk, MV mv, int timeout) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty !!!");
+			throw new HandleException("error : key is empty");
 		}
 		this.expire(key, timeout);
 		this.redisTemplate.opsForHash().put(key, mk, mv);
@@ -69,7 +69,7 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public void set(String key, Map<MK, MV> value) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty !!!");
+			throw new HandleException("error : key is empty");
 		}
 		this.redisTemplate.opsForHash().putAll(key, value);
 	}
@@ -81,7 +81,7 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public void set(String key, Map<MK, MV> value, int timeout) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty !!!");
+			throw new HandleException("error : key is empty");
 		}
 		this.expire(key, timeout);
 		this.redisTemplate.opsForHash().putAll(key, value);
@@ -94,7 +94,7 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public Map<MK, MV> get(String key) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty !!!");
+			throw new HandleException("error : key is empty");
 		}
 		HashOperations<String, MK, MV> opsForMap = this.redisTemplate.opsForHash();
 		return opsForMap.entries(key);
@@ -110,10 +110,10 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public MV get(String key, MK mk) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty !!!");
+			throw new HandleException("error : key is empty");
 		}
 		if(ValidateTool.isEmpty(mk)) {
-			throw new HandleException("error : map key is empty !!!");
+			throw new HandleException("error : map key is empty");
 		}
 		HashOperations<String, MK, MV> opsForMap = this.redisTemplate.opsForHash();
 		return opsForMap.get(key, mk);
@@ -126,7 +126,7 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public List<MV> list(String key) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty!!!");
+			throw new HandleException("error : key is empty");
 		}
 		HashOperations<String, MK, MV> opsForMap = this.redisTemplate.opsForHash();
 		return opsForMap.values(key);
@@ -140,7 +140,7 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public List<MV> list(String key, List<MK> hashKeys) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty!!!");
+			throw new HandleException("error : key is empty");
 		}
 		if(ValidateTool.isEmpty(hashKeys)) {
 			return list(key);
@@ -157,7 +157,7 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public Long size(String key) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty!!!");
+			throw new HandleException("error : key is empty");
 		}
 		return this.redisTemplate.opsForHash().size(key);
 	}
@@ -169,7 +169,7 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public void remove(String key, MK... hashKeys) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty!!!");
+			throw new HandleException("error : key is empty");
 		}
 		if(ValidateTool.isEmpty(hashKeys) || hashKeys.length == 0) {
 			this.delete(key);
@@ -185,7 +185,7 @@ public class RedisMapHandle<MK, MV> {
 	 */
 	public void delete(String key) {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty!!!");
+			throw new HandleException("error : key is empty");
 		}
 		this.redisTemplate.delete(key);
 	}

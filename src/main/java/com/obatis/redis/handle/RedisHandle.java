@@ -85,10 +85,10 @@ public class RedisHandle {
 
     private void validateData(String key, List<?> list) throws HandleException {
 		if(ValidateTool.isEmpty(key)) {
-			throw new HandleException("error : key is empty!");
+			throw new HandleException("error : key is empty");
 		}
 		if(list == null) {
-			throw new HandleException("error : list is empty!");
+			throw new HandleException("error : list is empty");
 		}
 	}
 
@@ -100,7 +100,7 @@ public class RedisHandle {
      */
     public<M> List<M> getList(String key, Class<M> cls){
     	if(ValidateTool.isEmpty(key)) {
-    		throw new HandleException("error : key is empty!!!");
+    		throw new HandleException("error : key is empty");
     	}
     	Object data = this.get(key);
     	String jsonStr = CommonConvert.toString(data);
