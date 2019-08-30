@@ -43,7 +43,8 @@ public class ExceptionRestHandleAdvice {
 		String errorCode = null;
 
 		if (exception instanceof HandleException) {
-			LOG.print(exception.getMessage());
+//			LOG.print(exception.getMessage());
+			printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.BUS_ERROR_STATUS);
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : "业务异常");
 			errorCode = ((HandleException) exception).getErrCode();
