@@ -38,19 +38,7 @@ public class LengthValidator implements ConstraintValidator<Length, Object> {
     		if(size < min || (max > 0 && size > max)) {
     			return false;
     		}
-    	} else if (value instanceof Integer) {
-    		if((int)value < min || (int)value > max) {
-    			return false;
-			}
-		} else if (value instanceof Long) {
-    		if((long)value < min || (long)value > max) {
-    			return false;
-			}
-		} else if (value instanceof Double) {
-    		if((double)value < min || (double)value > max) {
-    			return false;
-			}
-		} else {
+    	} else {
     		int len = CommonConvert.toString(value).length();
     		if(len < min || (max > 0 && len > max)) {
     			return false;
