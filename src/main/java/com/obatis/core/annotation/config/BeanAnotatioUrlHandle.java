@@ -43,7 +43,7 @@ public class BeanAnotatioUrlHandle {
             }
 
             if(pathArr.length != 1) {
-                throw new HandleException("error:Annotation error: " + canonicalName + " method " + method.getName() + " RequestMapping value not only one");
+                throw new HandleException("error: " + canonicalName + " method " + method.getName() + " RequestMapping value not only one");
             }
 
             String path = null;
@@ -56,7 +56,7 @@ public class BeanAnotatioUrlHandle {
             }
 
             if(path == null) {
-                throw new HandleException("error:Annotation error: " + canonicalName + " method " + method.getName() + " url annotation is null");
+                throw new HandleException("error: " + canonicalName + " method " + method.getName() + " url annotation is null");
             }
 
 
