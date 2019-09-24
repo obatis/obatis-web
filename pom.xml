@@ -10,14 +10,23 @@
     <description>obatis-web, apply web project</description>
     <url>https://github.com/obatis/obatis-web</url>
 
+    <!-- 中央仓库 -->
+    <!--<distributionManagement>-->
+        <!--<snapshotRepository>-->
+            <!--<id>oss</id>-->
+            <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+        <!--</snapshotRepository>-->
+        <!--<repository>-->
+            <!--<id>oss</id>-->
+            <!--<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+        <!--</repository>-->
+    <!--</distributionManagement>-->
+
+    <!-- 私有仓库 -->
     <distributionManagement>
-        <snapshotRepository>
-            <id>oss</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>oss</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>private-oss</id>
+            <url>http://139.9.81.33:8089/nexus/content/repositories/releases/</url>
         </repository>
     </distributionManagement>
 

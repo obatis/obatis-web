@@ -13,7 +13,7 @@ public class PageParam extends RequestParam {
 	private int rows = RequestConstant.DEFAULT_ROWS;
 	@ApiModelProperty(value = "排序字段")
 	private String sort;
-	@ApiModelProperty(value = "排序方式，0:升序 1:降序，默认升序。只接收1和2，其他无效")
+	@ApiModelProperty(value = "排序方式，0:升序 1:降序，默认升序。只接收0和1，其他无效")
 	@OrderValid
 	private int order;
 	
