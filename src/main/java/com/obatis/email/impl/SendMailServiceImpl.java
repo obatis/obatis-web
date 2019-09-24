@@ -1,5 +1,6 @@
 package com.obatis.email.impl;
 
+import com.obatis.config.SystemConstant;
 import com.obatis.email.SendMailService;
 import com.obatis.email.exception.SendMailException;
 import org.springframework.core.env.Environment;
@@ -23,8 +24,6 @@ import java.util.Map;
 public class SendMailServiceImpl implements SendMailService {
 
     @Resource
-    private Environment env;
-    @Resource
     private TemplateEngine templateEngine;
 
     private static JavaMailSender mailSender;
@@ -32,7 +31,7 @@ public class SendMailServiceImpl implements SendMailService {
 
     @Override
     public void send(String toEmail, String title, String content) throws SendMailException {
-        getJavaMailSender(env);
+        getJavaMailSender(SystemConstant.ENV);
         //使用MimeMessage，MIME协议
         MimeMessage message = mailSender.createMimeMessage();
 
