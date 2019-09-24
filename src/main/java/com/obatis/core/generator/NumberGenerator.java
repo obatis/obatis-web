@@ -13,7 +13,7 @@ import java.util.*;
  * 注：测试案例仅为业务实现，未考虑性能问题，测试时可考虑加入线程池或者队列效果会更好。
  * @author HuangLongPu
  */
-public class NumberGenerator {
+public final class NumberGenerator {
 
 	private NumberGenerator() {}
 
