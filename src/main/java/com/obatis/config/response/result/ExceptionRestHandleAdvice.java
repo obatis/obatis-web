@@ -40,17 +40,16 @@ public class ExceptionRestHandleAdvice {
 			response.setStatus(HttpStatus.OK.value());
 		}
 		ResultResponse resultInfo = new ResultResponse();
-		String errorCode = null;
+		String errorCode;
 
 		if (exception instanceof HandleException) {
-			LOG.print(exception.getMessage());
-			printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.BUS_ERROR_STATUS);
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : "业务异常");
 			errorCode = ((HandleException) exception).getErrCode();
+			LOG.print(printExceptionLog(exception));
 		} else if (exception instanceof MethodArgumentNotValidException) {
-			MethodArgumentNotValidException e1 = (MethodArgumentNotValidException) exception;
-			BindingResult bindingResult = e1.getBindingResult();
+			MethodArgumentNotValidException e = (MethodArgumentNotValidException) exception;
+			BindingResult bindingResult = e.getBindingResult();
 			List<ObjectError> allErrors = bindingResult.getAllErrors();
 			List<String> errorMsgs = new ArrayList<>();
 			for (ObjectError errorInfo : allErrors) {
@@ -76,7 +75,7 @@ public class ExceptionRestHandleAdvice {
 			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_LOGIN_ERROR_STATUS);
 			resultInfo.setMessage("用户未登录");
 			errorCode = ResponseDefaultErrorCode.NOT_LOGIN_ERROR_CODE;
-			LOG.print("用户未登录," + exception.getMessage());
+			LOG.print("用户未登录");
 		} else if (exception instanceof NoHandlerFoundException) {
 			resultInfo.setCode(org.apache.http.HttpStatus.SC_NOT_FOUND);
 			resultInfo.setMessage("HTTP请求URL地址不正确");
