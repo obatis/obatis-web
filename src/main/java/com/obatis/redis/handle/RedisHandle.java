@@ -42,8 +42,8 @@ public class RedisHandle {
 	 * @param timeout
 	 */
 	public void set(String key, Object value, int timeout) {
-		this.expire(key, timeout);
 		this.redisTemplate.opsForValue().set(key, value);
+		this.expire(key, timeout);
 	}
 
 	/**
@@ -78,9 +78,9 @@ public class RedisHandle {
 	 */
     public void setList(String key, List<?> list, int timeout){
     	this.validateData(key, list);
-		this.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
     	String data = JsonCommonConvert.objConvertJson(list);
     	this.set(key, data);
+    	this.expire(key, timeout);
     }
 
     private void validateData(String key, List<?> list) throws HandleException {

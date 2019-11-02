@@ -58,8 +58,8 @@ public class RedisMapHandle<MK, MV> {
 		if(ValidateTool.isEmpty(key)) {
 			throw new HandleException("error : key is empty");
 		}
-		this.expire(key, timeout);
 		this.redisTemplate.opsForHash().put(key, mk, mv);
+		this.expire(key, timeout);
 	}
 	
 	/**
@@ -83,8 +83,8 @@ public class RedisMapHandle<MK, MV> {
 		if(ValidateTool.isEmpty(key)) {
 			throw new HandleException("error : key is empty");
 		}
-		this.expire(key, timeout);
 		this.redisTemplate.opsForHash().putAll(key, value);
+		this.expire(key, timeout);
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package com.obatis.startup;
 
 import com.obatis.config.SystemConstant;
 import com.obatis.config.response.ResponseResultHandleFactory;
+import com.obatis.validate.ValidateTool;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -34,5 +35,9 @@ public class StartupApplicationRunner extends SpringApplication implements Appli
 
 	private void loadConfig() {
 		SystemConstant.SERVICE_NAME = env.getProperty("spring.application.name");
+		String runEvn =  env.getProperty("spring.profiles.active");
+		if(ValidateTool.isEmpty(runEvn) || runEvn.toLowerCase().equals("dev")) {
+			SystemConstant.RUN_DEV_ENV = true;
+		}
 	}
 }

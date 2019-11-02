@@ -15,4 +15,8 @@ public class SystemConstant {
      * 服务名称
      */
     public static String SERVICE_NAME;
+    /**
+     * 运行环境，true 为开发环境，false为生产环境
+     */
+    public static boolean RUN_DEV_ENV;
 }
