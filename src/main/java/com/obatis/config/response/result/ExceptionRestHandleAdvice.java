@@ -2,6 +2,7 @@ package com.obatis.config.response.result;
 
 import com.obatis.constant.http.ResponseDefaultErrorCode;
 import com.obatis.constant.http.ResponseDefaultErrorStatus;
+import com.obatis.convert.CommonConvert;
 import com.obatis.core.exception.HandleException;
 import com.obatis.core.exception.NotAuthHandleException;
 import com.obatis.core.exception.NotLoginHandleException;
