@@ -70,12 +70,12 @@ public class ExceptionRestHandleAdvice {
 			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_AUTH_ERROR_STATUS);
 			resultInfo.setMessage("请求未授权，没有操作权限");
 			errorCode = ResponseDefaultErrorCode.NOT_AUTH_ERROR_CODE;
-			LOG.print("请求未授权，没有操作权限");
+			LOG.print("请求未授权，没有操作权限" + (!ValidateTool.isEmpty(exception.getMessage()) ? "," + exception.getMessage() : ""));
 		} else if (exception instanceof NotLoginHandleException) {
 			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_LOGIN_ERROR_STATUS);
 			resultInfo.setMessage("用户未登录");
 			errorCode = ResponseDefaultErrorCode.NOT_LOGIN_ERROR_CODE;
-			LOG.print("用户未登录");
+			LOG.print("用户未登录" + (!ValidateTool.isEmpty(exception.getMessage()) ? "," + exception.getMessage() : ""));
 		} else if (exception instanceof NoHandlerFoundException) {
 			resultInfo.setCode(org.apache.http.HttpStatus.SC_NOT_FOUND);
 			resultInfo.setMessage("HTTP请求URL地址不正确");
