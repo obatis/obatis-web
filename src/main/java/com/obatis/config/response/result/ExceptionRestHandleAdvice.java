@@ -59,12 +59,12 @@ public class ExceptionRestHandleAdvice {
 			}
 			String join = String.join(",", errorMsgs);
 			resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_INVALID_ERROR_STATUS);
-			resultInfo.setMessage(ValidateTool.isHaveChinese(join) ? join : "请求参数值无效");
+			resultInfo.setMessage(ValidateTool.isHaveChinese(join) ? join : "请求错误");
 			errorCode = ResponseDefaultErrorCode.PARAM_INVALID_ERROR_CODE;
 			LOG.print("请求参数值无效：" + join);
 		} else if (exception instanceof HttpMessageNotReadableException) {
 			resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_TYPE_ERROR_STATUS);
-			resultInfo.setMessage("请求参数值类型不匹配");
+			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.PARAM_TYPE_ERROR_CODE;
 			LOG.print("请求参数值类型不匹配：" + exception.getMessage());
 		} else if (exception instanceof NotAuthHandleException) {
