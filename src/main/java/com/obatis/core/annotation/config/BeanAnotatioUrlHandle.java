@@ -14,6 +14,9 @@ import java.util.Map;
 
 public class BeanAnotatioUrlHandle {
 
+    /**
+     * url 存储的 map 类，key 为controller注解的URL地址，value 为注册URL的方法说明(借助于 swagger实现)
+     */
     private static final Map<String, String> URL_MAP = new HashMap<>();
 
     protected BeanAnotatioUrlHandle() {}
