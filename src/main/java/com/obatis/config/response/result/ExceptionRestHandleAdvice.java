@@ -1,8 +1,8 @@
 package com.obatis.config.response.result;
 
+import com.obatis.config.response.result.callback.ExceptionRestHandle;
 import com.obatis.constant.http.ResponseDefaultErrorCode;
 import com.obatis.constant.http.ResponseDefaultErrorStatus;
-import com.obatis.convert.CommonConvert;
 import com.obatis.core.exception.HandleException;
 import com.obatis.core.exception.NotAuthHandleException;
 import com.obatis.core.exception.NotLoginHandleException;
@@ -88,24 +88,28 @@ public class ExceptionRestHandleAdvice {
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.NULL_POINTER_ERROR_CODE;
 			LOG.print("空指针异常：" + trace);
+			ExceptionRestHandle.addNullPointer(exception);
 		} else if (exception instanceof IndexOutOfBoundsException) {
 			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.INDEX_OUT_ERROR_CODE;
 			LOG.print("操作越界异常：" + trace);
+			ExceptionRestHandle.addIndexOut(exception);
 		} else if (exception instanceof SQLException) {
 			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.SQL_EXECUTE_ERROR_CODE;
 			LOG.print("SQL执行运行异常：" + trace);
+			ExceptionRestHandle.addSql(exception);
 		} else {
 			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.SYSTEM_ERROR_CODE;
 			LOG.print("程序执行错误：" + trace);
+			ExceptionRestHandle.addDefault(exception);
 		}
 
 		if (ValidateTool.isEmpty(errorCode)) {
