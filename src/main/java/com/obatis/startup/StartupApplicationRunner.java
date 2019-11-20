@@ -2,19 +2,20 @@ package com.obatis.startup;
 
 import com.obatis.config.SystemConstant;
 import com.obatis.config.response.ResponseResultHandleFactory;
-import com.obatis.config.response.result.callback.ExceptionRestHandle;
 import com.obatis.config.response.result.callback.ExceptionRestHandleCallback;
 import com.obatis.config.response.result.callback.ExceptionRestParam;
 import com.obatis.validate.ValidateTool;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import javax.annotation.Resource;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,14 +23,12 @@ import java.util.concurrent.Executors;
 @Order(1)
 public class StartupApplicationRunner extends SpringApplication implements ApplicationRunner  {
 
-	private ExecutorService exceptionHandlePool = Executors.newFixedThreadPool(2);
-
 	@Resource
 	private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 	@Resource
 	private Environment env;
-//	@Resource
-//	private ExceptionRestHandleCallback exceptionRestHandleCallback;
+	@Resource
+	private ApplicationContext applicationContext;
 
 	/**
 	 * 该方法在项目启动时运行
@@ -54,44 +53,15 @@ public class StartupApplicationRunner extends SpringApplication implements Appli
 		}
 	}
 
+	/**
+	 * 异常回调
+	 */
 	private void handleExceptionCall() {
-//		System.out.println("exceptionRestHandleCallback >>> " + exceptionRestHandleCallback);
-	}
-
-	class HandleExceptionCallContext implements Runnable {
-
-		@Override
-		public void run() {
-			while (true) {
-				try {
-					exceptionHandlePool.execute(new HandleExceptionCallContextWorker(ExceptionRestHandle.EXCEPTION_HANDLE_QUEUE.take()));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	class HandleExceptionCallContextWorker implements Runnable {
-
-		private ExceptionRestParam param;
-
-		protected HandleExceptionCallContextWorker(ExceptionRestParam param) {
-			this.param = param;
+		Map<String, ExceptionRestHandleCallback> beanMap = applicationContext.getBeansOfType(ExceptionRestHandleCallback.class);
+		if(beanMap != null && !beanMap.isEmpty()) {
+			HandleExceptionCallContext.exceptionHandlePool.execute(new HandleExceptionCallContext(beanMap));
 		}
 
-		@Override
-		public void run() {
-			switch (param.getHandleType()) {
-				case HANDLE_TYPE_NULL_POINTER:
-					break;
-				case HANDLE_TYPE_INDEX_OUT:
-					break;
-				case HANDLE_TYPE_SQL:
-					break;
-				case HANDLE_TYPE_DEFAULT:
-					break;
-			}
-		}
 	}
+
 }
