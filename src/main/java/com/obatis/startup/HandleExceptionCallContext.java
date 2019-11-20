@@ -1,13 +1,15 @@
 package com.obatis.startup;
 
-import com.obatis.config.response.result.callback.ExceptionRestHandle;
 import com.obatis.config.response.result.callback.ExceptionRestHandleCallback;
 import com.obatis.config.response.result.callback.ExceptionRestParam;
+import com.obatis.config.response.result.callback.HandleTypeEnum;
 
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * 异常回调处理类
@@ -16,7 +18,23 @@ public class HandleExceptionCallContext implements Runnable {
 
     protected static final ExecutorService exceptionHandlePool = Executors.newFixedThreadPool(2);
 
-    private Map<String, ExceptionRestHandleCallback> beanMap;
+    public static final BlockingQueue<ExceptionRestParam> EXCEPTION_HANDLE_QUEUE = new LinkedBlockingQueue<>();
+
+    private static Map<String, ExceptionRestHandleCallback> beanMap;
+
+    public static void addException(HandleTypeEnum handleType, Exception exception) {
+        if(beanMap == null || !beanMap.isEmpty()) {
+            return;
+        }
+        ExceptionRestParam param = new ExceptionRestParam();
+        param.setHandleType(handleType);
+        param.setException(exception);
+        try {
+            EXCEPTION_HANDLE_QUEUE.put(param);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     protected HandleExceptionCallContext(Map<String, ExceptionRestHandleCallback> beanMap) {
         this.beanMap = beanMap;
@@ -26,7 +44,7 @@ public class HandleExceptionCallContext implements Runnable {
     public void run() {
         while (true) {
             try {
-                this.handleException(ExceptionRestHandle.EXCEPTION_HANDLE_QUEUE.take());
+                this.handleException(EXCEPTION_HANDLE_QUEUE.take());
             } catch (Exception e) {
                 e.printStackTrace();
             }
