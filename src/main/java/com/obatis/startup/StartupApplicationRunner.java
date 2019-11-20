@@ -2,8 +2,9 @@ package com.obatis.startup;
 
 import com.obatis.config.SystemConstant;
 import com.obatis.config.response.ResponseResultHandleFactory;
+import com.obatis.config.response.result.callback.ExceptionRestHandle;
 import com.obatis.config.response.result.callback.ExceptionRestHandleCallback;
-import com.obatis.config.response.result.callback.ExceptionRestParam;
+import com.obatis.config.response.result.callback.HandleExceptionCallbackContext;
 import com.obatis.validate.ValidateTool;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,8 +17,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import javax.annotation.Resource;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @Configuration
 @Order(1)
@@ -54,12 +53,13 @@ public class StartupApplicationRunner extends SpringApplication implements Appli
 	}
 
 	/**
-	 * 异常回调
+	 * 异常回调处理
 	 */
 	private void handleExceptionCall() {
 		Map<String, ExceptionRestHandleCallback> beanMap = applicationContext.getBeansOfType(ExceptionRestHandleCallback.class);
 		if(beanMap != null && !beanMap.isEmpty()) {
-			HandleExceptionCallContext.exceptionHandlePool.execute(new HandleExceptionCallContext(beanMap));
+			ExceptionRestHandle.ADD_EXCEPTION_FLAG = true;
+			SystemConstant.HANDLE_POOL.execute(new HandleExceptionCallbackContext(beanMap));
 		}
 
 	}
