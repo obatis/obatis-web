@@ -17,6 +17,10 @@ public final class LoadAnnotationUrl {
      * @param baseDir
      */
     protected final void load(String baseDir) {
+
+        /**
+         * 扫码基础目录下的文件
+         */
         Reflections reflections = new Reflections(baseDir);
         /**
          * 获取到所有的 Controller 注解
@@ -30,6 +34,9 @@ public final class LoadAnnotationUrl {
          * 处理 URL路径
          */
         this.handleController(controllerList);
+        /**
+         * 异常处理回调
+         */
         this.handleRestController(restControllerList);
     }
 
