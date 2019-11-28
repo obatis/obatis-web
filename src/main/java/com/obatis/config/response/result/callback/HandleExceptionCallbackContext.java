@@ -1,6 +1,7 @@
 package com.obatis.config.response.result.callback;
 
 import com.obatis.config.SystemConstant;
+import com.obatis.email.exception.SendMailException;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -12,7 +13,7 @@ public class HandleExceptionCallbackContext implements Runnable {
 
     private static Map<String, ExceptionRestHandleCallback> beanMap;
 
-    public static void addException(HandleTypeEnum handleType, Exception exception) {
+    public static void addException(ExceptionHandleTypeEnum handleType, Exception exception) {
         if(!ExceptionRestHandle.ADD_EXCEPTION_FLAG) {
             return;
         }
@@ -68,6 +69,9 @@ public class HandleExceptionCallbackContext implements Runnable {
                     break;
                 case HANDLE_TYPE_SQL:
                     exceptionRestHandleCallback.handleSQL((SQLException) param.getException());
+                    break;
+                case HANDLE_TYPE_SEND_MAIL:
+                    exceptionRestHandleCallback.handleSendMail((SendMailException) param.getException());
                     break;
                 case HANDLE_TYPE_DEFAULT:
                     exceptionRestHandleCallback.handle(param.getException());

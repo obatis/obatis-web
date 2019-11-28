@@ -8,6 +8,7 @@ import com.obatis.core.exception.NotAuthHandleException;
 import com.obatis.core.exception.NotLoginHandleException;
 import com.obatis.core.logger.LogPrintFactory;
 import com.obatis.core.logger.LogPrinter;
+import com.obatis.email.exception.SendMailException;
 import com.obatis.validate.ValidateTool;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -97,6 +98,13 @@ public class ExceptionRestHandleAdvice {
 			LOG.print("操作越界异常：" + trace);
 			ExceptionRestHandle.addIndexOut(exception);
 		} else if (exception instanceof SQLException) {
+			String trace = printExceptionLog(exception);
+			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setMessage("请求错误");
+			errorCode = ResponseDefaultErrorCode.SQL_EXECUTE_ERROR_CODE;
+			LOG.print("SQL执行运行异常：" + trace);
+			ExceptionRestHandle.addSql(exception);
+		} else if (exception instanceof SendMailException) {
 			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");

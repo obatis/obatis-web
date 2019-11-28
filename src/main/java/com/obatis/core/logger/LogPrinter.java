@@ -1,6 +1,5 @@
 package com.obatis.core.logger;
 
-import com.obatis.core.annotation.validator.IsRange;
 import org.springframework.beans.factory.annotation.Value;
 
 public class LogPrinter {

@@ -5,17 +5,17 @@ public class ExceptionRestParam {
     /**
      * 处理类型
      */
-    private HandleTypeEnum handleType;
+    private ExceptionHandleTypeEnum handleType;
     /**
      * 异常信息
      */
     private Exception exception;
 
-    public HandleTypeEnum getHandleType() {
+    public ExceptionHandleTypeEnum getHandleType() {
         return handleType;
     }
 
-    public void setHandleType(HandleTypeEnum handleType) {
+    public void setHandleType(ExceptionHandleTypeEnum handleType) {
         this.handleType = handleType;
     }
 
