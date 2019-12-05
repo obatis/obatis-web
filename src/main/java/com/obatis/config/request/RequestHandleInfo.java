@@ -63,7 +63,7 @@ public class RequestHandleInfo {
 		OperatingSystem operatingSystem = userAgent.getOperatingSystem(); // 操作系统信息
 		String browser = userAgent.getBrowser() + " " + userAgent.getBrowserVersion();
 		eu.bitwalker.useragentutils.DeviceType deviceType = operatingSystem.getDeviceType(); // 设备类型
-		String device = null;
+		String device;
 		switch (deviceType) {
 			case COMPUTER:
 				device = "PC";
