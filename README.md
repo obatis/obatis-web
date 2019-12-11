@@ -15,3 +15,7 @@ public class ApplicationStartup {
     }
 
 }
+
+注意：如果作为单体应用开发，springboot项目配置文件中加入以下配置表示不去注册中心进行注册，否则会报错，提示找不到注册中心地址
+eureka.client.fetch-registry = false
+eureka.client.register-with-eureka = false

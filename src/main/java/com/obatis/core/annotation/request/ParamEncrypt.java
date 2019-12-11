@@ -10,6 +10,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * api 接口返回数据时，加密参数返回
+ * 该注解尚未实现完毕，暂不提供使用
  */
 @Target({ FIELD })
 @Retention(RUNTIME)
