@@ -1,5 +1,6 @@
 package com.obatis.core.annotation.config;
 
+import com.obatis.core.annotation.request.ConfigFeignClient;
 import com.obatis.validate.ValidateTool;
 import org.reflections.Reflections;
 import org.springframework.stereotype.Controller;
@@ -23,21 +24,17 @@ public final class LoadAnnotationUrl {
          */
         Reflections reflections = new Reflections(baseDir);
         /**
-         * 获取到所有的 Controller 注解
+         * 处理所有注解@Controller 的URL路径
          */
-        Set<Class<?>> controllerList = reflections.getTypesAnnotatedWith(Controller.class);
+        this.handleController(reflections.getTypesAnnotatedWith(Controller.class));
         /**
-         * 获取到所有的 RestController 注解
+         * 处理所有注解@RestController 的URL路径
          */
-        Set<Class<?>> restControllerList = reflections.getTypesAnnotatedWith(RestController.class);
+        this.handleRestController(reflections.getTypesAnnotatedWith(RestController.class));
         /**
-         * 处理 URL路径
+         * 获取到所有注解@ConfigFeignClient 的微服务接口
          */
-        this.handleController(controllerList);
-        /**
-         * 异常处理回调
-         */
-        this.handleRestController(restControllerList);
+        this.handleConfigFeignClient(reflections.getTypesAnnotatedWith(ConfigFeignClient.class));
     }
 
     private final void handleController(Set<Class<?>> controllerList) {
@@ -51,6 +48,14 @@ public final class LoadAnnotationUrl {
 
     private void handleRestController(Set<Class<?>> restControllerList) {
         for (Class<?> cls : restControllerList) {
+            // 表示注解为 RestController
+            RestController resController = cls.getAnnotation(RestController.class);
+            getAnnotationUrlPath(cls, handlePath(resController.value()));
+        }
+    }
+
+    private void handleConfigFeignClient(Set<Class<?>> configFeignClientList) {
+        for (Class<?> cls : configFeignClientList) {
             // 表示注解为 RestController
             RestController resController = cls.getAnnotation(RestController.class);
             getAnnotationUrlPath(cls, handlePath(resController.value()));

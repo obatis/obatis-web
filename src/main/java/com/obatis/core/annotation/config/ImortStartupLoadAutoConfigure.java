@@ -10,6 +10,10 @@ import org.springframework.core.type.AnnotationMetadata;
 
 import java.util.Set;
 
+/**
+ * 项目启动加载类，进行注解的注册、特定方法处理等
+ * @author HuangLongPu
+ */
 public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegistrar {
 
     @Override

@@ -1,20 +1,19 @@
 package com.obatis.core.annotation.validator;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
+import javax.validation.Constraint;
+import javax.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * 校验入参是否为手机号码
  * @author HuangLongPu
  */
-@Target({FIELD})
+@Target({PARAMETER})
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = {IsPhoneNumberValidator.class})
