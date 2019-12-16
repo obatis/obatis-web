@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * 发送邮件构造方法构造类
@@ -91,6 +92,11 @@ public class SendMailServiceImpl implements SendMailService {
             ((JavaMailSenderImpl) mailSender).setUsername(env.getProperty("spring.mail.username"));
             ((JavaMailSenderImpl) mailSender).setPassword(env.getProperty("spring.mail.password"));
             ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("spring.mail.default-encoding", "UTF-8"));
+            Properties javaMailProperties = new Properties();
+            javaMailProperties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            javaMailProperties.setProperty("mail.smtp.socketFactory.port", "465");
+            javaMailProperties.setProperty("mail.smtp.port", "465");
+            ((JavaMailSenderImpl) mailSender).setJavaMailProperties(javaMailProperties);
             fromEmail = env.getProperty("mail.fromMail.addr");
         }
         return mailSender;
