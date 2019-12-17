@@ -6,6 +6,7 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -13,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * 校验不能为0，包括空值
  * @author HuangLongPu
  */
-@Target({PARAMETER})
+@Target({FIELD})
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = {NotZeroValidator.class})

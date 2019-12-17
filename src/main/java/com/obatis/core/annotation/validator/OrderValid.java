@@ -6,14 +6,14 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * 排序方式校验，只能接0:升序 1:降序
  * @author HuangLongPu
  */
-@Target({PARAMETER})
+@Target({FIELD})
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = {OrderValidValidator.class})

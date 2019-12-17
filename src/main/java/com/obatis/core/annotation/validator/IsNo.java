@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * 校验是否为订单号格式
  * @author HuangLongPu
  */
-@Target({ PARAMETER })
+@Target({ FIELD })
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = { IsNoValidator.class })
