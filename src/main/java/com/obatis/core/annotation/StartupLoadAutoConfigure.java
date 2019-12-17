@@ -16,7 +16,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * 启动配置类，主要实现包扫描。
  * 如果引用项目的启动类位于com目录下或者com.obatis目录下，可以直接使用 @SpringBootApplication 注解即可，无需使用 @StartupLoadAutoConfigure，使用也没有其他影响
- * 如果需要进行签名验证，设置 validateSign =
  */
 @Target(ElementType.TYPE)
 @Retention(RUNTIME)

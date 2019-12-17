@@ -93,9 +93,14 @@ public class SendMailServiceImpl implements SendMailService {
             ((JavaMailSenderImpl) mailSender).setPassword(env.getProperty("spring.mail.password"));
             ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("spring.mail.default-encoding", "UTF-8"));
             Properties javaMailProperties = new Properties();
-            javaMailProperties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-            javaMailProperties.setProperty("mail.smtp.socketFactory.port", "465");
-            javaMailProperties.setProperty("mail.smtp.port", "465");
+            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.ssl.enable", "true");
+            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.ssl.trust", "spring.mail.host");
+            javaMailProperties.setProperty("spring.mail.properties.mail.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.socketFactory.port", "465");
+            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.port", "465");
+            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.auth", "true");
+            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.starttls.enable", "true");
+            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.starttls.required", "true");
             ((JavaMailSenderImpl) mailSender).setJavaMailProperties(javaMailProperties);
             fromEmail = env.getProperty("mail.fromMail.addr");
         }
