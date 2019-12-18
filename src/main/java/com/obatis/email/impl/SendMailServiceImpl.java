@@ -35,22 +35,28 @@ public class SendMailServiceImpl implements SendMailService {
 
     private static JavaMailSender mailSender;
     private static String fromEmail = null;
+    private static String fromEmailPerson = null;
     private static final Integer defaultPort= 465;
 
     @Override
     public void send(String toEmail, String title, String content) throws SendMailException {
+        getJavaMailSender(SystemConstant.ENV);
         if(mailSender == null) {
             log.warn("邮件信息配置不正确，检查后请重启服务器");
             throw new SendMailException("邮件信息配置不正确，检查后请重启服务器");
         }
-        getJavaMailSender(SystemConstant.ENV);
         //使用MimeMessage，MIME协议
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper;
         try {
             helper = new MimeMessageHelper(message, true);
-            helper.setFrom(fromEmail);
+            if(!ValidateTool.isEmpty(fromEmailPerson)) {
+                helper.setFrom(fromEmail, fromEmailPerson);
+            } else {
+                helper.setFrom(fromEmail);
+            }
+
             helper.setTo(toEmail);
             helper.setSubject(title);
             /**
@@ -58,7 +64,7 @@ public class SendMailServiceImpl implements SendMailService {
              */
             helper.setText(content, true);
             mailSender.send(message);
-        } catch (MessagingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new SendMailException("error:" + e.getMessage());
         }
@@ -74,10 +80,6 @@ public class SendMailServiceImpl implements SendMailService {
      */
     @Override
     public void sendTemplate(String toEmail, String title, String templatePath, Map<String, Object> params) throws SendMailException {
-        if(mailSender == null) {
-            log.warn("邮件信息配置不正确，检查后请重启服务器");
-            throw new SendMailException("邮件信息配置不正确，检查后请重启服务器");
-        }
         Context context = new Context();
         context.setVariables(params);
         this.send(toEmail, title, templateEngine.process(templatePath, context));
@@ -113,7 +115,8 @@ public class SendMailServiceImpl implements SendMailService {
             if(ValidateTool.isEmpty(configHost)) {
                 configHost = "smtp." + configUsername.substring(configUsername.lastIndexOf("@") + 1);
             }
-            fromEmail = env.getProperty("mail.fromMail.addr");
+            fromEmail = env.getProperty("mail.fromMail");
+            fromEmailPerson = env.getProperty("mail.fromMail.person");
             if(ValidateTool.isEmpty(fromEmail)) {
                 fromEmail = configUsername;
             }
