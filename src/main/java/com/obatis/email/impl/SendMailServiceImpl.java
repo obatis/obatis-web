@@ -3,6 +3,7 @@ package com.obatis.email.impl;
 import com.obatis.config.SystemConstant;
 import com.obatis.email.SendMailService;
 import com.obatis.email.exception.SendMailException;
+import com.obatis.validate.ValidateTool;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -29,6 +30,7 @@ public class SendMailServiceImpl implements SendMailService {
 
     private static JavaMailSender mailSender;
     private static String fromEmail = null;
+    private static final Integer defaultPort= 465;
 
     @Override
     public void send(String toEmail, String title, String content) throws SendMailException {
@@ -88,19 +90,21 @@ public class SendMailServiceImpl implements SendMailService {
     private static synchronized JavaMailSender loadJavaMailSender(Environment env) {
         if(mailSender == null) {
             mailSender = new JavaMailSenderImpl();
-            ((JavaMailSenderImpl) mailSender).setHost(env.getProperty("spring.mail.host"));
-            ((JavaMailSenderImpl) mailSender).setUsername(env.getProperty("spring.mail.username"));
-            ((JavaMailSenderImpl) mailSender).setPassword(env.getProperty("spring.mail.password"));
-            ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("spring.mail.default-encoding", "UTF-8"));
+            ((JavaMailSenderImpl) mailSender).setHost(env.getProperty("mail.host"));
+            String smtpPort = ValidateTool.isNumber(env.getProperty("mail.port")) ? env.getProperty("mail.port") : defaultPort.toString();
+//            ((JavaMailSenderImpl) mailSender).setPort(Integer.parseInt(smtpPort));
+            ((JavaMailSenderImpl) mailSender).setUsername(env.getProperty("mail.username"));
+            ((JavaMailSenderImpl) mailSender).setPassword(env.getProperty("mail.password"));
+            ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("mail.default-encoding", "UTF-8"));
             Properties javaMailProperties = new Properties();
-            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.ssl.enable", "true");
-            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.ssl.trust", "spring.mail.host");
-            javaMailProperties.setProperty("spring.mail.properties.mail.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.socketFactory.port", "465");
-            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.port", "465");
-            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.auth", "true");
-            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.starttls.enable", "true");
-            javaMailProperties.setProperty("spring.mail.properties.mail.smtp.starttls.required", "true");
+            javaMailProperties.setProperty("mail.smtp.ssl.enable", "true");
+            javaMailProperties.setProperty("mail.smtp.ssl.trust", ((JavaMailSenderImpl) mailSender).getHost());
+            javaMailProperties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            javaMailProperties.setProperty("mail.smtp.socketFactory.port", smtpPort);
+            javaMailProperties.setProperty("mail.smtp.port", smtpPort);
+            javaMailProperties.setProperty("mail.smtp.auth", "true");
+            javaMailProperties.setProperty("mail.smtp.starttls.enable", "true");
+            javaMailProperties.setProperty("mail.smtp.starttls.required", "true");
             ((JavaMailSenderImpl) mailSender).setJavaMailProperties(javaMailProperties);
             fromEmail = env.getProperty("mail.fromMail.addr");
         }
