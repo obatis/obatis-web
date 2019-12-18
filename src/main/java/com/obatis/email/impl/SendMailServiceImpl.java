@@ -16,7 +16,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
-import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.Map;
 import java.util.Properties;
@@ -115,11 +114,7 @@ public class SendMailServiceImpl implements SendMailService {
             if(ValidateTool.isEmpty(configHost)) {
                 configHost = "smtp." + fromEmail.substring(fromEmail.lastIndexOf("@") + 1);
             }
-//            fromEmail = env.getProperty("mail.fromMail");
             fromEmailPerson = env.getProperty("mail.fromMail.person");
-//            if(ValidateTool.isEmpty(fromEmail)) {
-//                fromEmail = configUsername;
-//            }
             ((JavaMailSenderImpl) mailSender).setHost(configHost);
             ((JavaMailSenderImpl) mailSender).setUsername(fromEmail);
             ((JavaMailSenderImpl) mailSender).setPassword(configPwd);
