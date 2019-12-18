@@ -12,10 +12,10 @@ public class RedisTempletConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean(name = "redisTemplate")
-	public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+	public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory factory) {
 		// 配置 redis 缓存信息
 		RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
-		redisTemplate.setConnectionFactory(redisConnectionFactory);
+		redisTemplate.setConnectionFactory(factory);
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 		redisTemplate.setValueSerializer(new RedisObjectSerializer());
 		return redisTemplate;
