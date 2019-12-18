@@ -5,6 +5,8 @@ import com.obatis.core.exception.HandleException;
 import com.obatis.email.SendMailService;
 import com.obatis.email.exception.SendMailException;
 import com.obatis.validate.ValidateTool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -26,6 +28,8 @@ import java.util.Properties;
 @Component
 public class SendMailServiceImpl implements SendMailService {
 
+    private static final Logger log = LoggerFactory.getLogger(SendMailServiceImpl.class);
+
     @Resource
     private TemplateEngine templateEngine;
 
@@ -35,6 +39,10 @@ public class SendMailServiceImpl implements SendMailService {
 
     @Override
     public void send(String toEmail, String title, String content) throws SendMailException {
+        if(mailSender == null) {
+            log.warn("邮件信息配置不正确，检查后请重启服务器");
+            throw new SendMailException("邮件信息配置不正确，检查后请重启服务器");
+        }
         getJavaMailSender(SystemConstant.ENV);
         //使用MimeMessage，MIME协议
         MimeMessage message = mailSender.createMimeMessage();
@@ -66,6 +74,10 @@ public class SendMailServiceImpl implements SendMailService {
      */
     @Override
     public void sendTemplate(String toEmail, String title, String templatePath, Map<String, Object> params) throws SendMailException {
+        if(mailSender == null) {
+            log.warn("邮件信息配置不正确，检查后请重启服务器");
+            throw new SendMailException("邮件信息配置不正确，检查后请重启服务器");
+        }
         Context context = new Context();
         context.setVariables(params);
         this.send(toEmail, title, templateEngine.process(templatePath, context));
