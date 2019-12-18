@@ -105,25 +105,25 @@ public class SendMailServiceImpl implements SendMailService {
     private static synchronized JavaMailSender loadJavaMailSender(Environment env) {
         if(mailSender == null) {
             mailSender = new JavaMailSenderImpl();
-            String configUsername = env.getProperty("mail.username");
+            fromEmail = env.getProperty("mail.username");
             String configPwd = env.getProperty("mail.password");
-            if(ValidateTool.isEmpty(configUsername) || ValidateTool.isEmpty(configPwd)) {
+            if(ValidateTool.isEmpty(fromEmail) || ValidateTool.isEmpty(configPwd)) {
                 throw new HandleException("邮件信息配置不正确");
             }
 
             String configHost = env.getProperty("mail.host");
             if(ValidateTool.isEmpty(configHost)) {
-                configHost = "smtp." + configUsername.substring(configUsername.lastIndexOf("@") + 1);
+                configHost = "smtp." + fromEmail.substring(fromEmail.lastIndexOf("@") + 1);
             }
-            fromEmail = env.getProperty("mail.fromMail");
+//            fromEmail = env.getProperty("mail.fromMail");
             fromEmailPerson = env.getProperty("mail.fromMail.person");
-            if(ValidateTool.isEmpty(fromEmail)) {
-                fromEmail = configUsername;
-            }
+//            if(ValidateTool.isEmpty(fromEmail)) {
+//                fromEmail = configUsername;
+//            }
             ((JavaMailSenderImpl) mailSender).setHost(configHost);
-            ((JavaMailSenderImpl) mailSender).setUsername(configUsername);
+            ((JavaMailSenderImpl) mailSender).setUsername(fromEmail);
             ((JavaMailSenderImpl) mailSender).setPassword(configPwd);
-            ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("mail.default-encoding", "UTF-8"));
+            ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("mail.encoding", "UTF-8"));
             Properties javaMailProperties = new Properties();
             javaMailProperties.setProperty("mail.smtp.ssl.enable", "true");
             javaMailProperties.setProperty("mail.smtp.ssl.trust", configHost);
