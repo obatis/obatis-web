@@ -1,6 +1,7 @@
 package com.obatis.email.impl;
 
 import com.obatis.config.SystemConstant;
+import com.obatis.core.exception.HandleException;
 import com.obatis.email.SendMailService;
 import com.obatis.email.exception.SendMailException;
 import com.obatis.validate.ValidateTool;
@@ -90,13 +91,27 @@ public class SendMailServiceImpl implements SendMailService {
     private static synchronized JavaMailSender loadJavaMailSender(Environment env) {
         if(mailSender == null) {
             mailSender = new JavaMailSenderImpl();
-            ((JavaMailSenderImpl) mailSender).setHost(env.getProperty("mail.host"));
-            ((JavaMailSenderImpl) mailSender).setUsername(env.getProperty("mail.username"));
-            ((JavaMailSenderImpl) mailSender).setPassword(env.getProperty("mail.password"));
+            String configUsername = env.getProperty("mail.username");
+            String configPwd = env.getProperty("mail.password");
+            if(ValidateTool.isEmpty(configUsername) || ValidateTool.isEmpty(configPwd)) {
+                throw new HandleException("邮件信息配置不正确");
+            }
+
+            String configHost = env.getProperty("mail.host");
+            if(ValidateTool.isEmpty(configHost)) {
+                configHost = "smtp." + configUsername.substring(configUsername.lastIndexOf("@") + 1);
+            }
+            fromEmail = env.getProperty("mail.fromMail.addr");
+            if(ValidateTool.isEmpty(fromEmail)) {
+                fromEmail = configUsername;
+            }
+            ((JavaMailSenderImpl) mailSender).setHost(configHost);
+            ((JavaMailSenderImpl) mailSender).setUsername(configUsername);
+            ((JavaMailSenderImpl) mailSender).setPassword(configPwd);
             ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("mail.default-encoding", "UTF-8"));
             Properties javaMailProperties = new Properties();
             javaMailProperties.setProperty("mail.smtp.ssl.enable", "true");
-            javaMailProperties.setProperty("mail.smtp.ssl.trust", ((JavaMailSenderImpl) mailSender).getHost());
+            javaMailProperties.setProperty("mail.smtp.ssl.trust", configHost);
             javaMailProperties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
             String smtpPort = ValidateTool.isNumber(env.getProperty("mail.port")) ? env.getProperty("mail.port") : defaultPort.toString();
             javaMailProperties.setProperty("mail.smtp.socketFactory.port", smtpPort);
@@ -105,8 +120,8 @@ public class SendMailServiceImpl implements SendMailService {
             javaMailProperties.setProperty("mail.smtp.starttls.enable", "true");
             javaMailProperties.setProperty("mail.smtp.starttls.required", "true");
             ((JavaMailSenderImpl) mailSender).setJavaMailProperties(javaMailProperties);
-            fromEmail = env.getProperty("mail.fromMail.addr");
         }
         return mailSender;
     }
+
 }
