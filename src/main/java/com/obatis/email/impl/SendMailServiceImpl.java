@@ -91,8 +91,6 @@ public class SendMailServiceImpl implements SendMailService {
         if(mailSender == null) {
             mailSender = new JavaMailSenderImpl();
             ((JavaMailSenderImpl) mailSender).setHost(env.getProperty("mail.host"));
-            String smtpPort = ValidateTool.isNumber(env.getProperty("mail.port")) ? env.getProperty("mail.port") : defaultPort.toString();
-//            ((JavaMailSenderImpl) mailSender).setPort(Integer.parseInt(smtpPort));
             ((JavaMailSenderImpl) mailSender).setUsername(env.getProperty("mail.username"));
             ((JavaMailSenderImpl) mailSender).setPassword(env.getProperty("mail.password"));
             ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("mail.default-encoding", "UTF-8"));
@@ -100,6 +98,7 @@ public class SendMailServiceImpl implements SendMailService {
             javaMailProperties.setProperty("mail.smtp.ssl.enable", "true");
             javaMailProperties.setProperty("mail.smtp.ssl.trust", ((JavaMailSenderImpl) mailSender).getHost());
             javaMailProperties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            String smtpPort = ValidateTool.isNumber(env.getProperty("mail.port")) ? env.getProperty("mail.port") : defaultPort.toString();
             javaMailProperties.setProperty("mail.smtp.socketFactory.port", smtpPort);
             javaMailProperties.setProperty("mail.smtp.port", smtpPort);
             javaMailProperties.setProperty("mail.smtp.auth", "true");
