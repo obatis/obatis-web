@@ -5,7 +5,8 @@ import com.obatis.constant.NormalCommonConstant;
 import com.obatis.core.exception.HandleException;
 import com.obatis.email.SendMailService;
 import com.obatis.email.exception.SendMailException;
-import com.obatis.validate.ValidateTool;
+import com.obatis.tools.EncodingTool;
+import com.obatis.tools.ValidateTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -18,7 +19,6 @@ import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.Properties;
 
@@ -116,6 +116,9 @@ public class SendMailServiceImpl implements SendMailService {
             String configHost = env.getProperty("mail.host", "smtp." + fromEmail.substring(fromEmail.lastIndexOf("@") + 1));
             ((JavaMailSenderImpl) mailSender).setHost(configHost);
             fromEmailPerson = env.getProperty("mail.fromMail.person");
+            if(!ValidateTool.isEmpty(fromEmailPerson)) {
+                fromEmailPerson = EncodingTool.encodingUTF8(fromEmailPerson);
+            }
             ((JavaMailSenderImpl) mailSender).setUsername(fromEmail);
             ((JavaMailSenderImpl) mailSender).setPassword(configPwd);
             encoding = env.getProperty("mail.encoding", NormalCommonConstant.CHARSET_UTF8);

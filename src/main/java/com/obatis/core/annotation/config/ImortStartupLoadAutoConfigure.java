@@ -1,7 +1,7 @@
 package com.obatis.core.annotation.config;
 
 import com.obatis.config.SystemConstant;
-import com.obatis.validate.ValidateTool;
+import com.obatis.tools.ValidateTool;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;

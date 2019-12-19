@@ -2,7 +2,7 @@ package com.obatis.config.date;
 
 import com.obatis.convert.date.DateCommonConvert;
 import com.obatis.convert.date.DefaultDateConstant;
-import com.obatis.validate.ValidateTool;
+import com.obatis.tools.ValidateTool;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 

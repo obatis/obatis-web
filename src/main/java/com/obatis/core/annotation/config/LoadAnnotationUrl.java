@@ -1,7 +1,7 @@
 package com.obatis.core.annotation.config;
 
 import com.obatis.core.annotation.request.ConfigFeignClient;
-import com.obatis.validate.ValidateTool;
+import com.obatis.tools.ValidateTool;
 import org.reflections.Reflections;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

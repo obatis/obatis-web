@@ -2,7 +2,7 @@ package com.obatis.core.annotation.config;
 
 import com.obatis.core.annotation.request.NotLogin;
 import com.obatis.core.exception.HandleException;
-import com.obatis.validate.ValidateTool;
+import com.obatis.tools.ValidateTool;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

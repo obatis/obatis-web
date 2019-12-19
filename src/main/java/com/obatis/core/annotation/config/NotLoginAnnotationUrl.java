@@ -1,6 +1,6 @@
 package com.obatis.core.annotation.config;
 
-import com.obatis.validate.ValidateTool;
+import com.obatis.tools.ValidateTool;
 
 import java.util.HashMap;
 import java.util.Map;

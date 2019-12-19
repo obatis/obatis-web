@@ -5,7 +5,7 @@ import com.obatis.config.response.ResponseResultHandleFactory;
 import com.obatis.config.response.result.callback.ExceptionRestHandle;
 import com.obatis.config.response.result.callback.ExceptionRestHandleCallback;
 import com.obatis.config.response.result.callback.HandleExceptionCallbackContext;
-import com.obatis.validate.ValidateTool;
+import com.obatis.tools.ValidateTool;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -34,6 +34,7 @@ public class StartupApplicationRunner extends SpringApplication implements Appli
 	 */
 	@Override
 	public void run(ApplicationArguments args) {
+
 		SystemConstant.ENV = env;
 		this.loadConfig();
 		// 加载返回封装

@@ -9,7 +9,7 @@ import com.obatis.core.exception.NotLoginHandleException;
 import com.obatis.core.logger.LogPrintFactory;
 import com.obatis.core.logger.LogPrinter;
 import com.obatis.email.exception.SendMailException;
-import com.obatis.validate.ValidateTool;
+import com.obatis.tools.ValidateTool;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;

@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import com.obatis.convert.CommonConvert;
 import com.obatis.convert.JsonCommonConvert;
 import com.obatis.core.exception.HandleException;
-import com.obatis.validate.ValidateTool;
+import com.obatis.tools.ValidateTool;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
