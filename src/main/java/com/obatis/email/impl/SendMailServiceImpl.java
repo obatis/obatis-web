@@ -1,6 +1,7 @@
 package com.obatis.email.impl;
 
 import com.obatis.config.SystemConstant;
+import com.obatis.constant.NormalCommonConstant;
 import com.obatis.core.exception.HandleException;
 import com.obatis.email.SendMailService;
 import com.obatis.email.exception.SendMailException;
@@ -36,6 +37,7 @@ public class SendMailServiceImpl implements SendMailService {
     private static String fromEmail = null;
     private static String fromEmailPerson = null;
     private static final Integer defaultPort= 465;
+    private static String encoding;
 
     @Override
     public void send(String toEmail, String title, String content) throws SendMailException {
@@ -49,7 +51,7 @@ public class SendMailServiceImpl implements SendMailService {
 
         MimeMessageHelper helper;
         try {
-            helper = new MimeMessageHelper(message, true);
+            helper = new MimeMessageHelper(message, true, encoding);
             if(!ValidateTool.isEmpty(fromEmailPerson)) {
                 helper.setFrom(fromEmail, fromEmailPerson);
             } else {
@@ -110,20 +112,19 @@ public class SendMailServiceImpl implements SendMailService {
                 throw new HandleException("邮件信息配置不正确");
             }
 
-            String configHost = env.getProperty("mail.host");
-            if(ValidateTool.isEmpty(configHost)) {
-                configHost = "smtp." + fromEmail.substring(fromEmail.lastIndexOf("@") + 1);
-            }
-            fromEmailPerson = env.getProperty("mail.fromMail.person");
+            String configHost = env.getProperty("mail.host", "smtp." + fromEmail.substring(fromEmail.lastIndexOf("@") + 1));
             ((JavaMailSenderImpl) mailSender).setHost(configHost);
+            fromEmailPerson = env.getProperty("mail.fromMail.person");
             ((JavaMailSenderImpl) mailSender).setUsername(fromEmail);
             ((JavaMailSenderImpl) mailSender).setPassword(configPwd);
-            ((JavaMailSenderImpl) mailSender).setDefaultEncoding(env.getProperty("mail.encoding", "UTF-8"));
+            encoding = env.getProperty("mail.encoding", NormalCommonConstant.CHARSET_UTF8);
+            ((JavaMailSenderImpl) mailSender).setDefaultEncoding(encoding);
             Properties javaMailProperties = new Properties();
+            javaMailProperties.setProperty("mail.transport.protocol", "smtp");// 设置传输协议
             javaMailProperties.setProperty("mail.smtp.ssl.enable", "true");
             javaMailProperties.setProperty("mail.smtp.ssl.trust", configHost);
             javaMailProperties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-            String smtpPort = ValidateTool.isNumber(env.getProperty("mail.port")) ? env.getProperty("mail.port") : defaultPort.toString();
+            String smtpPort = env.getProperty("mail.port", defaultPort.toString());
             javaMailProperties.setProperty("mail.smtp.socketFactory.port", smtpPort);
             javaMailProperties.setProperty("mail.smtp.port", smtpPort);
             javaMailProperties.setProperty("mail.smtp.auth", "true");
