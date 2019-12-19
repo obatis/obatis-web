@@ -116,18 +116,11 @@ public class SendMailServiceImpl implements SendMailService {
 
             String configHost = env.getProperty("mail.host", "smtp." + fromEmail.substring(fromEmail.lastIndexOf("@") + 1));
             ((JavaMailSenderImpl) mailSender).setHost(configHost);
-            encoding = env.getProperty("mail.encoding", NormalCommonConstant.CHARSET_UTF8);
-            ((JavaMailSenderImpl) mailSender).setDefaultEncoding(encoding);
             fromEmailPerson = env.getProperty("mail.fromMail.person");
-//            if(!ValidateTool.isEmpty(fromEmailPerson)) {
-//                try {
-//                    fromEmailPerson = new String(fromEmailPerson.getBytes(), encoding);
-//                } catch (UnsupportedEncodingException e) {
-//                    e.printStackTrace();
-//                }
-//            }
             ((JavaMailSenderImpl) mailSender).setUsername(fromEmail);
             ((JavaMailSenderImpl) mailSender).setPassword(configPwd);
+            encoding = env.getProperty("mail.encoding", NormalCommonConstant.CHARSET_UTF8);
+            ((JavaMailSenderImpl) mailSender).setDefaultEncoding(encoding);
             Properties javaMailProperties = new Properties();
             javaMailProperties.setProperty("mail.transport.protocol", "smtp");// 设置传输协议
             javaMailProperties.setProperty("mail.smtp.ssl.enable", "true");
