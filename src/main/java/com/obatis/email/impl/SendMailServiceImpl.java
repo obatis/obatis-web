@@ -51,6 +51,7 @@ public class SendMailServiceImpl implements SendMailService {
 
         MimeMessageHelper helper;
         try {
+            System.out.println("encoding >>> " + encoding);
             helper = new MimeMessageHelper(message, true, encoding);
             if(!ValidateTool.isEmpty(fromEmailPerson)) {
                 helper.setFrom(fromEmail, fromEmailPerson);
