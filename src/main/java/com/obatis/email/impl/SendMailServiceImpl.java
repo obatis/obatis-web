@@ -119,13 +119,13 @@ public class SendMailServiceImpl implements SendMailService {
             encoding = env.getProperty("mail.encoding", NormalCommonConstant.CHARSET_UTF8);
             ((JavaMailSenderImpl) mailSender).setDefaultEncoding(encoding);
             fromEmailPerson = env.getProperty("mail.fromMail.person");
-            if(!ValidateTool.isEmpty(fromEmailPerson)) {
-                try {
-                    fromEmailPerson = new String(fromEmailPerson.getBytes(), encoding);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            }
+//            if(!ValidateTool.isEmpty(fromEmailPerson)) {
+//                try {
+//                    fromEmailPerson = new String(fromEmailPerson.getBytes(), encoding);
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+//            }
             ((JavaMailSenderImpl) mailSender).setUsername(fromEmail);
             ((JavaMailSenderImpl) mailSender).setPassword(configPwd);
             Properties javaMailProperties = new Properties();
