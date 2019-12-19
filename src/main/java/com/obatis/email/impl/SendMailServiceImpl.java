@@ -121,7 +121,7 @@ public class SendMailServiceImpl implements SendMailService {
             fromEmailPerson = env.getProperty("mail.fromMail.person");
             if(!ValidateTool.isEmpty(fromEmailPerson)) {
                 try {
-                    fromEmailPerson = new String(fromEmail.getBytes(), encoding);
+                    fromEmailPerson = new String(fromEmailPerson.getBytes(), encoding);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
