@@ -1,7 +1,7 @@
 package com.obatis.email.impl;
 
 import com.obatis.config.SystemConstant;
-import com.obatis.constant.NormalCommonConstant;
+import com.obatis.constant.CharsetConstant;
 import com.obatis.core.exception.HandleException;
 import com.obatis.email.SendMailService;
 import com.obatis.email.exception.SendMailException;
@@ -116,12 +116,12 @@ public class SendMailServiceImpl implements SendMailService {
             String configHost = env.getProperty("mail.host", "smtp." + fromEmail.substring(fromEmail.lastIndexOf("@") + 1));
             ((JavaMailSenderImpl) mailSender).setHost(configHost);
             fromEmailPerson = env.getProperty("mail.fromMail.person");
-            if(!ValidateTool.isEmpty(fromEmailPerson)) {
-                fromEmailPerson = EncodingTool.encodingUTF8(fromEmailPerson);
+            if(!ValidateTool.isEmpty(fromEmailPerson) && !EncodingTool.isChineseEncoding(fromEmailPerson)) {
+                fromEmailPerson = EncodingTool.isoEncodingUTF8(fromEmailPerson);
             }
             ((JavaMailSenderImpl) mailSender).setUsername(fromEmail);
             ((JavaMailSenderImpl) mailSender).setPassword(configPwd);
-            encoding = env.getProperty("mail.encoding", NormalCommonConstant.CHARSET_UTF8);
+            encoding = env.getProperty("mail.encoding", CharsetConstant.CHARSET_UTF8);
             ((JavaMailSenderImpl) mailSender).setDefaultEncoding(encoding);
             Properties javaMailProperties = new Properties();
             javaMailProperties.setProperty("mail.transport.protocol", "smtp");// 设置传输协议
