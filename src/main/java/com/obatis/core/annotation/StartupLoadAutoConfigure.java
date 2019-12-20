@@ -25,4 +25,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Import(value = ImortStartupLoadAutoConfigure.class)
 public @interface StartupLoadAutoConfigure {
 
+    /**
+     * 配置需要签名属性
+     * 该属性未开发完，暂不提供使用
+     * @return
+     */
+    boolean signEnable() default false;
 }

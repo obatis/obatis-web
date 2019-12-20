@@ -106,11 +106,11 @@ public class ExceptionRestHandleAdvice {
 			ExceptionRestHandle.addSql(exception);
 		} else if (exception instanceof SendMailException) {
 			String trace = printExceptionLog(exception);
-			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setCode(ResponseDefaultErrorStatus.SEND_MAIL_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
-			errorCode = ResponseDefaultErrorCode.SQL_EXECUTE_ERROR_CODE;
-			LOG.print("SQL执行运行异常：" + trace);
-			ExceptionRestHandle.addSql(exception);
+			errorCode = ResponseDefaultErrorCode.SEND_MAIL_ERROR_CODE;
+			LOG.print("邮件发送异常：" + trace);
+			ExceptionRestHandle.addMail(exception);
 		} else {
 			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
