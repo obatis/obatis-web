@@ -7,22 +7,18 @@ import com.obatis.config.response.result.callback.ExceptionRestHandleCallback;
 import com.obatis.config.response.result.callback.HandleExceptionCallbackContext;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import javax.annotation.Resource;
 import java.util.Map;
 
 @Configuration
-public class StartupApplicationRunner extends SpringApplication implements ApplicationRunner  {
+public class StartupApplicationRunner implements ApplicationRunner {
 
 	@Resource
 	private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
-	@Resource
-	private Environment env;
 	@Resource
 	private ApplicationContext applicationContext;
 
@@ -32,7 +28,6 @@ public class StartupApplicationRunner extends SpringApplication implements Appli
 	@Override
 	public void run(ApplicationArguments args) {
 
-		SystemConstant.setSystemEnv(env);
 		// 加载返回封装
 		ResponseResultHandleFactory.handleResponseResultInfo(requestMappingHandlerAdapter);
 		/**
