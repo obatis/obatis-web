@@ -42,7 +42,7 @@ public class SendMailServiceImpl implements SendMailService {
 
     @Override
     public void send(String toEmail, String title, String content) throws SendMailException {
-        getJavaMailSender(SystemConstant.ENV);
+        getJavaMailSender(SystemConstant.getSystemEnv());
         if(mailSender == null) {
             log.warn("邮件信息配置不正确，检查后请重启服务器");
             throw new SendMailException("邮件信息配置不正确，检查后请重启服务器");

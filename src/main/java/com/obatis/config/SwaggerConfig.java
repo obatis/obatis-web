@@ -17,11 +17,12 @@ public class SwaggerConfig {
 
     @Bean
     public Docket createRestApi() {
+        System.out.println(SystemConstant.getRunDevEnv());
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
                 .paths(PathSelectors.any())
-                .build();
+                .build().enable(SystemConstant.getRunDevEnv());
     }
 
     private ApiInfo apiInfo() {
