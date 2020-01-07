@@ -20,7 +20,7 @@ public final class SystemConstant {
     /**
      * 系统处理线程池
      */
-    public static final ExecutorService HANDLE_POOL = Executors.newFixedThreadPool(2);
+    public static final ExecutorService HANDLE_POOL = Executors.newFixedThreadPool(3);
 
     /**
      * springboot 配置属性
