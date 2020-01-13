@@ -1,5 +1,6 @@
 package com.obatis.config.message;
 
+import com.obatis.constant.CharsetConstant;
 import com.obatis.constant.NormalCommonConstant;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter;
@@ -18,7 +19,7 @@ public class HttpEncodingConfiguration {
 	@ConditionalOnMissingBean(CharacterEncodingFilter.class)
 	public CharacterEncodingFilter encodingFilter() {
 		CharacterEncodingFilter characterEncodingFilter = new OrderedCharacterEncodingFilter();
-		characterEncodingFilter.setEncoding(NormalCommonConstant.CHARSET_UTF8);
+		characterEncodingFilter.setEncoding(CharsetConstant.CHARSET_UTF8);
 		characterEncodingFilter.setForceRequestEncoding(true);
 		characterEncodingFilter.setForceResponseEncoding(true);
 		return characterEncodingFilter;
