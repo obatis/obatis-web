@@ -80,4 +80,12 @@ public class BeanAnotatioUrlHandle {
             }
         }
     }
+
+    /**
+     * 获取所以url地址信息列表
+     * @return
+     */
+    public final static Map<String, String> getUrl() {
+        return URL_MAP;
+    }
 }

@@ -4,6 +4,9 @@ import com.obatis.email.exception.SendMailException;
 
 import java.sql.SQLException;
 
+/**
+ * 异常回调接口，提供框架异常抛出回调，如果需要处理异常信息，需要定义一个spring bean 实现该接口
+ */
 public interface ExceptionRestHandleCallback {
 
     /**

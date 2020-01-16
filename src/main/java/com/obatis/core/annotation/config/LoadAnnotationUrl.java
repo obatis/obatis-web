@@ -55,11 +55,9 @@ public final class LoadAnnotationUrl {
     }
 
     private void handleConfigFeignClient(Set<Class<?>> configFeignClientList) {
-        for (Class<?> cls : configFeignClientList) {
-            // 表示注解为 RestController
-            RestController resController = cls.getAnnotation(RestController.class);
-            getAnnotationUrlPath(cls, handlePath(resController.value()));
-        }
+        /**
+         * 该方法尚未完全实现，暂时不提供使用
+         */
     }
 
     /**

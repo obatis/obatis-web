@@ -11,7 +11,10 @@ import java.util.Map;
  */
 public final class NotLoginAnnotationUrl {
 
-    private static final Map<String, String> NOT_LOGIN_URL = new HashMap<>();
+    /**
+     * url 存储的 map 类，key 为controller注解的URL地址，value 为注册URL的方法说明(借助于 swagger实现)
+     */
+    private static final Map<String, String> NOT_LOGIN_URL_MAP = new HashMap<>();
 
     protected NotLoginAnnotationUrl() {}
 
@@ -23,7 +26,7 @@ public final class NotLoginAnnotationUrl {
         if(ValidateTool.isEmpty(url)) {
             return;
         }
-        NOT_LOGIN_URL.put(url, urlName);
+        NOT_LOGIN_URL_MAP.put(url, urlName);
     }
 
     /**
@@ -35,6 +38,14 @@ public final class NotLoginAnnotationUrl {
         if(ValidateTool.isEmpty(url)) {
             return false;
         }
-        return NOT_LOGIN_URL.containsKey(url);
+        return NOT_LOGIN_URL_MAP.containsKey(url);
+    }
+
+    /**
+     * 获取无需登录即可注册的URL地址信息列表
+     * @return
+     */
+    public final static Map<String, String> getNotLoginUrl() {
+        return NOT_LOGIN_URL_MAP;
     }
 }
