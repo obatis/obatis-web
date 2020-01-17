@@ -1,6 +1,7 @@
 package com.obatis.config;
 
 import com.obatis.config.response.result.callback.ExceptionRestParam;
+import com.obatis.tools.EncodingTool;
 import com.obatis.tools.ValidateTool;
 import org.springframework.core.env.Environment;
 
@@ -31,6 +32,10 @@ public final class SystemConstant {
      */
     public static String SERVICE_NAME;
     /**
+     * 系统名称
+     */
+    public static String SYSTEM_NAME;
+    /**
      * 运行环境，true 为开发环境，false为生产环境
      */
     private static boolean RUN_DEV_ENV;
@@ -40,6 +45,15 @@ public final class SystemConstant {
             ENV = environment;
 
             SERVICE_NAME = environment.getProperty("spring.application.name");
+            SYSTEM_NAME = environment.getProperty("system.name");
+
+            /**
+             * 进行中文转换，防止乱码
+             */
+            if(!ValidateTool.isEmpty(SYSTEM_NAME) && !EncodingTool.isChineseEncoding(SYSTEM_NAME)) {
+                SYSTEM_NAME = EncodingTool.isoEncodingUTF8(SYSTEM_NAME);
+            }
+
             String runEvn =  environment.getProperty("spring.profiles.active");
             if(ValidateTool.isEmpty(runEvn) || runEvn.toLowerCase().equals("dev")) {
                 RUN_DEV_ENV = true;
