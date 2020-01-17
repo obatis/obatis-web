@@ -13,9 +13,9 @@ public interface RegisterUrlConfigure {
     /**
      * 注解url地址接口，map 中的url信息包含了notLogin url信息
      * url 存储的 map 类，key 为controller注解的URL地址，value 为注册URL的方法说明(借助于 swagger实现)
-     * @param urlInfoList
+     * @param urlArray
      */
-    void registerUrl(List<UrlBeanInfo> urlInfoList);
+    void registerUrl(List<UrlBeanInfo> urlArray);
 
     /**
      * 注册无需登录即可访问的url地址接口
