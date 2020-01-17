@@ -83,7 +83,7 @@ public class BeanAnotationUrlHandle {
             NotLogin notAuth = method.getAnnotation(NotLogin.class);
             int isLoginEnable = 0;
             if(notAuth != null) {
-                NotLoginAnnotationUrl.putNotLoginAnnotationUrl(controllerPath + path, urlName);
+                LoadNotLoginAnnotationUrl.putNotLoginAnnotationUrl(controllerPath + path, urlName);
                 isLoginEnable = 1;
             }
 
