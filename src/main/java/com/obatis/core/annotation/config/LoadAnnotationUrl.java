@@ -42,7 +42,7 @@ public final class LoadAnnotationUrl {
         for (Class<?> cls : controllerList) {
             // 表示注解为 Controller
             Controller controller = cls.getAnnotation(Controller.class);
-            getAnnotationUrlPath(cls, handlePath(controller.value()));
+            loadAnnotationUrlPath(cls, handlePath(controller.value()));
         }
     }
 
@@ -50,7 +50,7 @@ public final class LoadAnnotationUrl {
         for (Class<?> cls : restControllerList) {
             // 表示注解为 RestController
             RestController resController = cls.getAnnotation(RestController.class);
-            getAnnotationUrlPath(cls, handlePath(resController.value()));
+            loadAnnotationUrlPath(cls, handlePath(resController.value()));
         }
     }
 
@@ -81,7 +81,7 @@ public final class LoadAnnotationUrl {
         return path;
     }
 
-    private void getAnnotationUrlPath(Class<?> cls, String path) {
+    private void loadAnnotationUrlPath(Class<?> cls, String path) {
 
         RequestMapping mapping = cls.getAnnotation(RequestMapping.class);
         if (mapping != null) {
@@ -95,7 +95,7 @@ public final class LoadAnnotationUrl {
             }
         }
 
-        BeanAnotatioUrlHandle.handle(cls, cls.getCanonicalName(), path);
+        BeanAnotationUrlHandle.handle(cls, cls.getCanonicalName(), path);
     }
 
 }

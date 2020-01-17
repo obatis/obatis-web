@@ -49,6 +49,7 @@ public class ExceptionRestHandleAdvice {
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : "业务异常");
 			errorCode = ((HandleException) exception).getErrCode();
 			LOG.print(printExceptionLog(exception));
+			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof MethodArgumentNotValidException) {
 			MethodArgumentNotValidException e = (MethodArgumentNotValidException) exception;
 			BindingResult bindingResult = e.getBindingResult();
@@ -63,26 +64,31 @@ public class ExceptionRestHandleAdvice {
 			resultInfo.setMessage(ValidateTool.isHaveChinese(join) ? join : "请求错误");
 			errorCode = ResponseDefaultErrorCode.PARAM_INVALID_ERROR_CODE;
 			LOG.print("请求参数值无效：" + join);
+			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof HttpMessageNotReadableException) {
 			resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_TYPE_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.PARAM_TYPE_ERROR_CODE;
 			LOG.print("请求参数值类型不匹配：" + exception.getMessage());
+			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NotAuthHandleException) {
 			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_AUTH_ERROR_STATUS);
 			resultInfo.setMessage("请求未授权，没有操作权限");
 			errorCode = ResponseDefaultErrorCode.NOT_AUTH_ERROR_CODE;
 			LOG.print("请求未授权，没有操作权限" + (!ValidateTool.isEmpty(exception.getMessage()) ? "," + exception.getMessage() : ""));
+			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NotLoginHandleException) {
 			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_LOGIN_ERROR_STATUS);
 			resultInfo.setMessage("用户未登录");
 			errorCode = ResponseDefaultErrorCode.NOT_LOGIN_ERROR_CODE;
 			LOG.print("用户未登录" + (!ValidateTool.isEmpty(exception.getMessage()) ? "," + exception.getMessage() : ""));
+			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NoHandlerFoundException) {
 			resultInfo.setCode(org.apache.http.HttpStatus.SC_NOT_FOUND);
 			resultInfo.setMessage("HTTP请求URL地址不正确");
 			errorCode = ResponseDefaultErrorCode.URL_NOT_FOUND_ERROR_CODE;
 			LOG.print("HTTP请求URL地址不正确" + exception.getMessage());
+			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NullPointerException) {
 			String trace = printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);

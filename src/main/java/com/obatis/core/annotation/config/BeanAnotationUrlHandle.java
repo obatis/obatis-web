@@ -1,5 +1,7 @@
 package com.obatis.core.annotation.config;
 
+import com.obatis.config.url.UrlBeanInfo;
+import com.obatis.constant.http.HttpConstant;
 import com.obatis.core.annotation.request.NotLogin;
 import com.obatis.core.exception.HandleException;
 import com.obatis.tools.ValidateTool;
@@ -9,22 +11,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public class BeanAnotatioUrlHandle {
+public class BeanAnotationUrlHandle {
 
     /**
      * url 存储的 map 类，key 为controller注解的URL地址，value 为注册URL的方法说明(借助于 swagger实现)
      */
-    private static final Map<String, String> URL_MAP = new HashMap<>();
+    private static final List<UrlBeanInfo> URL_INFO_LIST = new ArrayList<>();
 
-    protected BeanAnotatioUrlHandle() {}
+    protected BeanAnotationUrlHandle() {}
 
     protected static final void handle(Class<?> beanCls, String canonicalName, String controllerPath) {
         Method[] methodArr = beanCls.getDeclaredMethods();
         for (Method method : methodArr) {
             String[] pathArr = null;
+            String requestType = null;
 
             RequestMapping mapping = method.getAnnotation(RequestMapping.class);
             if(mapping == null) {
@@ -33,12 +36,15 @@ public class BeanAnotatioUrlHandle {
                     GetMapping getMapping = method.getAnnotation(GetMapping.class);
                     if(getMapping != null) {
                         pathArr = getMapping.value();
+                        requestType = HttpConstant.METHOD_GET;
                     }
                 } else {
                     pathArr = postMapping.value();
+                    requestType = HttpConstant.METHOD_POST;
                 }
             } else {
                 pathArr = mapping.value();
+                requestType = mapping.method()[0].name();
             }
 
             if(pathArr == null) {
@@ -72,12 +78,21 @@ public class BeanAnotatioUrlHandle {
             /**
              * 缓存URL地址
              */
-            URL_MAP.put(controllerPath + path, urlName);
+//            URL_MAP.put(, urlName);
 
             NotLogin notAuth = method.getAnnotation(NotLogin.class);
+            int isLoginEnable = 0;
             if(notAuth != null) {
                 NotLoginAnnotationUrl.putNotLoginAnnotationUrl(controllerPath + path, urlName);
+                isLoginEnable = 1;
             }
+
+            UrlBeanInfo beanInfo = new UrlBeanInfo();
+            beanInfo.setResourceName(urlName);
+            beanInfo.setUrl(controllerPath + path);
+            beanInfo.setRequestType(requestType);
+            beanInfo.setIsLoginEnable(isLoginEnable);
+            URL_INFO_LIST.add(beanInfo);
         }
     }
 
@@ -85,7 +100,8 @@ public class BeanAnotatioUrlHandle {
      * 获取所以url地址信息列表
      * @return
      */
-    public final static Map<String, String> getUrl() {
-        return URL_MAP;
+    public final static List<UrlBeanInfo> getUrlInfo() {
+        return URL_INFO_LIST;
     }
+
 }

@@ -6,7 +6,7 @@ import com.obatis.config.response.result.callback.ExceptionRestHandle;
 import com.obatis.config.response.result.callback.ExceptionRestHandleCallback;
 import com.obatis.config.response.result.callback.HandleExceptionCallbackContext;
 import com.obatis.config.url.RegisterUrlConfigure;
-import com.obatis.core.annotation.config.BeanAnotatioUrlHandle;
+import com.obatis.core.annotation.config.BeanAnotationUrlHandle;
 import com.obatis.core.annotation.config.NotLoginAnnotationUrl;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -63,8 +63,8 @@ public class StartupApplicationRunner implements ApplicationRunner {
 		if(beanMap != null && !beanMap.isEmpty()) {
 			for (Map.Entry<String, RegisterUrlConfigure> value : beanMap.entrySet()) {
 				// 调用注册URL地址信息
-				if(BeanAnotatioUrlHandle.getUrl() != null && !BeanAnotatioUrlHandle.getUrl().isEmpty()) {
-					value.getValue().registerUrl(BeanAnotatioUrlHandle.getUrl());
+				if(BeanAnotationUrlHandle.getUrlInfo() != null && !BeanAnotationUrlHandle.getUrlInfo().isEmpty()) {
+					value.getValue().registerUrl(BeanAnotationUrlHandle.getUrlInfo());
 				}
 				// 调用注册无需登录的URL地址信息
 				if(NotLoginAnnotationUrl.getNotLoginUrl() != null && !NotLoginAnnotationUrl.getNotLoginUrl().isEmpty()) {
