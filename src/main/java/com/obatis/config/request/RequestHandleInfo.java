@@ -103,7 +103,16 @@ public class RequestHandleInfo {
 	 * 获取用户请求的token
 	 * @return
 	 */
+	@Deprecated
 	public static String getAuthUserToken() {
+		return getAccountToken();
+	}
+
+	/**
+	 * 获取用户请求的token
+	 * @return
+	 */
+	public static String getAccountToken() {
 		RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
 		HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
 		return request.getHeader(HttpConstant.HEADER_ACCOUNT_TOKEN);
