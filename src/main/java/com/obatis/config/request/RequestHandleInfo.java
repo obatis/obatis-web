@@ -101,6 +101,7 @@ public class RequestHandleInfo {
 
 	/**
 	 * 获取用户请求的token
+	 * 由 getAccountToken 方法替代
 	 * @return
 	 */
 	@Deprecated
