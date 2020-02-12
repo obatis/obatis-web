@@ -5,9 +5,10 @@ maven jar包引入在maven中央仓库搜索obatis，引用相应的版本，或
 
 引入obatis体系，只需在项目启动类上 加入 @StartupLoadAutoConfigure 注解，即引用 obatis 框架进行使用，参考如下代码： 
 
-@StartupLoadAutoConfigure
-@EnableEurekaClient
-@EnableFeignClients
+'''java  
+@StartupLoadAutoConfigure  
+@EnableEurekaClient  
+@EnableFeignClients  
 public class ApplicationStartup {
 
     public static void main(String[] args) {
@@ -15,6 +16,7 @@ public class ApplicationStartup {
     }
 
 }
+'''
 
 注意：如果作为单体应用开发，springboot项目配置文件中加入以下配置表示不去注册中心进行注册，否则会报错，提示找不到注册中心地址
 eureka.client.fetch-registry = false
