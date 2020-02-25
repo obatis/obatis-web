@@ -249,11 +249,6 @@
             <artifactId>obatis-net</artifactId>
             <version>1.0.5</version>
         </dependency>
-        <dependency>
-            <groupId>com.obatis</groupId>
-            <artifactId>obatis-excel</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
