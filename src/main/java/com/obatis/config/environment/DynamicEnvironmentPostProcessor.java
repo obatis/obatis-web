@@ -20,12 +20,6 @@ public class DynamicEnvironmentPostProcessor implements EnvironmentPostProcessor
             properties.setProperty(EnvironmentConfigEnum.SPRING_NOT_FOUND.getKey(), EnvironmentConfigEnum.SPRING_NOT_FOUND.getValue());
             loadPropertiesFlag = true;
         }
-        if(environment.getProperty(EnvironmentConfigEnum.RESOURCES_ADD_MAPPING.getKey()) == null) {
-            properties.setProperty(EnvironmentConfigEnum.RESOURCES_ADD_MAPPING.getKey(), EnvironmentConfigEnum.RESOURCES_ADD_MAPPING.getValue());
-            if(!loadPropertiesFlag) {
-                loadPropertiesFlag = true;
-            }
-        }
         if(environment.getProperty(EnvironmentConfigEnum.MYBATIS_MAP_UNDERSCORE.getKey()) == null) {
             properties.setProperty(EnvironmentConfigEnum.MYBATIS_MAP_UNDERSCORE.getKey(), EnvironmentConfigEnum.MYBATIS_MAP_UNDERSCORE.getValue());
             if(!loadPropertiesFlag) {

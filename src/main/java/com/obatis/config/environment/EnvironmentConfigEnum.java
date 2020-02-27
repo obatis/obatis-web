@@ -7,10 +7,6 @@ public enum EnvironmentConfigEnum {
      */
     SPRING_NOT_FOUND("spring.mvc.throw-exception-if-no-handler-found", "true"),
     /**
-     * 是否开启静态资源映射
-     */
-    RESOURCES_ADD_MAPPING("spring.resources.add-mappings", "false"),
-    /**
      * 数据库查询是否开启驼峰转化
      */
     MYBATIS_MAP_UNDERSCORE("mybatis.configuration.map-underscore-to-camel-case", "true");
