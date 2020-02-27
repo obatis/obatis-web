@@ -8,6 +8,7 @@ import com.obatis.core.exception.NotAuthHandleException;
 import com.obatis.core.exception.NotLoginHandleException;
 import com.obatis.core.logger.LogPrintFactory;
 import com.obatis.core.logger.LogPrinter;
+import com.obatis.core.result.ResultInfoOutput;
 import com.obatis.email.exception.SendMailException;
 import com.obatis.tools.ValidateTool;
 import org.springframework.http.HttpStatus;
