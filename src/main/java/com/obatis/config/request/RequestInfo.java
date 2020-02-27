@@ -1,9 +1,22 @@
 package com.obatis.config.request;
 
 public class RequestInfo {
+
+    /**
+     * 请求设备IP地址
+     */
     private String requestIp;
+    /**
+     * 请求设备操作系统
+     */
     private String requestSystem;
+    /**
+     * 请求设备浏览器
+     */
     private String requestBrowser;
+    /**
+     * 请求设备类型
+     */
     private String deviceType;
 
     public String getRequestIp() {

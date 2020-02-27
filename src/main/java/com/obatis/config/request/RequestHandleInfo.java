@@ -14,6 +14,14 @@ import java.net.UnknownHostException;
 public class RequestHandleInfo {
 
 	/**
+	 * 获取请求的IP地址
+	 * @return
+	 */
+	public static String getRequestIp() {
+		return getRequestIp(getHttpServletRequest());
+	}
+
+	/**
 	 * @Description: 获取请求的IP地址
 	 * @date 2019-05-09
 	 * @param request
@@ -57,6 +65,19 @@ public class RequestHandleInfo {
 		return ipAddress;
 	}
 
+	/**
+	 * 获取请求的设备相关信息
+	 * @return
+	 */
+	public static RequestInfo getRequestInfo() {
+		return getRequestInfo(getHttpServletRequest());
+	}
+
+	/**
+	 * 获取请求的设备相关信息
+	 * @param request
+	 * @return
+	 */
 	public static RequestInfo getRequestInfo(HttpServletRequest request) {
 		String agentString = request.getHeader("User-Agent");
 		UserAgent userAgent = UserAgent.parseUserAgentString(agentString);
@@ -114,8 +135,24 @@ public class RequestHandleInfo {
 	 * @return
 	 */
 	public static String getAccountToken() {
-		RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
-		HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
+		return getAccountToken(getHttpServletRequest());
+	}
+
+	/**
+	 * 获取用户请求的token
+	 * @param request
+	 * @return
+	 */
+	public static String getAccountToken(HttpServletRequest request) {
 		return request.getHeader(HttpConstant.HEADER_ACCOUNT_TOKEN);
+	}
+
+	/**
+	 * 获取request
+	 * @return
+	 */
+	private static HttpServletRequest getHttpServletRequest() {
+		RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+		return ((ServletRequestAttributes)requestAttributes).getRequest();
 	}
 }
