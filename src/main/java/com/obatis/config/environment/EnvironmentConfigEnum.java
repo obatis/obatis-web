@@ -1,10 +1,7 @@
 package com.obatis.config.environment;
 
-public class EnvironmentConstant {
+public enum  EnvironmentConfigEnum {
 
-    protected static boolean ENVIRONMENT_LOAD_FLAG = false;
-
-    protected enum SpringEn {
         /**
          * 是否配置访问404进入系统级拦截，不进行页面错误显示
          */
@@ -21,7 +18,7 @@ public class EnvironmentConstant {
         private String key;
         private String value;
 
-        SpringEn(String key, String value) {
+        EnvironmentConfigEnum(String key, String value) {
             this.key = key;
             this.value = value;
         }
@@ -33,5 +30,4 @@ public class EnvironmentConstant {
         public String getValue() {
             return value;
         }
-    }
 }
