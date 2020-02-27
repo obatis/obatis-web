@@ -1,1 +1,1 @@
-org.springframework.boot.env.EnvironmentPostProcessor=com.obatis.config.DynamicEnvironmentPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=com.obatis.config.environment.DynamicEnvironmentPostProcessor
