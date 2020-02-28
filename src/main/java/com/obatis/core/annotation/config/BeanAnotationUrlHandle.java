@@ -44,7 +44,11 @@ public class BeanAnotationUrlHandle {
                 }
             } else {
                 pathArr = mapping.value();
-                requestType = mapping.method()[0].name();
+                if(mapping.method().length > 0) {
+                    requestType = mapping.method()[0].name();
+                } else {
+                    requestType = HttpConstant.METHOD_POST + "/" + HttpConstant.METHOD_GET;
+                }
             }
 
             if(pathArr == null) {

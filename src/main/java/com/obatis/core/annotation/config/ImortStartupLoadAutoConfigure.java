@@ -40,7 +40,7 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
 
         String startupClassName = annotationMetadata.getClassName();
-        if(startupClassName.contains(".")) {
+        if(!startupClassName.contains(".")) {
             /**
              * 说明启动类在缺省目录下，直接返回
              */
