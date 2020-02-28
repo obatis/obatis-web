@@ -1,5 +1,5 @@
 # obatis-web
-obatis体系web框架服务，基于springcloud的web项目微服务框架，不包含数据库编程。项目地址：https://github.com/obatis/obatis-web
+obatis体系web框架服务，基于springcloud的web项目微服务框架，不包含数据库编程。项目主页:http://www.obatis.com，GitHub代码托管地址：https://github.com/obatis/obatis-web。
 
 
 
