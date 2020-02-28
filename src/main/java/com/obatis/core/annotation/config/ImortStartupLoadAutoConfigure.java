@@ -40,6 +40,12 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
 
         String startupClassName = annotationMetadata.getClassName();
+        if(startupClassName.contains(".")) {
+            /**
+             * 说明启动类在缺省目录下，直接返回
+             */
+            return;
+        }
         String startupPackageName = startupClassName.substring(0, startupClassName.lastIndexOf("."));
         SystemConstant.PROJECT_BASE_DIR = startupPackageName;
         if(ValidateTool.isEmpty(startupPackageName)) {
