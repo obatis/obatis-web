@@ -151,7 +151,7 @@ public class RequestHandleInfo {
 	 * 获取request
 	 * @return
 	 */
-	private static HttpServletRequest getHttpServletRequest() {
+	public static HttpServletRequest getHttpServletRequest() {
 		RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
 		return ((ServletRequestAttributes)requestAttributes).getRequest();
 	}
