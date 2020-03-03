@@ -18,6 +18,10 @@ public class RequestInfo {
      * 请求设备类型
      */
     private String deviceType;
+    /**
+     * 端口信息
+     */
+    private int remotePort;
 
     public String getRequestIp() {
         return requestIp;
@@ -49,5 +53,13 @@ public class RequestInfo {
 
     public void setDeviceType(String deviceType) {
         this.deviceType = deviceType;
+    }
+
+    public int getRemotePort() {
+        return remotePort;
+    }
+
+    public void setRemotePort(int remotePort) {
+        this.remotePort = remotePort;
     }
 }
