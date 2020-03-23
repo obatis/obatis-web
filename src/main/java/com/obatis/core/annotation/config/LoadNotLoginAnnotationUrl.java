@@ -38,6 +38,7 @@ public final class LoadNotLoginAnnotationUrl {
         if(ValidateTool.isEmpty(url)) {
             return false;
         }
+
         return NOT_LOGIN_URL_MAP.containsKey(url);
     }
 
