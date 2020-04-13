@@ -4,7 +4,7 @@
 
     <groupId>com.obatis</groupId>
     <artifactId>obatis-web</artifactId>
-    <version>2.1.0.3-beta</version>
+    <version>2.1.0.5-beta</version>
     <packaging>jar</packaging>
     <name>obatis-web</name>
     <description>obatis-web, apply web project</description>
@@ -250,7 +250,7 @@
         <dependency>
             <groupId>com.obatis</groupId>
             <artifactId>obatis-net</artifactId>
-            <version>1.0.5</version>
+            <version>1.0.5.2-beta</version>
         </dependency>
         <dependency>
             <groupId>com.obatis</groupId>
