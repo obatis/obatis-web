@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
@@ -17,12 +16,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({ FIELD })
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = { IsNoValidator.class })
-public @interface IsNo {
+@Constraint(validatedBy = { IsAlphanumericUnderlineValidator.class })
+public @interface IsAlphanumericUnderline {
 
-	String message() default "订单号只能包含数字、字母、下划线和中划线";
+    String message() default "订单号只能包含数字、字母、下划线和中划线";
 
-	Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }
