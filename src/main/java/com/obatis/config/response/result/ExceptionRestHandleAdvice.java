@@ -8,7 +8,6 @@ import com.obatis.core.exception.NotAuthHandleException;
 import com.obatis.core.exception.NotLoginHandleException;
 import com.obatis.core.logger.LogPrintFactory;
 import com.obatis.core.logger.LogPrinter;
-import com.obatis.core.result.ResultInfoOutput;
 import com.obatis.email.exception.SendMailException;
 import com.obatis.tools.ValidateTool;
 import org.springframework.http.HttpStatus;
@@ -74,13 +73,13 @@ public class ExceptionRestHandleAdvice {
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NotAuthHandleException) {
 			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_AUTH_ERROR_STATUS);
-			resultInfo.setMessage("请求未授权，没有操作权限");
+			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : NotAuthHandleException.DEFAUTL_NOT_AUTH_MESSAGE);
 			errorCode = ResponseDefaultErrorCode.NOT_AUTH_ERROR_CODE;
 			LOG.print("请求未授权，没有操作权限" + (!ValidateTool.isEmpty(exception.getMessage()) ? "," + exception.getMessage() : ""));
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NotLoginHandleException) {
 			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_LOGIN_ERROR_STATUS);
-			resultInfo.setMessage("用户未登录");
+			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : NotLoginHandleException.DEFAULT_NOT_LOGIN_MESSAGE);
 			errorCode = ResponseDefaultErrorCode.NOT_LOGIN_ERROR_CODE;
 			LOG.print("用户未登录" + (!ValidateTool.isEmpty(exception.getMessage()) ? "," + exception.getMessage() : ""));
 			ExceptionRestHandle.addDefault(exception);
