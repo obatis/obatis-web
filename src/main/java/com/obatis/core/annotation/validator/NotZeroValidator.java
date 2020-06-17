@@ -4,6 +4,7 @@ import com.obatis.tools.ValidateTool;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.math.BigDecimal;
 
 /**
  *
@@ -15,10 +16,7 @@ public class NotZeroValidator implements ConstraintValidator<NotZero, Object> {
     public boolean isValid(Object value, ConstraintValidatorContext context) {
     	if(ValidateTool.isEmpty(value)) {
     		return false;
-    	} else if("0".equals(value.toString())) {
-    		return false;
     	}
-        
-        return true;
+        return !ValidateTool.isZero(value);
     }
 }
