@@ -103,9 +103,9 @@ public class RequestHandleInfo {
 			case MOBILE:
 				// 手机
 				if (agentString.contains("Android")) {
-					device = "Android";
+					device = "Android Phone";
 				} else if (agentString.contains("iOS")) {
-					device = "IOS";
+					device = "IOS Phone";
 				} else {
 					device = "Other Phone";
 				}
