@@ -87,9 +87,11 @@ public class RequestHandleInfo {
 		String device;
 		switch (deviceType) {
 			case COMPUTER:
+				// PC电脑
 				device = "PC";
 				break;
 			case TABLET:
+				// 平板
 				if (agentString.contains("Android")) {
 					device = "Android Pad";
 				} else if (agentString.contains("iOS")) {
@@ -99,6 +101,7 @@ public class RequestHandleInfo {
 				}
 				break;
 			case MOBILE:
+				// 手机
 				if (agentString.contains("Android")) {
 					device = "Android";
 				} else if (agentString.contains("iOS")) {
@@ -108,6 +111,7 @@ public class RequestHandleInfo {
 				}
 				break;
 			default:
+				// 其他设备
 				device = "Other";
 				break;
 		}
