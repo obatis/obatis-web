@@ -95,7 +95,7 @@ public class RequestHandleInfo {
 				} else if (agentString.contains("iOS")) {
 					device = "iPad";
 				} else {
-					device = "Unknown";
+					device = "Other Pad";
 				}
 				break;
 			case MOBILE:
@@ -104,11 +104,11 @@ public class RequestHandleInfo {
 				} else if (agentString.contains("iOS")) {
 					device = "IOS";
 				} else {
-					device = "Unknown";
+					device = "Other Phone";
 				}
 				break;
 			default:
-				device = "Unknown";
+				device = "Other";
 				break;
 		}
 
