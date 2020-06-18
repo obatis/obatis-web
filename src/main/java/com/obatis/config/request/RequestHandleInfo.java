@@ -118,7 +118,7 @@ public class RequestHandleInfo {
 
 		RequestInfo info = new RequestInfo();
 		info.setRequestBrowser(browser);
-		info.setDeviceType(device);
+		info.setDeviceTypeName(device);
 		info.setRequestSystem(operatingSystem.getName());
 		info.setRequestIp(getRequestIp(request));
 		info.setRemotePort(request.getRemotePort());

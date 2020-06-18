@@ -15,9 +15,9 @@ public class RequestInfo {
      */
     private String requestBrowser;
     /**
-     * 请求设备类型
+     * 请求设备类型名称
      */
-    private String deviceType;
+    private String deviceTypeName;
     /**
      * 端口信息
      */
@@ -47,12 +47,12 @@ public class RequestInfo {
         this.requestBrowser = requestBrowser;
     }
 
-    public String getDeviceType() {
-        return deviceType;
+    public String getDeviceTypeName() {
+        return deviceTypeName;
     }
 
-    public void setDeviceType(String deviceType) {
-        this.deviceType = deviceType;
+    public void setDeviceTypeName(String deviceTypeName) {
+        this.deviceTypeName = deviceTypeName;
     }
 
     public int getRemotePort() {
