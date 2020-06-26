@@ -1,22 +1,19 @@
 package com.obatis.core.annotation.config;
 
 import com.obatis.config.SystemConstant;
+import com.obatis.core.exception.HandleException;
 import com.obatis.tools.ValidateTool;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.env.Environment;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.type.AnnotationMetadata;
 
 import javax.annotation.Resource;
-import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -42,14 +39,14 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
         String startupClassName = annotationMetadata.getClassName();
         if(!startupClassName.contains(".")) {
             /**
-             * 说明启动类在缺省目录下，直接返回
+             * 说明启动类在缺省目录下
              */
-            return;
+            throw new HandleException("项目启动类不允许在缺省目录下");
         }
         String startupPackageName = startupClassName.substring(0, startupClassName.lastIndexOf("."));
         SystemConstant.PROJECT_BASE_DIR = startupPackageName;
         if(ValidateTool.isEmpty(startupPackageName)) {
-            return;
+            throw new HandleException("获取项目启动类包路径失败");
         }
         if(!"com".equals(startupPackageName) && !SystemConstant.CORE_BASE_DIR.equals(startupPackageName)) {
             /**
@@ -64,6 +61,8 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
                 String beanName = beanDefinition.getBeanClassName();
                 beanDefinitionRegistry.registerBeanDefinition(beanName, beanDefinition);
             }
+        } else {
+            throw new HandleException("项目启动类不允许在com或者com.obatis下");
         }
 
         /**
