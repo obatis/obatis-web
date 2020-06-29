@@ -5,7 +5,7 @@ import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.obatis.constant.NormalCommonConstant;
+import com.obatis.constant.CharsetConstant;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,7 +56,7 @@ public class HttpMessageConverterConfigure {
          * TODO  日期需要优化
          */
         fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
-        fastJsonConfig.setCharset(Charset.forName(NormalCommonConstant.CHARSET_UTF8));
+        fastJsonConfig.setCharset(Charset.forName(CharsetConstant.CHARSET_UTF8));
         // 对BigInt 和BigDecimal类型做序列化处理，防止出现科学计数
         SerializeConfig serializeConfig =  new SerializeConfig();
         serializeConfig.put(BigInteger.class, new HttpMessageBigIntConvertSerializer());
@@ -68,7 +68,7 @@ public class HttpMessageConverterConfigure {
         // fastjson设置MediaType
         List<MediaType> supportedMediaTypes = new ArrayList<>();
         supportedMediaTypes.add(MediaType.APPLICATION_JSON);
-        supportedMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
+//        supportedMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
 //        supportedMediaTypes.add(MediaType.APPLICATION_ATOM_XML);
 //        supportedMediaTypes.add(MediaType.APPLICATION_FORM_URLENCODED);
 //        supportedMediaTypes.add(MediaType.APPLICATION_OCTET_STREAM);
