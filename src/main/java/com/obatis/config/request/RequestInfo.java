@@ -1,6 +1,10 @@
 package com.obatis.config.request;
 
-public class RequestInfo {
+import java.io.Serializable;
+
+public class RequestInfo implements Serializable {
+
+    private static final long serialVersionUID = -6209687775513114433L;
 
     /**
      * 请求设备IP地址
