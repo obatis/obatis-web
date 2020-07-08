@@ -8,6 +8,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -159,5 +160,14 @@ public class RequestHandleInfo {
 	public static HttpServletRequest getHttpServletRequest() {
 		RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
 		return ((ServletRequestAttributes)requestAttributes).getRequest();
+	}
+
+	/**
+	 * 获取 Response
+	 * @return
+	 */
+	public static HttpServletResponse getHttpServletResponse() {
+		RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+		return ((ServletRequestAttributes)requestAttributes).getResponse();
 	}
 }
