@@ -52,10 +52,8 @@ public class HttpMessageConverterConfigure {
         };
 
         fastJsonConfig.setSerializerFeatures(serializerFeatures);
-        /**
-         * TODO  日期需要优化
-         */
-        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
+
+//        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
         fastJsonConfig.setCharset(Charset.forName(CharsetConstant.CHARSET_UTF8));
         // 对BigInt 和BigDecimal类型做序列化处理，防止出现科学计数
         SerializeConfig serializeConfig =  new SerializeConfig();
