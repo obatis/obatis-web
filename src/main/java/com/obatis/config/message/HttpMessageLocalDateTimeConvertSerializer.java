@@ -2,7 +2,6 @@ package com.obatis.config.message;
 
 import com.alibaba.fastjson.serializer.JSONSerializer;
 import com.alibaba.fastjson.serializer.ObjectSerializer;
-import com.alibaba.fastjson.serializer.SerializeWriter;
 import com.obatis.convert.date.DefaultDateConstant;
 import com.obatis.tools.ValidateTool;
 
@@ -18,14 +17,13 @@ public class HttpMessageLocalDateTimeConvertSerializer implements ObjectSerializ
 
     @Override
     public void write(JSONSerializer serializer, Object object, Object fieldName, Type fieldType, int features) {
-        SerializeWriter out = serializer.getWriter();
         if (ValidateTool.isEmpty(object)) {
-            serializer.getWriter().writeNull();
+            serializer.out.writeNull();
             return;
         }
 
         LocalDateTime result = (LocalDateTime) object;
-        out.write(result.format(DateTimeFormatter.ofPattern(DefaultDateConstant.DATE_TIME_PATTERN)));
+        serializer.out.writeString(result.format(DateTimeFormatter.ofPattern(DefaultDateConstant.DATE_TIME_PATTERN)));
     }
 
 

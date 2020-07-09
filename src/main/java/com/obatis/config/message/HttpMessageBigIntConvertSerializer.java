@@ -2,7 +2,6 @@ package com.obatis.config.message;
 
 import com.alibaba.fastjson.serializer.JSONSerializer;
 import com.alibaba.fastjson.serializer.ObjectSerializer;
-import com.alibaba.fastjson.serializer.SerializeWriter;
 import com.obatis.tools.ValidateTool;
 
 import java.lang.reflect.Type;
@@ -15,19 +14,18 @@ public class HttpMessageBigIntConvertSerializer implements ObjectSerializer {
 
 	@Override
 	public void write(JSONSerializer serializer, Object object, Object fieldName, Type fieldType, int features) {
-		SerializeWriter out = serializer.getWriter();
 		if (ValidateTool.isEmpty(object)) {
-			serializer.getWriter().writeNull();
+			serializer.out.writeNull();
 			return;
 		} 
 		
 		String value = object.toString();
 		// 如果长度达到28位，说明是生成的number
 		if(value.length() >= 18) {
-			out.write("\"" + value + "\"");
+			serializer.out.write("\"" + value + "\"");
 			return;
 		}
-		out.write(value);
+		serializer.out.write(value);
 	}
 
 	

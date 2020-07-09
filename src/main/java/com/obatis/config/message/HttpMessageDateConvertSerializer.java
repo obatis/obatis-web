@@ -21,7 +21,7 @@ public class HttpMessageDateConvertSerializer implements ObjectSerializer {
         } else {
             Date date = (Date)object;
             SimpleDateFormat format = new SimpleDateFormat(DefaultDateConstant.DATE_TIME_PATTERN);
-            serializer.write(format.format(date));
+            serializer.out.writeString(format.format(date));
         }
     }
 
