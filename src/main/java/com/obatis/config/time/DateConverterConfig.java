@@ -42,14 +42,4 @@ public class DateConverterConfig implements Converter<String, Date> {
         }
     }
 
-    public static void main(String[] args) {
-        String time = "2020-7-9 12:12";
-        if(time.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}$")) {
-            LocalDateTime localDateTime = DateCommonConvert.parseDateTime(time, DefaultDateConstant.DATE_HOUR_MINUTE_PATTERN);
-            System.out.println(localDateTime);
-        }
-
-        System.out.println("end");
-    }
-
 }

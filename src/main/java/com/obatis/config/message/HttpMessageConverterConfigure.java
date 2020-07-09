@@ -14,7 +14,10 @@ import org.springframework.http.MediaType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,6 +63,9 @@ public class HttpMessageConverterConfigure {
         serializeConfig.put(BigInteger.class, new HttpMessageBigIntConvertSerializer());
         serializeConfig.put(BigDecimal.class, new HttpMessageBigIntConvertSerializer());
         serializeConfig.put(Long.class, new HttpMessageBigIntConvertSerializer());
+        serializeConfig.put(LocalDateTime.class, new HttpMessageLocalDateTimeConvertSerializer());
+        serializeConfig.put(LocalDate.class, new HttpMessageLocalDateConvertSerializer());
+        serializeConfig.put(Date.class, new HttpMessageDateConvertSerializer());
         fastJsonConfig.setSerializeConfig(serializeConfig);
         fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
 
