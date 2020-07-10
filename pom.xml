@@ -4,7 +4,7 @@
 
     <groupId>com.obatis</groupId>
     <artifactId>obatis-web</artifactId>
-    <version>2.2.0-beta</version>
+    <version>2.2.0.2-beta</version>
     <packaging>jar</packaging>
     <name>obatis-web</name>
     <description>obatis-web, apply web project</description>
@@ -235,22 +235,22 @@
         <dependency>
             <groupId>com.obatis</groupId>
             <artifactId>obatis-tools</artifactId>
-            <version>1.1</version>
+            <version>1.1.1.1-beta</version>
         </dependency>
         <dependency>
             <groupId>com.obatis</groupId>
             <artifactId>obatis-upload</artifactId>
-            <version>1.0.3</version>
+            <version>1.0.3.2-beta</version>
         </dependency>
         <dependency>
             <groupId>com.obatis</groupId>
             <artifactId>obatis-net</artifactId>
-            <version>1.0.8</version>
+            <version>1.0.8.2-beta</version>
         </dependency>
         <dependency>
             <groupId>com.obatis</groupId>
             <artifactId>obatis-office</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.1.2-beta</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
