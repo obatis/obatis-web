@@ -4,7 +4,7 @@
 
     <groupId>com.obatis</groupId>
     <artifactId>obatis-web</artifactId>
-    <version>2.2.0.2-beta</version>
+    <version>2.2.0.3-beta</version>
     <packaging>jar</packaging>
     <name>obatis-web</name>
     <description>obatis-web, apply web project</description>
@@ -140,6 +140,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-java8time</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
