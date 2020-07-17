@@ -80,22 +80,32 @@ public class RequestHandleInfo {
 	 * @return
 	 */
 	public static RequestInfo getRequestInfo(HttpServletRequest request) {
-		String agentString = request.getHeader("User-Agent");
-		UserAgent userAgent = UserAgent.parseUserAgentString(agentString);
+		String agentInfo = request.getHeader("User-Agent");
+		UserAgent userAgent = UserAgent.parseUserAgentString(agentInfo);
 		OperatingSystem operatingSystem = userAgent.getOperatingSystem(); // 操作系统信息
 		String browser = userAgent.getBrowser() + " " + userAgent.getBrowserVersion();
 		eu.bitwalker.useragentutils.DeviceType deviceType = operatingSystem.getDeviceType(); // 设备类型
 		String device;
+
+		// 转化为消息，方便比对
+		String agentInfoLowerCase = agentInfo.toLowerCase();
+
 		switch (deviceType) {
 			case COMPUTER:
 				// PC电脑
-				device = "PC";
+				if(agentInfoLowerCase.contains("windows")) {
+					device = "Windows PC";
+				} else if (agentInfoLowerCase.contains("mac")) {
+					device = "Mac Pc";
+				} else {
+					device = "Other PC";
+				}
 				break;
 			case TABLET:
 				// 平板
-				if (agentString.contains("Android")) {
+				if (agentInfoLowerCase.contains("android") || agentInfoLowerCase.contains("android pad")) {
 					device = "Android Pad";
-				} else if (agentString.contains("iOS")) {
+				} else if (agentInfoLowerCase.contains("ios") || agentInfoLowerCase.contains("ipad") || agentInfoLowerCase.contains("mac")) {
 					device = "iPad";
 				} else {
 					device = "Other Pad";
@@ -103,9 +113,9 @@ public class RequestHandleInfo {
 				break;
 			case MOBILE:
 				// 手机
-				if (agentString.contains("Android")) {
+				if (agentInfoLowerCase.contains("android")) {
 					device = "Android Phone";
-				} else if (agentString.contains("iOS")) {
+				} else if (agentInfoLowerCase.contains("ios") || agentInfoLowerCase.contains("iphone") || agentInfoLowerCase.contains("mac")) {
 					device = "IOS Phone";
 				} else {
 					device = "Other Phone";
