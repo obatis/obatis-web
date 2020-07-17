@@ -116,7 +116,7 @@ public class RequestHandleInfo {
 				if (agentInfoLowerCase.contains("android")) {
 					device = "Android Phone";
 				} else if (agentInfoLowerCase.contains("ios") || agentInfoLowerCase.contains("iphone") || agentInfoLowerCase.contains("mac")) {
-					device = "IOS Phone";
+					device = "iPhone";
 				} else {
 					device = "Other Phone";
 				}
