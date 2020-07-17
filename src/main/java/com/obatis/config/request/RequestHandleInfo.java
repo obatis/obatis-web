@@ -96,7 +96,7 @@ public class RequestHandleInfo {
 				if(agentInfoLowerCase.contains("windows")) {
 					device = "Windows PC";
 				} else if (agentInfoLowerCase.contains("mac")) {
-					device = "Mac Pc";
+					device = "Mac PC";
 				} else {
 					device = "Other PC";
 				}
