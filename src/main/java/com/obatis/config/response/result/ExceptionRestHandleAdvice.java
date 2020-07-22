@@ -12,6 +12,7 @@ import com.obatis.email.exception.SendMailException;
 import com.obatis.tools.ValidateTool;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -51,20 +52,11 @@ public class ExceptionRestHandleAdvice {
 			LOG.print(printExceptionLog(exception));
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof MethodArgumentNotValidException) {
-			MethodArgumentNotValidException e = (MethodArgumentNotValidException) exception;
-			BindingResult bindingResult = e.getBindingResult();
-			List<ObjectError> allErrors = bindingResult.getAllErrors();
-			List<String> errorMsgs = new ArrayList<>();
-			for (ObjectError errorInfo : allErrors) {
-				FieldError fieldError = (FieldError) errorInfo;
-				errorMsgs.add(fieldError.getDefaultMessage());
-			}
-			String join = String.join(",", errorMsgs);
-			resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_INVALID_ERROR_STATUS);
-			resultInfo.setMessage(ValidateTool.isHaveChinese(join) ? join : "请求错误");
+			this.handleMethodArgumentBindBad(exception, ((MethodArgumentNotValidException) exception).getBindingResult(), resultInfo);
 			errorCode = ResponseDefaultErrorCode.PARAM_INVALID_ERROR_CODE;
-			LOG.print("请求参数值无效：" + join);
-			ExceptionRestHandle.addDefault(exception);
+		} else if (exception instanceof BindException) {
+			this.handleMethodArgumentBindBad(exception, ((BindException) exception).getBindingResult(), resultInfo);
+			errorCode = ResponseDefaultErrorCode.PARAM_INVALID_ERROR_CODE;
 		} else if (exception instanceof HttpMessageNotReadableException) {
 			resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_TYPE_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
@@ -90,35 +82,35 @@ public class ExceptionRestHandleAdvice {
 			LOG.print("HTTP请求URL地址不正确" + exception.getMessage());
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NullPointerException) {
-			String trace = printExceptionLog(exception);
+			String trace = this.printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.NULL_POINTER_ERROR_CODE;
 			LOG.print("空指针异常：" + trace);
 			ExceptionRestHandle.addNullPointer(exception);
 		} else if (exception instanceof IndexOutOfBoundsException) {
-			String trace = printExceptionLog(exception);
+			String trace = this.printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.INDEX_OUT_ERROR_CODE;
 			LOG.print("操作越界异常：" + trace);
 			ExceptionRestHandle.addIndexOut(exception);
 		} else if (exception instanceof SQLException) {
-			String trace = printExceptionLog(exception);
+			String trace = this.printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.SQL_EXECUTE_ERROR_CODE;
 			LOG.print("SQL执行运行异常：" + trace);
 			ExceptionRestHandle.addSql(exception);
 		} else if (exception instanceof SendMailException) {
-			String trace = printExceptionLog(exception);
+			String trace = this.printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SEND_MAIL_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.SEND_MAIL_ERROR_CODE;
 			LOG.print("邮件发送异常：" + trace);
 			ExceptionRestHandle.addMail(exception);
 		} else {
-			String trace = printExceptionLog(exception);
+			String trace = this.printExceptionLog(exception);
 			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
 			errorCode = ResponseDefaultErrorCode.SYSTEM_ERROR_CODE;
@@ -133,12 +125,26 @@ public class ExceptionRestHandleAdvice {
 		return resultInfo;
 	}
 
+	private void handleMethodArgumentBindBad(Exception exception, BindingResult bindingResult, ResultResponse resultInfo) {
+		List<ObjectError> allErrors = bindingResult.getAllErrors();
+		List<String> errorMsgs = new ArrayList<>();
+		for (ObjectError errorInfo : allErrors) {
+			FieldError fieldError = (FieldError) errorInfo;
+			errorMsgs.add(fieldError.getDefaultMessage());
+		}
+		String join = String.join(",", errorMsgs);
+		resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_INVALID_ERROR_STATUS);
+		resultInfo.setMessage(ValidateTool.isHaveChinese(join) ? join : "请求错误");
+		LOG.print("请求参数值无效：" + join);
+		ExceptionRestHandle.addDefault(exception);
+	}
+
 	/**
 	 * 构建日志
 	 * @param e
 	 * @return
 	 */
-	private static String printExceptionLog(Throwable e) {
+	private String printExceptionLog(Throwable e) {
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter, true);
 		e.printStackTrace(printWriter);
