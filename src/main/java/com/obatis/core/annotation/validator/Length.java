@@ -20,7 +20,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = {LengthValidator.class})
 public @interface Length {
 	
-	int min();
+	int min() default 0;
 	
 	int max();
 

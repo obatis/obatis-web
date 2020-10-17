@@ -16,6 +16,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -63,6 +64,18 @@ public class ExceptionRestHandleAdvice {
 			errorCode = ResponseDefaultErrorCode.PARAM_TYPE_ERROR_CODE;
 			LOG.print("请求参数值类型不匹配：" + exception.getMessage());
 			ExceptionRestHandle.addDefault(exception);
+		} else if (exception instanceof NoHandlerFoundException) {
+			resultInfo.setCode(org.apache.http.HttpStatus.SC_NOT_FOUND);
+			resultInfo.setMessage("HTTP请求URL地址不正确");
+			errorCode = ResponseDefaultErrorCode.URL_NOT_FOUND_ERROR_CODE;
+			LOG.print("HTTP请求URL地址不正确" + exception.getMessage());
+			ExceptionRestHandle.addDefault(exception);
+		} else if (exception instanceof HttpRequestMethodNotSupportedException) {
+			// HTTP请求类型不支持
+			resultInfo.setCode(ResponseDefaultErrorStatus.METHOD_NOT_SUPPORT_ERROR_STATUS);
+			resultInfo.setMessage("HTTP请求类型不支持");
+			errorCode = ResponseDefaultErrorCode.METHOD_NOT_SUPPORT_ERROR_CODE;
+			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NotAuthHandleException) {
 			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_AUTH_ERROR_STATUS);
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : NotAuthHandleException.DEFAUTL_NOT_AUTH_MESSAGE);
@@ -74,12 +87,6 @@ public class ExceptionRestHandleAdvice {
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : NotLoginHandleException.DEFAULT_NOT_LOGIN_MESSAGE);
 			errorCode = ResponseDefaultErrorCode.NOT_LOGIN_ERROR_CODE;
 			LOG.print("用户未登录" + (!ValidateTool.isEmpty(exception.getMessage()) ? "," + exception.getMessage() : ""));
-			ExceptionRestHandle.addDefault(exception);
-		} else if (exception instanceof NoHandlerFoundException) {
-			resultInfo.setCode(org.apache.http.HttpStatus.SC_NOT_FOUND);
-			resultInfo.setMessage("HTTP请求URL地址不正确");
-			errorCode = ResponseDefaultErrorCode.URL_NOT_FOUND_ERROR_CODE;
-			LOG.print("HTTP请求URL地址不正确" + exception.getMessage());
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NullPointerException) {
 			String trace = this.printExceptionLog(exception);
