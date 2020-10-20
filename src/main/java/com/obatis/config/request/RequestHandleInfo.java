@@ -88,7 +88,7 @@ public class RequestHandleInfo {
 		String device;
 
 		// 转化为消息，方便比对
-		String agentInfoLowerCase = agentInfo.toLowerCase();
+		String agentInfoLowerCase = agentInfo == null ? "" : agentInfo.toLowerCase();
 
 		switch (deviceType) {
 			case COMPUTER:

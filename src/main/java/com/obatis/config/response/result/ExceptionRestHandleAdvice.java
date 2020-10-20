@@ -16,6 +16,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -70,7 +71,7 @@ public class ExceptionRestHandleAdvice {
 			errorCode = ResponseDefaultErrorCode.URL_NOT_FOUND_ERROR_CODE;
 			LOG.print("HTTP请求URL地址不正确" + exception.getMessage());
 			ExceptionRestHandle.addDefault(exception);
-		} else if (exception instanceof HttpRequestMethodNotSupportedException) {
+		} else if (exception instanceof HttpRequestMethodNotSupportedException || exception instanceof HttpMediaTypeNotSupportedException) {
 			// HTTP请求类型不支持
 			resultInfo.setCode(ResponseDefaultErrorStatus.METHOD_NOT_SUPPORT_ERROR_STATUS);
 			resultInfo.setMessage("HTTP请求类型不支持");
