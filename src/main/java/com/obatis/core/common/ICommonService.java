@@ -4,7 +4,19 @@ import com.obatis.core.exception.HandleException;
 
 import java.math.BigInteger;
 
+/**
+ * 公共接口基类，开发者可根据实际需要进行继承
+ * @param <T>
+ */
 public interface ICommonService<T> {
+
+    /**
+     * 添加数据
+     * @param t
+     * @return
+     * @throws HandleException
+     */
+    int insert(T t) throws HandleException;
 
     /**
      * 根据ID删除数据

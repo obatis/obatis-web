@@ -7,22 +7,20 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * 校验是否为电子邮箱地址
- * @author HuangLongPu
+ * 验证是否为车牌号
  */
 @Target({ FIELD })
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = { IsEmailValidator.class })
-public @interface IsEmail {
+@Constraint(validatedBy = { IsVehicleLicenseValidator.class })
+public @interface IsVehicleLicense {
 
-	String message() default "不是有效的电子邮箱";
+    String message() default "不是有效的车牌号";
 
-	Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }

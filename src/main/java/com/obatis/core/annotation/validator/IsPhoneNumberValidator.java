@@ -9,7 +9,7 @@ public class IsPhoneNumberValidator implements ConstraintValidator<IsPhoneNumber
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (!ValidateTool.isEmpty(value) && ValidateTool.isPhoneNumber(value)) {
+		if (ValidateTool.isPhoneNumber(value)) {
 			return true;
 		}
 		return false;

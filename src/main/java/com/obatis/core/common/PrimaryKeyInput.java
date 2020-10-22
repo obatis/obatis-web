@@ -1,25 +1,12 @@
 package com.obatis.core.common;
 
-import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.math.BigInteger;
 
 /**
  *  id 查询参数实体
+ *  该类已于 2020-10-22日弃用，更名为 com.obatis.core.common.PrimaryKeyParam
  */
-public class PrimaryKeyInput implements Serializable {
+@Deprecated
+public class PrimaryKeyInput extends PrimaryKeyParam implements Serializable {
 
-    @ApiModelProperty("主键ID")
-    @NotNull(message = "ID不能为空")
-    private BigInteger id;
-
-    public BigInteger getId() {
-        return id;
-    }
-
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
 }
