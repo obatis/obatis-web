@@ -1,5 +1,6 @@
 package com.obatis.config.response.result;
 
+import com.obatis.core.annotation.request.ReturnTypeValue;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
@@ -24,7 +25,10 @@ public class ResponseBodyWrapHandler implements HandlerMethodReturnValueHandler 
 
     @Override
     public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
-    	if(returnValue instanceof ResultResponse) {
+        /**
+         * 如果返回值已经是 ResultResponse 结构体或者方法体已经注册了 ReturnTypeValue 明确原样输出，则不进行任何结构化处理
+          */
+        if(returnValue instanceof ResultResponse || returnType.hasMethodAnnotation(ReturnTypeValue.class)) {
     		delegate.handleReturnValue(returnValue, returnType, mavContainer, webRequest);
     	} else {
             ResultResponse resultInfo = new ResultResponse();
