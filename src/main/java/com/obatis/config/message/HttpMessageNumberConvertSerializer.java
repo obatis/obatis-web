@@ -7,10 +7,10 @@ import com.obatis.tools.ValidateTool;
 import java.lang.reflect.Type;
 
 /**
- * 主要对BigInt类型进行转换处理，防止科学计数，比如生成的28为number串码，否则前端接收会出现科学计数的现象
+ * 主要对大整型Number类型进行转换处理，防止科学计数，比如生成的28为number串码，否则前端接收会出现科学计数的现象
  * @author HuangLongPu
  */
-public class HttpMessageBigIntConvertSerializer implements ObjectSerializer {
+public class HttpMessageNumberConvertSerializer implements ObjectSerializer {
 
 	@Override
 	public void write(JSONSerializer serializer, Object object, Object fieldName, Type fieldType, int features) {

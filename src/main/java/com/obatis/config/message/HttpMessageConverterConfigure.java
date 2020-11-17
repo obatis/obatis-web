@@ -60,9 +60,9 @@ public class HttpMessageConverterConfigure {
         fastJsonConfig.setCharset(Charset.forName(CharsetConstant.CHARSET_UTF8));
         // 对BigInt 和BigDecimal类型做序列化处理，防止出现科学计数
         SerializeConfig serializeConfig =  new SerializeConfig();
-        serializeConfig.put(BigInteger.class, new HttpMessageBigIntConvertSerializer());
-        serializeConfig.put(BigDecimal.class, new HttpMessageBigIntConvertSerializer());
-        serializeConfig.put(Long.class, new HttpMessageBigIntConvertSerializer());
+        serializeConfig.put(BigInteger.class, new HttpMessageNumberConvertSerializer());
+        serializeConfig.put(BigDecimal.class, new HttpMessageNumberConvertSerializer());
+        serializeConfig.put(Long.class, new HttpMessageNumberConvertSerializer());
         serializeConfig.put(LocalDateTime.class, new HttpMessageLocalDateTimeConvertSerializer());
         serializeConfig.put(LocalDate.class, new HttpMessageLocalDateConvertSerializer());
         serializeConfig.put(Date.class, new HttpMessageDateConvertSerializer());
