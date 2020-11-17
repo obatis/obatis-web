@@ -1,8 +1,8 @@
 package com.obatis.config.response.result;
 
 import com.obatis.config.response.result.callback.ExceptionRestHandle;
-import com.obatis.constant.http.ResponseDefaultErrorCode;
-import com.obatis.constant.http.ResponseDefaultErrorStatus;
+import com.obatis.constant.http.ResponseErrorCode;
+import com.obatis.constant.http.ResponseErrorStatus;
 import com.obatis.core.exception.HandleException;
 import com.obatis.core.exception.NotAuthHandleException;
 import com.obatis.core.exception.NotLoginHandleException;
@@ -48,86 +48,86 @@ public class ExceptionRestHandleAdvice {
 		String errorCode;
 
 		if (exception instanceof HandleException) {
-			resultInfo.setCode(ResponseDefaultErrorStatus.BUS_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.BUS_ERROR_STATUS);
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : "业务异常");
 			errorCode = ((HandleException) exception).getErrCode();
 			LOG.print(printExceptionLog(exception));
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof MethodArgumentNotValidException) {
 			this.handleMethodArgumentBindBad(exception, ((MethodArgumentNotValidException) exception).getBindingResult(), resultInfo);
-			errorCode = ResponseDefaultErrorCode.PARAM_INVALID_ERROR_CODE;
+			errorCode = ResponseErrorCode.PARAM_INVALID_ERROR_CODE;
 		} else if (exception instanceof BindException) {
 			this.handleMethodArgumentBindBad(exception, ((BindException) exception).getBindingResult(), resultInfo);
-			errorCode = ResponseDefaultErrorCode.PARAM_INVALID_ERROR_CODE;
+			errorCode = ResponseErrorCode.PARAM_INVALID_ERROR_CODE;
 		} else if (exception instanceof HttpMessageNotReadableException) {
-			resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_TYPE_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.PARAM_TYPE_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
-			errorCode = ResponseDefaultErrorCode.PARAM_TYPE_ERROR_CODE;
+			errorCode = ResponseErrorCode.PARAM_TYPE_ERROR_CODE;
 			LOG.print("请求参数值类型不匹配：" + exception.getMessage());
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NoHandlerFoundException) {
 			resultInfo.setCode(org.apache.http.HttpStatus.SC_NOT_FOUND);
 			resultInfo.setMessage("HTTP请求URL地址不正确");
-			errorCode = ResponseDefaultErrorCode.URL_NOT_FOUND_ERROR_CODE;
+			errorCode = ResponseErrorCode.URL_NOT_FOUND_ERROR_CODE;
 			LOG.print("HTTP请求URL地址不正确" + exception.getMessage());
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof HttpRequestMethodNotSupportedException || exception instanceof HttpMediaTypeNotSupportedException) {
 			// HTTP请求类型不支持
-			resultInfo.setCode(ResponseDefaultErrorStatus.METHOD_NOT_SUPPORT_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.METHOD_NOT_SUPPORT_ERROR_STATUS);
 			resultInfo.setMessage("HTTP请求类型不支持");
-			errorCode = ResponseDefaultErrorCode.METHOD_NOT_SUPPORT_ERROR_CODE;
+			errorCode = ResponseErrorCode.METHOD_NOT_SUPPORT_ERROR_CODE;
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NotAuthHandleException) {
-			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_AUTH_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.NOT_AUTH_ERROR_STATUS);
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : NotAuthHandleException.DEFAUTL_NOT_AUTH_MESSAGE);
-			errorCode = ResponseDefaultErrorCode.NOT_AUTH_ERROR_CODE;
+			errorCode = ResponseErrorCode.NOT_AUTH_ERROR_CODE;
 			LOG.print("请求未授权，没有操作权限" + (!ValidateTool.isEmpty(exception.getMessage()) ? "," + exception.getMessage() : ""));
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NotLoginHandleException) {
-			resultInfo.setCode(ResponseDefaultErrorStatus.NOT_LOGIN_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.NOT_LOGIN_ERROR_STATUS);
 			resultInfo.setMessage(ValidateTool.isHaveChinese(exception.getMessage()) ? exception.getMessage() : NotLoginHandleException.DEFAULT_NOT_LOGIN_MESSAGE);
-			errorCode = ResponseDefaultErrorCode.NOT_LOGIN_ERROR_CODE;
+			errorCode = ResponseErrorCode.NOT_LOGIN_ERROR_CODE;
 			LOG.print("用户未登录" + (!ValidateTool.isEmpty(exception.getMessage()) ? "," + exception.getMessage() : ""));
 			ExceptionRestHandle.addDefault(exception);
 		} else if (exception instanceof NullPointerException) {
 			String trace = this.printExceptionLog(exception);
-			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
-			errorCode = ResponseDefaultErrorCode.NULL_POINTER_ERROR_CODE;
+			errorCode = ResponseErrorCode.NULL_POINTER_ERROR_CODE;
 			LOG.print("空指针异常：" + trace);
 			ExceptionRestHandle.addNullPointer(exception);
 		} else if (exception instanceof IndexOutOfBoundsException) {
 			String trace = this.printExceptionLog(exception);
-			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
-			errorCode = ResponseDefaultErrorCode.INDEX_OUT_ERROR_CODE;
+			errorCode = ResponseErrorCode.INDEX_OUT_ERROR_CODE;
 			LOG.print("操作越界异常：" + trace);
 			ExceptionRestHandle.addIndexOut(exception);
 		} else if (exception instanceof SQLException) {
 			String trace = this.printExceptionLog(exception);
-			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
-			errorCode = ResponseDefaultErrorCode.SQL_EXECUTE_ERROR_CODE;
+			errorCode = ResponseErrorCode.SQL_EXECUTE_ERROR_CODE;
 			LOG.print("SQL执行运行异常：" + trace);
 			ExceptionRestHandle.addSql(exception);
 		} else if (exception instanceof SendMailException) {
 			String trace = this.printExceptionLog(exception);
-			resultInfo.setCode(ResponseDefaultErrorStatus.SEND_MAIL_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.SEND_MAIL_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
-			errorCode = ResponseDefaultErrorCode.SEND_MAIL_ERROR_CODE;
+			errorCode = ResponseErrorCode.SEND_MAIL_ERROR_CODE;
 			LOG.print("邮件发送异常：" + trace);
 			ExceptionRestHandle.addMail(exception);
 		} else {
 			String trace = this.printExceptionLog(exception);
-			resultInfo.setCode(ResponseDefaultErrorStatus.SYSTEM_ERROR_STATUS);
+			resultInfo.setCode(ResponseErrorStatus.SYSTEM_ERROR_STATUS);
 			resultInfo.setMessage("请求错误");
-			errorCode = ResponseDefaultErrorCode.SYSTEM_ERROR_CODE;
+			errorCode = ResponseErrorCode.SYSTEM_ERROR_CODE;
 			LOG.print("程序执行错误：" + trace);
 			ExceptionRestHandle.addDefault(exception);
 		}
 
 		if (ValidateTool.isEmpty(errorCode)) {
-			errorCode = ResponseDefaultErrorCode.DEFAULT_ERROR_CODE;
+			errorCode = ResponseErrorCode.DEFAULT_ERROR_CODE;
 		}
 		resultInfo.setErrorCode(errorCode);
 		return resultInfo;
@@ -141,7 +141,7 @@ public class ExceptionRestHandleAdvice {
 			errorMsgs.add(fieldError.getDefaultMessage());
 		}
 		String join = String.join(",", errorMsgs);
-		resultInfo.setCode(ResponseDefaultErrorStatus.PARAM_INVALID_ERROR_STATUS);
+		resultInfo.setCode(ResponseErrorStatus.PARAM_INVALID_ERROR_STATUS);
 		resultInfo.setMessage(ValidateTool.isHaveChinese(join) ? join : "请求错误");
 		LOG.print("请求参数值无效：" + join);
 		ExceptionRestHandle.addDefault(exception);

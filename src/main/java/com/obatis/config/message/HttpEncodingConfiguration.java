@@ -1,7 +1,6 @@
 package com.obatis.config.message;
 
 import com.obatis.constant.CharsetConstant;
-import com.obatis.constant.NormalCommonConstant;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter;
 import org.springframework.context.annotation.Bean;
