@@ -1,6 +1,7 @@
 package com.obatis.config.request;
 
 import com.obatis.constant.http.HttpConstant;
+import com.obatis.tools.ValidateTool;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.springframework.web.context.request.RequestAttributes;
@@ -82,9 +83,15 @@ public class RequestHandleInfo {
 	public static RequestInfo getRequestInfo(HttpServletRequest request) {
 		String agentInfo = request.getHeader("User-Agent");
 		UserAgent userAgent = UserAgent.parseUserAgentString(agentInfo);
-		OperatingSystem operatingSystem = userAgent.getOperatingSystem(); // 操作系统信息
-		String browser = userAgent.getBrowser() + " " + userAgent.getBrowserVersion();
-		eu.bitwalker.useragentutils.DeviceType deviceType = operatingSystem.getDeviceType(); // 设备类型
+		// 操作系统信息
+		OperatingSystem operatingSystem = userAgent.getOperatingSystem();
+		// 获取浏览器信息
+		String browser = userAgent.getBrowser().getName();
+		if(userAgent.getBrowserVersion() != null && !ValidateTool.isEmpty(userAgent.getBrowserVersion().getVersion())) {
+			browser += " " + userAgent.getBrowserVersion().getVersion();
+		}
+		// 设备类型
+		eu.bitwalker.useragentutils.DeviceType deviceType = operatingSystem.getDeviceType();
 		String device;
 
 		// 转化为消息，方便比对
