@@ -1,6 +1,5 @@
 package com.obatis.config.response.result;
 
-import com.obatis.common.exception.HandleException;
 import com.obatis.config.response.result.callback.ExceptionRestHandle;
 import com.obatis.constant.http.ResponseErrorCode;
 import com.obatis.constant.http.ResponseErrorStatus;
@@ -9,6 +8,7 @@ import com.obatis.core.exception.NotLoginHandleException;
 import com.obatis.core.logger.LogPrintFactory;
 import com.obatis.core.logger.LogPrinter;
 import com.obatis.email.exception.SendMailException;
+import com.obatis.exception.HandleException;
 import com.obatis.tools.ValidateTool;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;

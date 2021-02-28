@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
-import com.obatis.common.exception.HandleException;
+import com.obatis.exception.HandleException;
 import com.obatis.convert.CommonConvert;
 import com.obatis.convert.JsonConvert;
 import com.obatis.tools.ValidateTool;

@@ -1,7 +1,7 @@
 package com.obatis.core.annotation.config;
 
-import com.obatis.common.exception.HandleException;
 import com.obatis.config.SystemConstant;
+import com.obatis.exception.HandleException;
 import com.obatis.tools.ValidateTool;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

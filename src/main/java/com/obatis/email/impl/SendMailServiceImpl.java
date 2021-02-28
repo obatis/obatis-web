@@ -1,6 +1,6 @@
 package com.obatis.email.impl;
 
-import com.obatis.common.exception.HandleException;
+import com.obatis.exception.HandleException;
 import com.obatis.config.SystemConstant;
 import com.obatis.constant.CharsetConstant;
 import com.obatis.email.SendMailService;
