@@ -1,6 +1,6 @@
 package com.obatis.core.common;
 
-import com.obatis.core.exception.HandleException;
+import com.obatis.common.exception.HandleException;
 
 import java.math.BigInteger;
 

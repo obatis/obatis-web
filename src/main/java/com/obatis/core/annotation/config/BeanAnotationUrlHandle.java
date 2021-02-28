@@ -1,9 +1,9 @@
 package com.obatis.core.annotation.config;
 
+import com.obatis.common.exception.HandleException;
 import com.obatis.config.url.UrlBeanInfo;
 import com.obatis.constant.http.HttpConstant;
 import com.obatis.core.annotation.request.NotLogin;
-import com.obatis.core.exception.HandleException;
 import com.obatis.tools.ValidateTool;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;

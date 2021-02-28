@@ -1,12 +1,11 @@
 package com.obatis.config.time;
 
-import com.obatis.convert.date.DateCommonConvert;
-import com.obatis.convert.date.DefaultDateConstant;
+import com.obatis.convert.date.DateConstant;
+import com.obatis.convert.date.DateConvert;
 import com.obatis.tools.ValidateTool;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -28,15 +27,15 @@ public class DateConverterConfig implements Converter<String, Date> {
         }
 
         if(source.matches("^\\d{4}-\\d{1,2}$")){
-            return DateCommonConvert.toDate(DateCommonConvert.parseDate(source, DefaultDateConstant.YEAR_MONTH_PATTERN));
+            return DateConvert.toDate(DateConvert.parseDate(source, DateConstant.YEAR_MONTH_PATTERN));
         } else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2}$")){
-            return DateCommonConvert.toDate(DateCommonConvert.parseDate(source, DefaultDateConstant.DATE_PATTERN));
+            return DateConvert.toDate(DateConvert.parseDate(source, DateConstant.DATE_PATTERN));
         } else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}$")){
-            return DateCommonConvert.toDate(DateCommonConvert.parseDateTime(source, DefaultDateConstant.DATE_HOUR_PATTERN));
+            return DateConvert.toDate(DateConvert.parseDateTime(source, DateConstant.DATE_HOUR_PATTERN));
         } else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}$")){
-            return DateCommonConvert.toDate(DateCommonConvert.parseDateTime(source, DefaultDateConstant.DATE_HOUR_MINUTE_PATTERN));
+            return DateConvert.toDate(DateConvert.parseDateTime(source, DateConstant.DATE_HOUR_MINUTE_PATTERN));
         } else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}:\\d{1,2}$")){
-            return DateCommonConvert.toDate(DateCommonConvert.parseDateTime(source, DefaultDateConstant.DATE_TIME_PATTERN));
+            return DateConvert.toDate(DateConvert.parseDateTime(source, DateConstant.DATE_TIME_PATTERN));
         } else {
             throw new IllegalArgumentException("error: invalid date value '" + source + "'");
         }

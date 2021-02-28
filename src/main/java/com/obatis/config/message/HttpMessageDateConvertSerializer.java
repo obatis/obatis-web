@@ -2,7 +2,7 @@ package com.obatis.config.message;
 
 import com.alibaba.fastjson.serializer.JSONSerializer;
 import com.alibaba.fastjson.serializer.ObjectSerializer;
-import com.obatis.convert.date.DefaultDateConstant;
+import com.obatis.convert.date.DateConstant;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -20,7 +20,7 @@ public class HttpMessageDateConvertSerializer implements ObjectSerializer {
             serializer.out.writeNull();
         } else {
             Date date = (Date)object;
-            SimpleDateFormat format = new SimpleDateFormat(DefaultDateConstant.DATE_TIME_PATTERN);
+            SimpleDateFormat format = new SimpleDateFormat(DateConstant.DATE_TIME_PATTERN);
             serializer.out.writeString(format.format(date));
         }
     }

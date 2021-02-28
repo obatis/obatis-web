@@ -1,7 +1,7 @@
 package com.obatis.config.response.result;
 
-import com.obatis.constant.http.ResponseDefaultErrorCode;
-import com.obatis.constant.http.ResponseDefaultErrorStatus;
+import com.obatis.constant.http.ResponseErrorCode;
+import com.obatis.constant.http.ResponseErrorStatus;
 
 /**
  * 微服务请求熔断回调结果集处理
@@ -14,9 +14,9 @@ public class FailBackResponse {
 	public static final ResultResponse RESULT = new ResultResponse();
 	
 	static {
-		RESULT.setCode(ResponseDefaultErrorStatus.FAIL_BACK_ERROR_STATUS);
+		RESULT.setCode(ResponseErrorStatus.FAIL_BACK_ERROR_STATUS);
 		RESULT.setMessage("请求错误，检查网络情况");
-		RESULT.setErrorCode(ResponseDefaultErrorCode.NETWORK_ERROR_CODE);
+		RESULT.setErrorCode(ResponseErrorCode.NETWORK_ERROR_CODE);
 	}
 
 }

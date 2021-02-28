@@ -5,9 +5,9 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
+import com.obatis.common.exception.HandleException;
 import com.obatis.convert.CommonConvert;
-import com.obatis.convert.JsonCommonConvert;
-import com.obatis.core.exception.HandleException;
+import com.obatis.convert.JsonConvert;
 import com.obatis.tools.ValidateTool;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -66,7 +66,7 @@ public class RedisHandle {
 	 */
     public void setList(String key, List<?> list){
     	this.validateData(key, list);
-    	String data = JsonCommonConvert.objConvertJson(list);
+    	String data = JsonConvert.objConvertJson(list);
     	this.set(key, data);
     }
 
@@ -78,7 +78,7 @@ public class RedisHandle {
 	 */
     public void setList(String key, List<?> list, int timeout){
     	this.validateData(key, list);
-    	String data = JsonCommonConvert.objConvertJson(list);
+    	String data = JsonConvert.objConvertJson(list);
     	this.set(key, data);
     	this.expire(key, timeout);
     }
@@ -104,6 +104,6 @@ public class RedisHandle {
     	}
     	Object data = this.get(key);
     	String jsonStr = CommonConvert.toString(data);
-    	return JsonCommonConvert.jsonConvertList(jsonStr, cls);
+    	return JsonConvert.jsonConvertList(jsonStr, cls);
     }
 }

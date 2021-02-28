@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
-import com.obatis.core.exception.HandleException;
+import com.obatis.common.exception.HandleException;
 import com.obatis.tools.ValidateTool;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;

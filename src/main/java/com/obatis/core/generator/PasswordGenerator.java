@@ -1,7 +1,7 @@
 package com.obatis.core.generator;
 
-import com.obatis.encrypt.base64.Base64EncoderTool;
-import com.obatis.encrypt.md5.Md5EncryptTool;
+import com.obatis.encrypt.base64.Base64Encrypter;
+import com.obatis.encrypt.md5.Md5Encrypter;
 
 /**
  * md5密码生成库，建议sha值是个变化值(比如上次登录时间)，或者是不对用户展示的值，提高暴力破解的难度。
@@ -27,10 +27,10 @@ public class PasswordGenerator {
 	 * @return
 	 */
 	public static final String getPassword(String shaName, String userName, String password) {
-		String prefixMd5Encrypt = Md5EncryptTool.encrypt16(PREFIX + shaName + userName);
-		String suffixMd5Encrypt = Md5EncryptTool.encrypt16( shaName + userName + SUFFIX);
-		String pwdMd5Encrypt = Md5EncryptTool.encrypt32(PREFIX + password + SUFFIX);
-		String minMd5Encrypt = Md5EncryptTool.encrypt32(prefixMd5Encrypt + pwdMd5Encrypt + suffixMd5Encrypt);
+		String prefixMd5Encrypt = Md5Encrypter.encrypt16(PREFIX + shaName + userName);
+		String suffixMd5Encrypt = Md5Encrypter.encrypt16( shaName + userName + SUFFIX);
+		String pwdMd5Encrypt = Md5Encrypter.encrypt32(PREFIX + password + SUFFIX);
+		String minMd5Encrypt = Md5Encrypter.encrypt32(prefixMd5Encrypt + pwdMd5Encrypt + suffixMd5Encrypt);
 		return handleBinaryBase(prefixMd5Encrypt + pwdMd5Encrypt) + handleBinaryBase(minMd5Encrypt);
 	}
 
@@ -47,7 +47,7 @@ public class PasswordGenerator {
 			temp = temp + Integer.toBinaryString(strChar[i]) + " ";
 		}
 
-		return new String(Base64EncoderTool.encode((Md5EncryptTool.encrypt32(temp) + Md5EncryptTool.encrypt16(temp.hashCode() + "")).getBytes())).replace("M", "a").replace("=", "").toLowerCase().replace("zz", "m").replace("tq", "a").replace("yy", "b").replace("nm", "a");
+		return new String(Base64Encrypter.encode((Md5Encrypter.encrypt32(temp) + Md5Encrypter.encrypt16(temp.hashCode() + "")).getBytes())).replace("M", "a").replace("=", "").toLowerCase().replace("zz", "m").replace("tq", "a").replace("yy", "b").replace("nm", "a");
 	}
 
 	/**

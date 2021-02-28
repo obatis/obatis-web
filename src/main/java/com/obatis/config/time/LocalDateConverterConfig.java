@@ -1,6 +1,6 @@
 package com.obatis.config.time;
 
-import com.obatis.convert.date.DateCommonConvert;
+import com.obatis.convert.date.DateConvert;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 
@@ -14,7 +14,7 @@ public class LocalDateConverterConfig implements Converter<String, LocalDate> {
 	
     @Override
     public LocalDate convert(String source) {
-    	return DateCommonConvert.parseDate(source);
+    	return DateConvert.parseDate(source);
     }
 
 }
