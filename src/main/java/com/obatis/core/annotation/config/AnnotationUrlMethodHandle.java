@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
-public final class LoadAnnotationUrl {
+public final class AnnotationUrlMethodHandle {
 
-    protected LoadAnnotationUrl() {}
+    protected AnnotationUrlMethodHandle() {}
 
     /**
      * 加载带有 @Controller 和 @RestController 的Controller类
@@ -95,7 +95,7 @@ public final class LoadAnnotationUrl {
             }
         }
 
-        BeanAnotationUrlHandle.handle(cls, cls.getCanonicalName(), path);
+        AnotationUrlMethodHandleAutoConfigure.handle(cls, cls.getCanonicalName(), path);
     }
 
 }

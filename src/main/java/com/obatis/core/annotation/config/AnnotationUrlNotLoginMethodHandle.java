@@ -9,14 +9,14 @@ import java.util.Map;
  * 缓存添加注解 @NotLogin 的Controller Url路径
  * @author HuangLongPu
  */
-public final class LoadNotLoginAnnotationUrl {
+public final class AnnotationUrlNotLoginMethodHandle {
 
     /**
      * url 存储的 map 类，key 为controller注解的URL地址，value 为注册URL的方法说明(借助于 swagger实现)
      */
     private static final Map<String, String> NOT_LOGIN_URL_MAP = new HashMap<>();
 
-    protected LoadNotLoginAnnotationUrl() {}
+    protected AnnotationUrlNotLoginMethodHandle() {}
 
     /**
      * 放置添加注解 @NotLogin 的Controller Url路径

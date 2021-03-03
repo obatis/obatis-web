@@ -21,7 +21,6 @@ import java.util.Set;
  * @author HuangLongPu
  */
 @Configuration
-@ConditionalOnWebApplication
 public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegistrar {
 
     @Resource
@@ -36,7 +35,8 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
 
-        String startupClassName = annotationMetadata.getClassName();
+//        String startupClassName = annotationMetadata.getClassName();
+
         if(!startupClassName.contains(".")) {
             /**
              * 说明启动类在缺省目录下
@@ -48,6 +48,7 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
         if(ValidateTool.isEmpty(startupPackageName)) {
             throw new HandleException("获取项目启动类包路径失败");
         }
+
         if(!"com".equals(startupPackageName) && !SystemConstant.CORE_BASE_DIR.equals(startupPackageName)) {
             /**
              * 是否使用默认的filter，使用默认的filter意味着只扫描那些类上拥有Component、Service、Repository或Controller注解的类。
@@ -68,7 +69,7 @@ public class ImortStartupLoadAutoConfigure implements ImportBeanDefinitionRegist
         /**
          * 加载 Controller url
          */
-        new LoadAnnotationUrl().load(startupPackageName);
+        new AnnotationUrlMethodHandle().load(startupPackageName);
     }
 
 }

@@ -14,14 +14,14 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeanAnotationUrlHandle {
+public class AnotationUrlMethodHandleAutoConfigure {
 
     /**
      * url 存储的 map 类，key 为controller注解的URL地址，value 为注册URL的方法说明(借助于 swagger实现)
      */
     private static final List<UrlBeanInfo> URL_INFO_LIST = new ArrayList<>();
 
-    protected BeanAnotationUrlHandle() {}
+    protected AnotationUrlMethodHandleAutoConfigure() {}
 
     protected static final void handle(Class<?> beanCls, String canonicalName, String controllerPath) {
         Method[] methodArr = beanCls.getDeclaredMethods();
@@ -87,7 +87,7 @@ public class BeanAnotationUrlHandle {
             NotLogin notAuth = method.getAnnotation(NotLogin.class);
             int isLoginEnable = 0;
             if(notAuth != null) {
-                LoadNotLoginAnnotationUrl.putNotLoginAnnotationUrl(controllerPath + path, urlName);
+                AnnotationUrlNotLoginMethodHandle.putNotLoginAnnotationUrl(controllerPath + path, urlName);
                 isLoginEnable = 1;
             }
 

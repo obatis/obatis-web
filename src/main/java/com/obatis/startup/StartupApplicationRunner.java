@@ -6,8 +6,8 @@ import com.obatis.config.response.result.callback.ExceptionRestHandle;
 import com.obatis.config.response.result.callback.ExceptionRestHandleCallback;
 import com.obatis.config.response.result.callback.HandleExceptionCallbackContext;
 import com.obatis.config.url.RegisterUrlConfigure;
-import com.obatis.core.annotation.config.BeanAnotationUrlHandle;
-import com.obatis.core.annotation.config.LoadNotLoginAnnotationUrl;
+import com.obatis.core.annotation.config.AnnotationUrlNotLoginMethodHandle;
+import com.obatis.core.annotation.config.AnotationUrlMethodHandleAutoConfigure;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
@@ -63,12 +63,12 @@ public class StartupApplicationRunner implements ApplicationRunner {
         if (beanMap != null && !beanMap.isEmpty()) {
             for (Map.Entry<String, RegisterUrlConfigure> value : beanMap.entrySet()) {
                 // 调用注册URL地址信息
-                if (BeanAnotationUrlHandle.getUrlInfo() != null && !BeanAnotationUrlHandle.getUrlInfo().isEmpty()) {
-                    value.getValue().registerUrl(BeanAnotationUrlHandle.getUrlInfo());
+                if (AnotationUrlMethodHandleAutoConfigure.getUrlInfo() != null && !AnotationUrlMethodHandleAutoConfigure.getUrlInfo().isEmpty()) {
+                    value.getValue().registerUrl(AnotationUrlMethodHandleAutoConfigure.getUrlInfo());
                 }
                 // 调用注册无需登录的URL地址信息
-                if (LoadNotLoginAnnotationUrl.getNotLoginUrl() != null && !LoadNotLoginAnnotationUrl.getNotLoginUrl().isEmpty()) {
-                    value.getValue().registerNotLoginUrl(LoadNotLoginAnnotationUrl.getNotLoginUrl());
+                if (AnnotationUrlNotLoginMethodHandle.getNotLoginUrl() != null && !AnnotationUrlNotLoginMethodHandle.getNotLoginUrl().isEmpty()) {
+                    value.getValue().registerNotLoginUrl(AnnotationUrlNotLoginMethodHandle.getNotLoginUrl());
                 }
             }
         }
