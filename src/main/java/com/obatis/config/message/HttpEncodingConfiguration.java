@@ -1,7 +1,6 @@
 package com.obatis.config.message;
 
 import com.obatis.constant.CharsetConstant;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +11,6 @@ import org.springframework.web.filter.CharacterEncodingFilter;
  * 设置编码
  * @author HuangLongPu
  */
-@ConditionalOnBean(HttpMessageConverterConfigure.class)
 @Configuration
 public class HttpEncodingConfiguration {
 

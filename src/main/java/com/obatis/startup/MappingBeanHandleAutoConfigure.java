@@ -51,11 +51,12 @@ public class MappingBeanHandleAutoConfigure {
                 }
             }
 
-            if(pathArr == null) {
+            int pathArraySize = 0;
+            if(pathArr == null || (pathArraySize = pathArr.length) == 0) {
                 continue;
             }
 
-            if(pathArr.length != 1) {
+            if(pathArraySize != 1) {
                 throw new HandleException("error: " + canonicalName + " method " + method.getName() + " RequestMapping value not only one");
             }
 
