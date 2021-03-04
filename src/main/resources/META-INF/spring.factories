@@ -1,1 +1,7 @@
 org.springframework.boot.env.EnvironmentPostProcessor=com.obatis.config.environment.DynamicEnvironmentPostProcessor
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.obatis.startup.StartupApplicationAutoConfigure,\
+com.obatis.config.environment.DynamicEnvironmentPostProcessor,\
+com.obatis.config.message.HttpEncodingConfiguration

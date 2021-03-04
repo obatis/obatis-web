@@ -1,4 +1,4 @@
-package com.obatis.core.annotation.config;
+package com.obatis.startup;
 
 import com.obatis.tools.ValidateTool;
 
@@ -9,14 +9,14 @@ import java.util.Map;
  * 缓存添加注解 @NotLogin 的Controller Url路径
  * @author HuangLongPu
  */
-public final class AnnotationUrlNotLoginMethodHandle {
+public final class MappingBeanUrlNotLoginMethodHandle {
 
     /**
      * url 存储的 map 类，key 为controller注解的URL地址，value 为注册URL的方法说明(借助于 swagger实现)
      */
     private static final Map<String, String> NOT_LOGIN_URL_MAP = new HashMap<>();
 
-    protected AnnotationUrlNotLoginMethodHandle() {}
+    protected MappingBeanUrlNotLoginMethodHandle() {}
 
     /**
      * 放置添加注解 @NotLogin 的Controller Url路径

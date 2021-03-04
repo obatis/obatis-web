@@ -12,8 +12,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public final class SystemConstant {
 
-    public static final String CORE_BASE_DIR = "com.obatis";
-    public static String PROJECT_BASE_DIR = null;
     /**
      * 系统处理队列
      */

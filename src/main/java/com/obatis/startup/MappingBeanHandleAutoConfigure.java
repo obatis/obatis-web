@@ -1,4 +1,4 @@
-package com.obatis.core.annotation.config;
+package com.obatis.startup;
 
 import com.obatis.exception.HandleException;
 import com.obatis.config.url.UrlBeanInfo;
@@ -14,14 +14,14 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnotationUrlMethodHandleAutoConfigure {
+public class MappingBeanHandleAutoConfigure {
 
     /**
      * url 存储的 map 类，key 为controller注解的URL地址，value 为注册URL的方法说明(借助于 swagger实现)
      */
     private static final List<UrlBeanInfo> URL_INFO_LIST = new ArrayList<>();
 
-    protected AnotationUrlMethodHandleAutoConfigure() {}
+    protected MappingBeanHandleAutoConfigure() {}
 
     protected static final void handle(Class<?> beanCls, String canonicalName, String controllerPath) {
         Method[] methodArr = beanCls.getDeclaredMethods();
@@ -87,7 +87,7 @@ public class AnotationUrlMethodHandleAutoConfigure {
             NotLogin notAuth = method.getAnnotation(NotLogin.class);
             int isLoginEnable = 0;
             if(notAuth != null) {
-                AnnotationUrlNotLoginMethodHandle.putNotLoginAnnotationUrl(controllerPath + path, urlName);
+                MappingBeanUrlNotLoginMethodHandle.putNotLoginAnnotationUrl(controllerPath + path, urlName);
                 isLoginEnable = 1;
             }
 
