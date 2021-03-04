@@ -34,7 +34,7 @@ public final class MappingBeanUrlNotLoginMethodHandle {
      * @param url
      * @return
      */
-    public final static boolean validateNotLogin(String url) {
+    public final static boolean isNotLogin(String url) {
         if(ValidateTool.isEmpty(url)) {
             return false;
         }

@@ -5,9 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.annotation.Annotation;
 import java.util.Map;
 
 public final class MappingBeanMethodHandle {
@@ -19,12 +17,7 @@ public final class MappingBeanMethodHandle {
      * @param applicationContext
      */
     protected final void load(ApplicationContext applicationContext) {
-        this.loadController(applicationContext, Controller.class);
-        this.loadController(applicationContext, RestController.class);
-    }
-
-    private void loadController(ApplicationContext applicationContext, Class<? extends Annotation> annotationType) {
-        Map<String, Object> beans = applicationContext.getBeansWithAnnotation(annotationType);
+        Map<String, Object> beans = applicationContext.getBeansWithAnnotation(Controller.class);
         for (String beanName : beans.keySet()) {
             Object value = applicationContext.getBean(beanName);
             if (value == null) {
