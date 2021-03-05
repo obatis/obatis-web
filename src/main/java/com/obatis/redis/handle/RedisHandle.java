@@ -9,6 +9,7 @@ import com.obatis.exception.HandleException;
 import com.obatis.convert.CommonConvert;
 import com.obatis.convert.JsonConvert;
 import com.obatis.tools.ValidateTool;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
  * 针对存储String类型的数据，兼容list的存储
  * @author HuangLongPu
  */
-@Component
+@Configuration
 public class RedisHandle {
 
 	@Resource
