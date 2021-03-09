@@ -7,4 +7,7 @@ com.obatis.config.message.HttpEncodingConfiguration,\
 com.obatis.config.message.HttpMessageConverterConfigure,\
 com.obatis.config.response.result.ExceptionRestHandleAdvice,\
 com.obatis.redis.RedisTempletConfiguration,\
-com.obatis.email.impl.SendMailServiceImpl
+com.obatis.email.impl.SendMailServiceImpl,\
+com.obatis.config.time.DateConverterConfig,\
+com.obatis.config.time.LocalDateConverterConfig,\
+com.obatis.config.time.LocalDateTimeConverterConfig
